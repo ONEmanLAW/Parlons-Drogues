@@ -1,0 +1,44 @@
+{
+  "substances": [
+    {
+      "name": "Cannabis",
+      "color": "yellow",
+      "effects": {
+        "somnolence": 50,
+        "tristesse": 0,
+        "bonheur": 20,
+        "anxiete": 10
+      }
+    },
+    {
+      "name": "Alcool",
+      "color": "green",
+      "effects": {
+        "somnolence": 30,
+        "tristesse": 20,
+        "bonheur": 0,
+        "anxiete": 5
+      }
+    },
+    {
+      "name": "Ecstasy",
+      "color": "blue",
+      "effects": {
+        "somnolence": 0,
+        "tristesse": 0,
+        "bonheur": 70,
+        "anxiete": 15
+      }
+    },
+    {
+      "name": "Drogue Dure",
+      "color": "red",
+      "effects": {
+        "somnolence": 10,
+        "tristesse": 30,
+        "bonheur": -20,
+        "anxiete": 80
+      }
+    }
+  ]
+}

@@ -9,12 +9,17 @@
       <Card title="Carte 2" description="Description de la carte 2" />
       <Card title="Carte 3" description="Description de la carte 3" />
     </div>
+
+    <!-- Section avec le composant InteractiveCharacter -->
+    <div class="interactive-section">
+      <InteractiveCharacter />
+    </div>
   </div>
 </template>
 
 <script setup>
 import Card from '../components/Card.vue';
+import InteractiveCharacter from '../components/InteractiveCharacter.vue';
 </script>
-
 
 <style src="../styles/Home.css"></style>
