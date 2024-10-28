@@ -6,8 +6,8 @@
         <p>{{ description }}</p>
       </div>
       <div class="card-back">
-        <h3>Back Side</h3>
-        <p>Some additional information here.</p>
+        <h3>Face Arrière</h3>
+        <p>{{ backContent }}</p>
       </div>
     </div>
   </div>
@@ -20,20 +20,17 @@ import { gsap } from 'gsap';
 const props = defineProps({
   title: String,
   description: String,
+  backContent: String
 });
 
 const flipped = ref(false);
-
-
 const cardRef = ref(null);
 
 const toggleFlip = () => {
   flipped.value = !flipped.value;
-
-  
   gsap.to(cardRef.value.querySelector('.card-inner'), {
     rotateY: flipped.value ? 180 : 0,
-    duration: 0.6,
+    duration: 0.4,
     ease: "power1.inOut",
   });
 };

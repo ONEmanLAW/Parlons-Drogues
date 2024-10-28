@@ -1,9 +1,9 @@
 <template>
   <header>
     <h1>Parlons Drogues</h1>
-    <nav>
+    <!-- <nav>
       <router-link to="/">Accueil</router-link>
-    </nav>
+    </nav> -->
   </header>
 </template>
 

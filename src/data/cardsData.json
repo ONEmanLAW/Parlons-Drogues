@@ -1,0 +1,19 @@
+{
+  "cards": [
+    {
+      "title": "Carte 1",
+      "description": "Description de la carte 1",
+      "backContent": "Informations supplémentaires pour la carte 1"
+    },
+    {
+      "title": "Carte 2",
+      "description": "Description de la carte 2",
+      "backContent": "Informations supplémentaires pour la carte 2"
+    },
+    {
+      "title": "Carte 3",
+      "description": "Description de la carte 3",
+      "backContent": "Informations supplémentaires pour la carte 3"
+    }
+  ]
+}

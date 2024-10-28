@@ -3,14 +3,16 @@
     <h1>Bienvenue sur Parlons Drogues</h1>
     <p>Voici des informations importantes.</p>
     
-    <!-- Section avec les cartes -->
     <div class="card-container">
-      <Card title="Carte 1" description="Description de la carte 1" />
-      <Card title="Carte 2" description="Description de la carte 2" />
-      <Card title="Carte 3" description="Description de la carte 3" />
+      <Card
+        v-for="(card, index) in cards"
+        :key="index"
+        :title="card.title"
+        :description="card.description"
+        :backContent="card.backContent"
+      />
     </div>
 
-    <!-- Section avec le composant InteractiveCharacter -->
     <div class="interactive-section">
       <InteractiveCharacter />
     </div>
@@ -18,8 +20,19 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import Card from '../components/Card.vue';
 import InteractiveCharacter from '../components/InteractiveCharacter.vue';
+
+
+import cardsData from '../data/cardsData.json';
+
+const cards = ref([]);
+
+
+onMounted(() => {
+  cards.value = cardsData.cards;
+});
 </script>
 
 <style src="../styles/Home.css"></style>
