@@ -1,0 +1,40 @@
+.quiz {
+  text-align: center;
+  padding: 20px;
+}
+
+.quiz h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.quiz p {
+  font-size: 18px;
+  margin: 15px 0;
+}
+
+.quiz button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+.quiz button:first-child {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.quiz button:last-child {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
