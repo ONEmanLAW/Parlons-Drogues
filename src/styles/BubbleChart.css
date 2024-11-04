@@ -1,0 +1,11 @@
+.bubble-chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.bubble-chart text {
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+}
