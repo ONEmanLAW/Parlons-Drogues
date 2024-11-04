@@ -1,9 +1,17 @@
 <template>
   <header>
     <h1>Parlons Drogues</h1>
-    <!-- <nav>
-      <router-link to="/">Accueil</router-link>
-    </nav> -->
+    <nav>
+      <ul>
+        <li><router-link to="/">Accueil</router-link></li>
+        <li><router-link to="/chapter1">Chapitre 1</router-link></li>
+        <li><router-link to="/chapter2">Chapitre 2</router-link></li>
+        <li><router-link to="/chapter3">Chapitre 3</router-link></li>
+        <li><router-link to="/chapter4">Chapitre 4</router-link></li>
+        <li><router-link to="/chapter5">Chapitre 5</router-link></li>
+        <li><router-link to="/advice">Conseils</router-link></li>
+      </ul>
+    </nav>
   </header>
 </template>
 
@@ -11,4 +19,4 @@
 
 </script>
 
-<style src="../styles/Header.css" scoped></style>
+<style scoped src="../styles/Header.css"></style>

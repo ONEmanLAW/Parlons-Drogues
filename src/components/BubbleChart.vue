@@ -63,4 +63,4 @@ function createBubbleChart() {
 }
 </script>
 
-<style src="../styles/BubbleChart.css"></style>
+<style scoped src="../styles/BubbleChart.css"></style>

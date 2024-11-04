@@ -8,4 +8,4 @@
 
 </script>
 
-<style src="../styles/Footer.css" scoped></style>
+<style scoped src="../styles/Footer.css"></style>

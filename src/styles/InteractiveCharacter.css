@@ -1,53 +1,40 @@
-.container {
+.interactive-character {
   text-align: center;
-  max-width: 400px;
-  margin: auto;
+  padding: 20px;
 }
 
 .character {
   width: 100px;
   height: 100px;
   margin: 20px auto;
-  background-color: grey;
-  transition: background-color 0.5s;
+  border-radius: 10px;
 }
 
 .buttons {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 10px;
   margin-top: 20px;
 }
 
-button {
-  padding: 10px 15px;
+.buttons button {
+  padding: 10px 20px;
   cursor: pointer;
+  background-color: #f0f0f0;
   border: none;
-  border-radius: 8px;
-  background-color: #4caf50;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.buttons button.active {
+  background-color: #007bff;
   color: white;
-  font-size: 16px; 
-  font-weight: bold; 
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s, transform 0.1s;
-  margin-right: 5px;
-}
-
-button:hover {
-  background-color: #45a049;
-}
-
-button:active {
-  transform: translateY(2px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-}
-
-button.active {
-  background-color: #388e3c;
 }
 
 .data-display {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 20px;
   margin-top: 20px;
 }
 
@@ -56,21 +43,18 @@ button.active {
 }
 
 .circle-chart {
-  width: 50px;
-  height: 50px;
+  transform: rotate(-90deg);
 }
 
 .circle-background {
   fill: none;
-  stroke: #e6e6e6;
+  stroke: #e0e0e0;
   stroke-width: 5;
 }
 
 .circle-foreground {
   fill: none;
-  stroke: #4caf50;
+  stroke: #007bff;
   stroke-width: 5;
-  transition: stroke-dashoffset 0.5s;
-  transform: rotate(-90deg);
-  transform-origin: center;
+  transition: stroke-dashoffset 0.3s ease;
 }

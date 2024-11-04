@@ -1,11 +1,9 @@
 <template>
-  <div class="container">
+  <div class="interactive-character">
     <h2>Jeu de risques cumulés</h2>
 
-    <!-- Personnage -->
     <div class="character" :style="{ backgroundColor: currentColor }"></div>
 
-    <!-- Boutons de substances -->
     <div class="buttons">
       <button v-for="substance in substances" 
               :key="substance.name" 
@@ -15,7 +13,6 @@
       </button>
     </div>
 
-    <!-- Graphiques de données -->
     <div class="data-display">
       <div v-for="(value, key) in dataEffects" :key="key" class="data-item">
         <p>{{ key }}</p>
@@ -33,7 +30,6 @@
 <script setup>
 import { reactive, ref, computed, onMounted } from 'vue';
 import * as d3 from 'd3';
-
 
 import substancesData from '../data/substances.json';
 import '../styles/InteractiveCharacter.css';
@@ -78,10 +74,8 @@ function updateEffects() {
   });
 }
 
-
 const circleRadius = 20;
 const circleCircumference = 2 * Math.PI * circleRadius;
-
 
 function calculateOffset(value) {
   const percentage = Math.min(value, 100) / 100;
@@ -92,3 +86,5 @@ onMounted(() => {
   updateEffects();
 });
 </script>
+
+<style scoped src="../styles/InteractiveCharacter.css"></style>

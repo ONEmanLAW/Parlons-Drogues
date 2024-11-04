@@ -36,4 +36,4 @@ const toggleFlip = () => {
 };
 </script>
 
-<style src="../styles/Card.css"></style>
+<style scoped src="../styles/Card.css"></style>
