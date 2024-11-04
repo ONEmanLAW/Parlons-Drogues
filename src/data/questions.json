@@ -2,27 +2,27 @@
   "questions": [
     {
       "id": 1,
-      "question": "Le cannabis est-il légal dans tous les pays du monde ?",
+      "question": "1: Le cannabis est-il légal dans tous les pays du monde ?",
       "correctAnswer": false
     },
     {
       "id": 2,
-      "question": "La consommation d'alcool est autorisée pour les personnes de moins de 18 ans en France.",
+      "question": "2: La consommation d'alcool est autorisée pour les personnes de moins de 18 ans en France.",
       "correctAnswer": false
     },
     {
       "id": 3,
-      "question": "L'ecstasy est classé comme drogue dure.",
+      "question": "3: L'ecstasy est classé comme drogue dure.",
       "correctAnswer": true
     },
     {
       "id": 4,
-      "question": "Le tabac contient de la nicotine.",
+      "question": "4: Le tabac contient de la nicotine.",
       "correctAnswer": true
     },
     {
       "id": 5,
-      "question": "La consommation de drogue est sans danger pour la santé.",
+      "question": "5: La consommation de drogue est sans danger pour la santé.",
       "correctAnswer": false
     }
   ]
