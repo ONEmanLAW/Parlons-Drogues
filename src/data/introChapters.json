@@ -1,0 +1,28 @@
+{
+  "chapters": [
+    {
+      "id": 1,
+      "title": "Chapitre 1",
+      "subtitle": "Éléna et ses premières expériences",
+      "description": "Découvre l'histoire d'Éléna et apprends les effets immédiats du cannabis.",
+      "videoSource": "assets/videos/video1.mp4",
+      "imageSource": "assets/images/image1.png"
+    },
+    {
+      "id": 2,
+      "title": "Chapitre 2",
+      "subtitle": "Un autre chapitre",
+      "description": "Description pour le deuxième chapitre.",
+      "videoSource": "assets/videos/video2.mp4",
+      "imageSource": "assets/images/image2.png"
+    },
+    {
+      "id": 3,
+      "title": "Chapitre 3",
+      "subtitle": "Encore un chapitre",
+      "description": "Description pour le troisième chapitre.",
+      "videoSource": "assets/videos/video3.mp4",
+      "imageSource": "assets/images/image3.png"
+    }
+  ]
+}

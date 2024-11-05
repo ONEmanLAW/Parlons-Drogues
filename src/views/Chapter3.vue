@@ -1,12 +1,35 @@
+<!-- views/Chapter3.vue -->
 <template>
-  <div>
+  <div class="chapter">
+    <IntroChapters
+      :title="chapter.title"
+      :subtitle="chapter.subtitle"
+      :description="chapter.description"
+      :videoSource="chapter.videoSource"
+      :imageSource="chapter.imageSource"
+    />
+
     <h2>Chapitre 3 - Personnage interactif</h2>
     <InteractiveCharacter />
   </div>
 </template>
 
 <script setup>
+import IntroChapters from '../components/IntroChapters.vue';
 import InteractiveCharacter from '../components/InteractiveCharacter.vue';
+import introChaptersData from '../data/introChapters.json';
+
+const chapterData = introChaptersData.chapters.find(ch => ch.id === 3);
+
+
+const videoSource = new URL(`../${chapterData.videoSource}`, import.meta.url).href;
+const imageSource = new URL(`../${chapterData.imageSource}`, import.meta.url).href;
+
+const chapter = {
+  ...chapterData,
+  videoSource,
+  imageSource
+};
 </script>
 
-<style src="../styles/Chapter.css"></style>
+<style src="../styles/Chapter.css" scoped></style>
