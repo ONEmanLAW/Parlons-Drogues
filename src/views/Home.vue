@@ -21,6 +21,16 @@
       </div>
     </div>
 
+  
+    <div class="chapter-indicators">
+      <span
+        v-for="index in totalChapters"
+        :key="index"
+        class="indicator"
+        :class="{ active: index - 1 === currentIndex }"
+      ></span>
+    </div>
+
     <div class="navigation-buttons">
       <button @click="previousChapter" :disabled="isAtFirstChapter">Previous</button>
       <button @click="nextChapter" :disabled="isAtLastChapter">Next</button>
@@ -143,5 +153,23 @@ button {
   margin: 0 10px;
   font-size: 16px;
   cursor: pointer;
+}
+
+.chapter-indicators {
+  display: flex;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ccc;
+  transition: background-color 0.3s ease;
+}
+
+.indicator.active {
+  background-color: #333;
 }
 </style>
