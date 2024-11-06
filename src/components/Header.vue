@@ -7,8 +7,6 @@
         <li><router-link to="/chapter1">Chapitre 1</router-link></li>
         <li><router-link to="/chapter2">Chapitre 2</router-link></li>
         <li><router-link to="/chapter3">Chapitre 3</router-link></li>
-        <li><router-link to="/chapter4">Chapitre 4</router-link></li>
-        <li><router-link to="/chapter5">Chapitre 5</router-link></li>
         <li><router-link to="/advice">Conseils</router-link></li>
       </ul>
     </nav>
