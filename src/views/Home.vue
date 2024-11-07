@@ -1,5 +1,7 @@
 <template>
+  <Header />
   <div class="home">
+   
     <h1>Bienvenue sur Parlons Drogues</h1>
     <p>Explorez les chapitres avec les boutons suivants :</p>
 
@@ -34,13 +36,18 @@
       <button @click="previousChapter">Previous</button>
       <button @click="nextChapter">Next</button>
     </div>
+  
   </div>
+  <!-- <Footer /> -->
 </template>
 
 <script setup>
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import introChaptersData from '../data/introChapters.json';
+
+import Header from '../components/Header.vue'; 
+// import Footer from '../components/Footer.vue';
 
 
 const router = useRouter();
@@ -72,11 +79,11 @@ const getChapterStyle = (index) => {
 
   const translateZ = Math.cos(angle * Math.PI / 180) * radius;
   const translateX = Math.sin(angle * Math.PI / 180) * radius;
-  const scale = position === 0 ? 1 : 0.8;
+  const scale = position === 0 ? 1.5 : 1;
 
   return {
     transform: `rotateY(${angle}deg) translateX(${translateX}px) translateZ(${translateZ}px) scale(${scale})`,
-    transition: "transform 0.5s ease-in-out",
+    transition: "transform 0.8s ease-in-out",
     zIndex: position === 0 ? 1 : 0,
     opacity: 1,
   };

@@ -1,5 +1,6 @@
 <!-- views/Chapter2.vue -->
 <template>
+  <Header />
   <div class="chapter">
     <IntroChapters
       :title="chapter.title"
@@ -21,6 +22,7 @@
       />
     </div>
   </div>
+  <Footer />
 </template>
 
 <script setup>
@@ -29,6 +31,9 @@ import IntroChapters from '../components/IntroChapters.vue';
 import Card from '../components/Card.vue';
 import introChaptersData from '../data/introChapters.json';
 import cardsData from '../data/cardsData.json';
+
+import Header from '../components/Header.vue'; 
+import Footer from '../components/Footer.vue';
 
 const chapterData = introChaptersData.chapters.find(ch => ch.id === 2);
 

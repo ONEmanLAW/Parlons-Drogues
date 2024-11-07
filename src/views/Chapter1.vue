@@ -1,6 +1,8 @@
 <!-- views/Chapter1.vue -->
 <template>
+  <Header />
   <div class="chapter">
+   
     <IntroChapters
       :title="chapter.title"
       :subtitle="chapter.subtitle"
@@ -12,12 +14,16 @@
     <h2>Chapitre 1 - Quiz</h2>
     <Quiz />
   </div>
+  <Footer />
 </template>
 
 <script setup>
 import IntroChapters from '../components/IntroChapters.vue';
 import Quiz from '../components/Quiz.vue';
 import introChaptersData from '../data/introChapters.json';
+
+import Header from '../components/Header.vue'; 
+import Footer from '../components/Footer.vue';
 
 
 const chapterData = introChaptersData.chapters.find(ch => ch.id === 1);
