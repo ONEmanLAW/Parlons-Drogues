@@ -33,4 +33,4 @@ const chapter = {
 };
 </script>
 
-<style src="../styles/Chapter.css" scoped></style>
+<style scoped src="../styles/Chapter.css"></style>

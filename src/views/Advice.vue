@@ -9,4 +9,4 @@
 
 </script>
 
-<style src="../styles/Chapter.css"></style>
+<style scoped src="../styles/Chapter.css"></style>
