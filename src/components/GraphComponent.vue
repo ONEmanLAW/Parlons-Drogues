@@ -2,7 +2,6 @@
   <div class="chapter3">
     <h2>Graphique des Effets par Mode de Consommation</h2>
 
-    <!-- Boutons pour sélectionner les modes de consommation -->
     <div class="buttons">
       <button
         v-for="mode in modes"
@@ -14,10 +13,8 @@
       </button>
     </div>
 
-    <!-- Zone du graphique -->
     <div ref="chartContainer" class="chart-container"></div>
 
-    <!-- Curseur pour sélectionner l'année (1-10 ans) -->
     <div class="slider-container">
       <input
         type="range"
@@ -38,12 +35,12 @@ import effectsData from '../data/effectsData.json';
 
 const modes = ['Fumé', 'Vapoté', 'Ingeré'];
 const selectedModes = ref([]);
-const selectedYear = ref(1); // Année sélectionnée par défaut
+const selectedYear = ref(1); 
 
 const chartContainer = ref(null);
 let svg, xScale, yScale, lineGenerator;
 
-// Fonction pour initialiser le graphique D3
+
 const initializeChart = () => {
   const margin = { top: 20, right: 20, bottom: 50, left: 50 };
   const width = 600 - margin.left - margin.right;
@@ -56,40 +53,36 @@ const initializeChart = () => {
     .append('g')
     .attr('transform', `translate(${margin.left},${margin.top})`);
 
-  // Échelle pour l'axe des X (minutes)
   xScale = d3.scaleLinear()
-    .domain([0, 180]) // 0 à 180 minutes
+    .domain([0, 180]) 
     .range([0, width]);
 
-  // Échelle pour l'axe des Y (effets)
+ 
   yScale = d3.scaleLinear()
-    .domain([0, 50]) // ajustable en fonction des données max
+    .domain([0, 50]) 
     .range([height, 0]);
 
-  // Générateur de ligne
   lineGenerator = d3.line()
     .x((d, i) => xScale([0, 15, 45, 90, 180][i]))
     .y(d => yScale(d))
     .curve(d3.curveMonotoneX);
 
-  // Ajout de l'axe des X
   svg.append('g')
     .attr('transform', `translate(0,${height})`)
     .call(d3.axisBottom(xScale).ticks(5));
 
-  // Ajout de l'axe des Y
+  
   svg.append('g')
     .call(d3.axisLeft(yScale));
 
   updateChart();
 };
 
-// Fonction pour mettre à jour le graphique en fonction des modes sélectionnés et de l'année
+
 const updateChart = () => {
-  // Effacer les lignes existantes
+
   svg.selectAll('.line').remove();
 
-  // Ajouter une ligne pour chaque mode sélectionné
   selectedModes.value.forEach(mode => {
     const data = effectsData[mode.toLowerCase()][selectedYear.value];
 
@@ -103,7 +96,7 @@ const updateChart = () => {
   });
 };
 
-// Fonction pour obtenir une couleur spécifique pour chaque mode
+
 const getColorForMode = (mode) => {
   const colors = {
     "Fumé": "rgba(255, 99, 132, 1)",
@@ -113,7 +106,7 @@ const getColorForMode = (mode) => {
   return colors[mode] || 'black';
 };
 
-// Fonction pour ajouter ou retirer un mode de consommation sélectionné
+
 const toggleMode = (mode) => {
   const index = selectedModes.value.indexOf(mode);
   if (index === -1) {
@@ -128,8 +121,8 @@ onMounted(() => {
   initializeChart();
 });
 
-watch(selectedYear, updateChart); // Mettre à jour le graphique lorsque l'année change
-watch(selectedModes, updateChart); // Mettre à jour le graphique lorsque les modes changent
+watch(selectedYear, updateChart);
+watch(selectedModes, updateChart); 
 </script>
 
 <style scoped>

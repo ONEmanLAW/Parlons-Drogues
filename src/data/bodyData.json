@@ -1,0 +1,80 @@
+{
+  "bodyParts": [
+    {
+      "id": 1,
+      "name": "Cerveau",
+      "color": "#FF5733",
+      "data": {
+        "data1": [
+          { "label": "Paranoïa", "value": 40 },
+          { "label": "Mémoire", "value": 60 }
+        ],
+        "data2": [
+          { "label": "Concentration", "value": 70 },
+          { "label": "Stress", "value": 30 }
+        ],
+        "progress": {
+          "data1": 60,
+          "data2": 70 
+        }
+      }
+    },
+    {
+      "id": 2,
+      "name": "Poumons",
+      "color": "#33FF57",
+      "data": {
+        "data1": [
+          { "label": "Irritation", "value": 55 },
+          { "label": "Toux", "value": 45 }
+        ],
+        "data2": [
+          { "label": "Bronchite", "value": 65 },
+          { "label": "Essoufflement", "value": 35 }
+        ],
+        "progress": {
+          "data1": 55,
+          "data2": 65  
+        }
+      }
+    },
+    {
+      "id": 3,
+      "name": "Foie",
+      "color": "#3357FF",
+      "data": {
+        "data1": [
+          { "label": "Dépuration", "value": 50 },
+          { "label": "Accumulation de toxines", "value": 50 }
+        ],
+        "data2": [
+          { "label": "Métabolisme", "value": 60 },
+          { "label": "Inflammation", "value": 40 }
+        ],
+        "progress": {
+          "data1": 50,  
+          "data2": 60   
+        }
+      }
+    },
+    {
+      "id": 4,
+      "name": "Cœur",
+      "color": "#FF33A1",
+      "data": {
+        "data1": [
+          { "label": "Fréquence cardiaque", "value": 80 },
+          { "label": "Palpitations", "value": 20 }
+        ],
+        "data2": [
+          { "label": "Tension artérielle", "value": 75 },
+          { "label": "Stress", "value": 25 }
+        ],
+        "progress": {
+          "data1": 80,  
+          "data2": 75   
+        }
+      }
+    }
+  ]
+}
