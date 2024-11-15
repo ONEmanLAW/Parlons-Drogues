@@ -1,5 +1,5 @@
 <template>
-  <Header />
+  <!-- <Header /> -->
   <div class="home">
    
     <h1>Bienvenue sur Parlons Drogues</h1>
@@ -47,7 +47,7 @@ import { useRouter } from 'vue-router';
 import introChaptersData from '../data/introChapters.json';
 
 import Header from '../components/Header.vue'; 
-// import Footer from '../components/Footer.vue';
+import Footer from '../components/Footer.vue';
 
 
 const router = useRouter();

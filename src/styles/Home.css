@@ -4,6 +4,10 @@
   align-items: center;
   text-align: center;
   perspective: 1000px;
+  padding: 50px 0px;
+  box-sizing: border-box;
+  height: 100vh;
+  justify-content: space-between;
 }
 
 .chapter-container {

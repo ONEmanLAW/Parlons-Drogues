@@ -11,17 +11,16 @@
     />
 
     <h2>Chapitre 3 - Personnage interactif</h2>
-    <InteractiveCharacter />
-    <GraphComponent />
+    
   </div>
   <Footer />
 </template>
 
 <script setup>
 import IntroChapters from '../components/IntroChapters.vue';
-import InteractiveCharacter from '../components/InteractiveCharacter.vue';
+
 import introChaptersData from '../data/introChapters.json';
-import GraphComponent from '../components/GraphComponent.vue';
+
 
 import Header from '../components/Header.vue'; 
 import Footer from '../components/Footer.vue';

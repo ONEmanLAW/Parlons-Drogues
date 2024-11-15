@@ -1,6 +1,9 @@
 <template>
   <div class="intro">
-    <button v-if="!videoStarted" @click="startVideo">Start</button>
+    <!-- Titre ajouté -->
+    <h1 class="intro-title">Bienvenue sur notre vidéo d'introduction</h1>
+    
+    <button v-if="!videoStarted" @click="startVideo" class="start-button">Start</button>
 
     <div v-if="videoStarted" ref="videoContainer" class="video-container">
       <video 
@@ -23,21 +26,13 @@ import { ref, onMounted, nextTick } from 'vue';
 import { useRouter } from 'vue-router';
 import gsap from 'gsap';
 
-
 const videoSource = new URL('../assets/videos/video2.mp4', import.meta.url).href;
-
 const router = useRouter();
-
 const videoStarted = ref(false);
-
 
 const startVideo = async () => {
   videoStarted.value = true;
-
-  
   await nextTick();
-
-  
   gsap.fromTo(
     videoContainer.value, 
     { x: '100vw', opacity: 0 },
@@ -45,21 +40,15 @@ const startVideo = async () => {
   );
 };
 
-
 const videoContainer = ref(null);
 
-
 const onVideoEnded = () => {
-  
   animateAndRedirect();
 };
-
 
 const skipVideo = () => {
-  
   animateAndRedirect();
 };
-
 
 const animateAndRedirect = () => {
   gsap.to(videoContainer.value, {
@@ -74,26 +63,56 @@ const animateAndRedirect = () => {
 </script>
 
 <style scoped>
-
 .intro {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column; /* Centre tout en colonne */
   height: 100vh;
   width: 100vw;
   background-color: #ffffff;
   overflow: hidden;
+  text-align: center;
 }
 
+/* Titre ajouté */
+.intro-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px; /* Espace entre le titre et le bouton */
+  text-transform: uppercase;
+}
 
 button {
   padding: 10px 20px;
   font-size: 18px;
   cursor: pointer;
   z-index: 10;
+  transition: all 0.3s ease-in-out;
 }
 
+/* Bouton Start */
+.start-button {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 20px;
+  padding: 15px 30px;
+  transition: background-color 0.3s, transform 0.3s;
+}
 
+.start-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.start-button:active {
+  background-color: #004085;
+}
+
+/* Conteneur vidéo */
 .video-container {
   position: relative;
   width: 100vw;
@@ -101,14 +120,14 @@ button {
   overflow: hidden;
 }
 
-
+/* Vidéo en plein écran */
 .video-fullscreen {
   width: 100vw;
   height: 100vh;
   object-fit: cover;
 }
 
-
+/* Bouton Skip */
 .skip-button {
   position: absolute;
   bottom: 50px; 
@@ -122,8 +141,6 @@ button {
   border-radius: 5px;
   z-index: 10;
   text-transform: uppercase;
-  overflow: hidden;
-  position: relative;
 }
 
 .skip-button::after {

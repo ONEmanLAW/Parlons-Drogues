@@ -13,6 +13,8 @@
 
     <h2>Chapitre 1 - Quiz</h2>
     <Quiz />
+    <InteractiveCharacter />
+    <GraphComponent />
     <BodyChart />
   </div>
   <Footer />
@@ -23,6 +25,9 @@ import IntroChapters from '../components/IntroChapters.vue';
 import Quiz from '../components/Quiz.vue';
 import BodyChart from '../components/BodyChart.vue';
 import introChaptersData from '../data/introChapters.json';
+
+import GraphComponent from '../components/GraphComponent.vue';
+import InteractiveCharacter from '../components/InteractiveCharacter.vue';
 
 import Header from '../components/Header.vue'; 
 import Footer from '../components/Footer.vue';
