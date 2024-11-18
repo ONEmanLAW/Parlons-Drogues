@@ -1,10 +1,5 @@
 <template>
-  <!-- <Header /> -->
   <div class="home">
-   
-    <h1>Bienvenue sur Parlons Drogues</h1>
-    <p>Explorez les chapitres avec les boutons suivants :</p>
-
     <div class="chapter-container">
       <div
         v-for="(chapter, index) in chapters"
@@ -19,7 +14,12 @@
           @click="goToChapter(index)"
           :class="{ clickable: isClickable(index), disabled: !isClickable(index) }"
         />
-        <h2 v-if="index === currentIndex">{{ chapter.title }}</h2>
+
+        <div v-if="index === currentIndex" class="chapter-info">
+          <h3 class="chapter-number">&#183; Chapitre {{ index + 1 }} &#183;</h3>
+          <h2>{{ chapter.title }}</h2>
+          <p>{{ chapter.description }}</p>
+        </div>
       </div>
     </div>
 
@@ -36,27 +36,22 @@
       <button @click="previousChapter">Previous</button>
       <button @click="nextChapter">Next</button>
     </div>
-  
   </div>
-  <!-- <Footer /> -->
 </template>
 
+
+
 <script setup>
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import introChaptersData from '../data/introChapters.json';
-
-import Header from '../components/Header.vue'; 
-import Footer from '../components/Footer.vue';
-
+import homeChaptersData from '../data/homeChapters.json';
 
 const router = useRouter();
 
-const chapters = introChaptersData.chapters.map((chapterData) => ({
+const chapters = homeChaptersData.chapters.map((chapterData) => ({
   ...chapterData,
   imageSource: new URL(`../${chapterData.imageSource}`, import.meta.url).href,
 }));
-
 
 const currentIndex = ref(0);
 const totalChapters = chapters.length;
@@ -67,19 +62,27 @@ const chapterSound = new Audio(new URL('../assets/sounds/sound.wav', import.meta
 const getChapterStyle = (index) => {
   const position = (index - currentIndex.value + totalChapters) % totalChapters;
   let angle;
+  let scale = 1;
+
   if (position === 0) {
+    // Immage au centre
     angle = 0;
+    scale = 1.2;
   } else if (position === 1 || position === -totalChapters + 1) {
+    // Image a droite
     angle = 45;
+    scale = 0.8;
   } else if (position === -1 || position === totalChapters - 1) {
+    // Image a gauche
     angle = -45;
+    scale = 0.8;
   } else {
-    return { opacity: 0, pointerEvents: "none" };
+    angle = 90;
+    
   }
 
   const translateZ = Math.cos(angle * Math.PI / 180) * radius;
   const translateX = Math.sin(angle * Math.PI / 180) * radius;
-  const scale = position === 0 ? 1.5 : 1;
 
   return {
     transform: `rotateY(${angle}deg) translateX(${translateX}px) translateZ(${translateZ}px) scale(${scale})`,
@@ -89,18 +92,15 @@ const getChapterStyle = (index) => {
   };
 };
 
-
 const nextChapter = () => {
   currentIndex.value = (currentIndex.value + 1) % totalChapters;
   chapterSound.play();
 };
 
-
 const previousChapter = () => {
   currentIndex.value = (currentIndex.value - 1 + totalChapters) % totalChapters;
-  chapterSound.play(); 
+  chapterSound.play();
 };
-
 
 const goToChapter = (index) => {
   if (index === currentIndex.value) {
@@ -109,7 +109,6 @@ const goToChapter = (index) => {
     chapterSound.play();
   }
 };
-
 
 const isClickable = (index) => {
   return index === currentIndex.value;
