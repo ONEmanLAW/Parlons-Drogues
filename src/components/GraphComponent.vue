@@ -31,15 +31,14 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import * as d3 from 'd3';
-import effectsData from '../data/effectsData.json';
+import effectsData from '../data/effectsData.json'; // Charger le JSON séparé
 
 const modes = ['Fumé', 'Vapoté', 'Ingeré'];
 const selectedModes = ref([]);
-const selectedYear = ref(1); 
+const selectedYear = ref(1);
 
 const chartContainer = ref(null);
-let svg, xScale, yScale, lineGenerator;
-
+let svg, xScale, yScale;
 
 const initializeChart = () => {
   const margin = { top: 20, right: 20, bottom: 50, left: 50 };
@@ -54,48 +53,70 @@ const initializeChart = () => {
     .attr('transform', `translate(${margin.left},${margin.top})`);
 
   xScale = d3.scaleLinear()
-    .domain([0, 180]) 
+    .domain([0, 180]) // Durée en minutes
     .range([0, width]);
 
- 
   yScale = d3.scaleLinear()
-    .domain([0, 50]) 
+    .domain([0, 50]) // Effets max
     .range([height, 0]);
-
-  lineGenerator = d3.line()
-    .x((d, i) => xScale([0, 15, 45, 90, 180][i]))
-    .y(d => yScale(d))
-    .curve(d3.curveMonotoneX);
 
   svg.append('g')
     .attr('transform', `translate(0,${height})`)
-    .call(d3.axisBottom(xScale).ticks(5));
+    .call(d3.axisBottom(xScale).ticks(5).tickFormat(d => `${d} min`));
 
-  
   svg.append('g')
-    .call(d3.axisLeft(yScale));
+    .call(d3.axisLeft(yScale).ticks(5).tickFormat(d => `${d}%`));
 
   updateChart();
 };
 
-
 const updateChart = () => {
-
   svg.selectAll('.line').remove();
+  svg.selectAll('.emoji').remove();
+  svg.selectAll('.text').remove(); // Enlever les textes précédents
 
   selectedModes.value.forEach(mode => {
     const data = effectsData[mode.toLowerCase()][selectedYear.value];
 
+    // Dessiner une ligne continue (sans pointillés)
+    const line = d3.line()
+      .x((d, i) => xScale([0, 15, 45, 90, 180][i]))
+      .y(d => yScale(d))
+      .curve(d3.curveCardinal); // Courbes naturelles
+
     svg.append('path')
       .datum(data)
       .attr('class', 'line')
-      .attr('d', lineGenerator)
+      .attr('d', line)
       .attr('fill', 'none')
       .attr('stroke', getColorForMode(mode))
-      .attr('stroke-width', 2);
+      .attr('stroke-width', 2); // Traité avec un trait plus large, continu
+
+    // Ajouter des emojis comme points individuels
+    svg.selectAll(`.emoji-${mode}`)
+      .data(data)
+      .enter()
+      .append('text')
+      .attr('class', 'emoji')
+      .attr('x', (d, i) => xScale([0, 15, 45, 90, 180][i]))
+      .attr('y', d => yScale(d)) // Emoji aligné sur la courbe
+      .attr('text-anchor', 'middle')
+      .attr('font-size', '18px')
+      .text((d, i) => getEmojiForPoint(mode, i)); // Emoji différent pour chaque point
+
+    // Ajouter des textes sous chaque emoji pour afficher le pourcentage de l'effet
+    svg.selectAll(`.text-${mode}`)
+      .data(data)
+      .enter()
+      .append('text')
+      .attr('class', 'text')
+      .attr('x', (d, i) => xScale([0, 15, 45, 90, 180][i]))
+      .attr('y', d => yScale(d) + 20) // Position sous l'emoji
+      .attr('text-anchor', 'middle')
+      .attr('font-size', '12px')
+      .text(d => `${d}%`); // Affichage du pourcentage d'effet sous l'emoji
   });
 };
-
 
 const getColorForMode = (mode) => {
   const colors = {
@@ -106,6 +127,15 @@ const getColorForMode = (mode) => {
   return colors[mode] || 'black';
 };
 
+// Emoji spécifique pour chaque point, selon l'indice
+const getEmojiForPoint = (mode, index) => {
+  const emojis = {
+    "Fumé": ["💨", "🔥", "💨", "☁️", "🌬️"], // Différents emojis pour chaque point
+    "Vapoté": ["💨", "🍃", "🌀", "🌬️", "🌫️"],
+    "Ingeré": ["🍽️", "🥄", "🍒", "🍍", "🍉"]
+  };
+  return emojis[mode] && emojis[mode][index] || '❓'; // Retourne un emoji spécifique pour chaque point
+};
 
 const toggleMode = (mode) => {
   const index = selectedModes.value.indexOf(mode);
@@ -122,7 +152,7 @@ onMounted(() => {
 });
 
 watch(selectedYear, updateChart);
-watch(selectedModes, updateChart); 
+watch(selectedModes, updateChart);
 </script>
 
 <style scoped>
@@ -189,5 +219,18 @@ input[type="range"]::-moz-range-thumb {
   background-color: #555;
   border-radius: 50%;
   cursor: pointer;
+}
+
+.line {
+  stroke-dasharray: none; /* Traité sans pointillé */
+}
+
+.emoji {
+  font-family: Arial, sans-serif;
+}
+
+.text {
+  font-family: Arial, sans-serif;
+  fill: #333;
 }
 </style>
