@@ -1,28 +1,91 @@
 {
-  "cards": [
+  "chapters": [
     {
-      "title": "Card 1",
-      "description": "Description of card 1",
-      "icon": "path/to/icon1.png",
-      "backDescription": "Learning progress",
-      "donutPercentage": 75,
-      "centerText": "🚀"
+      "id": 1,
+      "cards": [
+        {
+          "title": "Card 1",
+          "description": "Description for card 1",
+          "icon": "path/to/icon1.png",
+          "backDescription": "Details for card 1",
+          "donutPercentage": 60,
+          "centerText": "💡"
+        },
+        {
+          "title": "Card 2",
+          "description": "Description for card 2",
+          "icon": "path/to/icon2.png",
+          "backDescription": "Details for card 2",
+          "donutPercentage": 75,
+          "centerText": "📈"
+        },
+        {
+          "title": "Card 3",
+          "description": "Description for card 3",
+          "icon": "path/to/icon3.png",
+          "backDescription": "Details for card 3",
+          "donutPercentage": 90,
+          "centerText": "🚀"
+        }
+      ]
     },
     {
-      "title": "Card 2",
-      "description": "Description of card 2",
-      "icon": "path/to/icon2.png",
-      "backDescription": "User reactions",
-      "donutPercentage": 50,
-      "centerText": "🎯"
+      "id": 2,
+      "cards": [
+        {
+          "title": "Card 4",
+          "description": "Description for card 4",
+          "icon": "path/to/icon4.png",
+          "backDescription": "Details for card 4",
+          "donutPercentage": 40,
+          "centerText": "🎯"
+        },
+        {
+          "title": "Card 5",
+          "description": "Description for card 5",
+          "icon": "path/to/icon5.png",
+          "backDescription": "Details for card 5",
+          "donutPercentage": 65,
+          "centerText": "📊"
+        },
+        {
+          "title": "Card 6",
+          "description": "Description for card 6",
+          "icon": "path/to/icon6.png",
+          "backDescription": "Details for card 6",
+          "donutPercentage": 85,
+          "centerText": "⚡"
+        }
+      ]
     },
     {
-      "title": "Card 3",
-      "description": "Description of card 3",
-      "icon": "path/to/icon3.png",
-      "backDescription": "Progress achieved",
-      "donutPercentage": 90,
-      "centerText": "🔥"
+      "id": 3,
+      "cards": [
+        {
+          "title": "Card 7",
+          "description": "Description for card 7",
+          "icon": "path/to/icon7.png",
+          "backDescription": "Details for card 7",
+          "donutPercentage": 30,
+          "centerText": "🔥"
+        },
+        {
+          "title": "Card 8",
+          "description": "Description for card 8",
+          "icon": "path/to/icon8.png",
+          "backDescription": "Details for card 8",
+          "donutPercentage": 50,
+          "centerText": "🌟"
+        },
+        {
+          "title": "Card 9",
+          "description": "Description for card 9",
+          "icon": "path/to/icon9.png",
+          "backDescription": "Details for card 9",
+          "donutPercentage": 100,
+          "centerText": "💯"
+        }
+      ]
     }
   ]
 }
