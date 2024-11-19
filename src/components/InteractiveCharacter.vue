@@ -2,81 +2,110 @@
   <div class="interactive-character">
     <h2>Jeu de risques cumulés</h2>
 
-    <div class="character" :style="{ backgroundColor: currentColor }"></div>
+    <div class="character-container">
+      
+      <div class="left-buttons">
+        <button
+          v-for="substance in leftSubstances"
+          :key="substance.name"
+          :class="{ active: activeSubstance === substance }"
+          @click="selectSubstance(substance)"
+        >
+          {{ substance.name }}
+        </button>
+      </div>
 
-    <div class="buttons">
-      <button v-for="substance in substances" 
-              :key="substance.name" 
-              :class="{ active: activeSubstances.includes(substance) }"
-              @click="toggleSubstance(substance)">
-        {{ substance.name }}
-      </button>
+      <div class="character">
+        <img :src="currentImage" alt="Substance" />
+      </div>
+
+      <div class="right-buttons">
+        <button
+          v-for="substance in rightSubstances"
+          :key="substance.name"
+          :class="{ active: activeSubstance === substance }"
+          @click="selectSubstance(substance)"
+        >
+          {{ substance.name }}
+        </button>
+      </div>
     </div>
 
     <div class="data-display">
-      <div v-for="(value, key) in dataEffects" :key="key" class="data-item">
-        <p>{{ key }}</p>
-        <svg class="circle-chart" width="50" height="50" :data-value="value">
-          <circle class="circle-background" cx="25" cy="25" r="20"></circle>
-          <circle class="circle-foreground" cx="25" cy="25" r="20"
-                  :style="{ strokeDasharray: circleCircumference, strokeDashoffset: calculateOffset(value) }">
-          </circle>
+      <div v-for="(value, key) in currentEffects" :key="key" class="data-item">
+        <svg class="circle-chart" width="60" height="60" :data-value="value">
+          <circle
+            class="circle-background"
+            cx="30"
+            cy="30"
+            r="25"
+          ></circle>
+          <circle
+            class="circle-foreground"
+            cx="30"
+            cy="30"
+            r="25"
+            :style="{
+              strokeDasharray: circleCircumference,
+              strokeDashoffset: calculateOffset(value),
+              stroke: getGradient(value)
+            }"
+          ></circle>
+          <text x="50%" y="50%" text-anchor="middle" alignment-baseline="middle" font-size="16" fill="#167540" font-weight="bold">
+            {{ value }}%
+          </text>
         </svg>
+
+        
+        <p>{{ translateKey(key) }}</p>
       </div>
     </div>
   </div>
 </template>
 
-
-
 <script setup>
-import { reactive, ref, computed, onMounted } from 'vue';
-import * as d3 from 'd3';
+import { ref, computed } from "vue";
+import "../styles/InteractiveCharacter.css";
 
-import substancesData from '../data/substances.json';
-import '../styles/InteractiveCharacter.css';
 
-const activeSubstances = reactive([]);
-const dataEffects = reactive({
-  somnolence: 0,
-  tristesse: 0,
-  bonheur: 0,
-  anxiete: 0
-});
+import substancesData from "../data/substances.json";
+
 
 const substances = ref(substancesData.substances);
+const activeSubstance = ref(null);
 
-function toggleSubstance(substance) {
-  const index = activeSubstances.indexOf(substance);
-  if (index >= 0) {
-    activeSubstances.splice(index, 1);
-  } else {
-    activeSubstances.push(substance);
-  }
-  updateEffects();
+
+const leftSubstances = computed(() => substances.value.slice(0, 2));
+const rightSubstances = computed(() => substances.value.slice(2, 4));
+
+function resolveImagePath(path) {
+  return new URL(path, import.meta.url).href;
 }
 
-const currentColor = computed(() => {
-  if (activeSubstances.length === 0) return 'grey';
-  return d3.interpolateRgbBasis(activeSubstances.map(s => s.color))(0.5);
+
+const currentImage = computed(() => {
+  return activeSubstance.value
+    ? resolveImagePath(activeSubstance.value.image)
+    : resolveImagePath("../assets/images/image1.png");
 });
 
-function updateEffects() {
-  dataEffects.somnolence = 0;
-  dataEffects.tristesse = 0;
-  dataEffects.bonheur = 0;
-  dataEffects.anxiete = 0;
 
-  activeSubstances.forEach(substance => {
-    const effects = substance.effects;
-    dataEffects.somnolence += effects.somnolence;
-    dataEffects.tristesse += effects.tristesse;
-    dataEffects.bonheur += effects.bonheur;
-    dataEffects.anxiete += effects.anxiete;
-  });
+const currentEffects = computed(() => {
+  return activeSubstance.value ? activeSubstance.value.effects : {
+    baisse_des_performances: 0,
+    difficultes_concentration: 0,
+    absences_repetees: 0,
+    risques_abandon_scolaire: 0,
+  };
+});
+
+
+function selectSubstance(substance) {
+  activeSubstance.value = activeSubstance.value === substance ? null : substance;
 }
 
-const circleRadius = 20;
+
+const circleRadius = 25;
 const circleCircumference = 2 * Math.PI * circleRadius;
 
 function calculateOffset(value) {
@@ -84,11 +113,119 @@ function calculateOffset(value) {
   return circleCircumference * (1 - percentage);
 }
 
-onMounted(() => {
-  updateEffects();
-});
+
+function translateKey(key) {
+  const translations = {
+    baisse_des_performances: "Baisse des performances scolaires",
+    difficultes_concentration: "Difficultés de concentration",
+    absences_repetees: "Absences répétées",
+    risques_abandon_scolaire: "Risques d'abandon scolaire",
+  };
+  return translations[key] || key;
+}
+
+
+function getGradient(value) {
+  const percentage = Math.min(value, 100);
+  const lightGreen = "#b0e57c";
+  const darkGreen = "#006400";  
+
+  const green = `rgb(${Math.floor(176 + (percentage * (Math.floor(0 + (99 - 176)) / 100)))}, ${Math.floor(229 + (percentage * (Math.floor(90 + (229 - 90)) / 100)))}, ${Math.floor(124 + (percentage * (Math.floor(180 + (124 - 180)) / 100)))})`;
+
+  return green;
+}
 </script>
 
+<style scoped>
+.interactive-character {
+  text-align: center;
+  padding: 20px;
+}
+
+.character-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.left-buttons,
+.right-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; 
+}
+
+.left-buttons button,
+.right-buttons button {
+  margin: 0;
+  background-color: white;
+  color: #167540;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: 2px solid #167540;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.left-buttons button.active,
+.right-buttons button.active {
+  background-color: #167540;
+  color: white;
+}
+
+.character {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 40px;
+}
+
+.character img {
+  width: 150px;
+  height: auto;
+  border-radius: 10px;
+}
+
+.data-display {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.data-item {
+  text-align: center;
+}
+
+.circle-chart {
+  transform: rotate(0deg); 
+}
+
+.circle-background {
+  fill: none;
+  stroke: #e0e0e0;
+  stroke-width: 5;
+}
+
+.circle-foreground {
+  fill: none;
+  stroke-width: 5;
+  transition: stroke-dashoffset 0.3s ease;
+}
 
 
-<style scoped src="../styles/InteractiveCharacter.css"></style>
+circle {
+  stroke: url(#gradientGreen);
+}
+
+circle text {
+  font-size: 16px;
+  font-weight: bold;
+  fill: #167540;
+}
+
+.data-item p {
+  margin-top: 10px;
+}
+</style>

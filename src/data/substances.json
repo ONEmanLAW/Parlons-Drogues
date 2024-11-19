@@ -1,44 +1,48 @@
 {
   "substances": [
     {
-      "name": "Cannabis",
+      "name": "Famille",
       "color": "yellow",
       "effects": {
-        "somnolence": 50,
-        "tristesse": 0,
-        "bonheur": 20,
-        "anxiete": 10
-      }
+        "baisse_des_performances": 30,
+        "difficultes_concentration": 40,
+        "absences_repetees": 25,
+        "risques_abandon_scolaire": 60
+      },
+      "image": "../assets/images/elena.png"
     },
     {
-      "name": "Alcool",
+      "name": "Amis",
       "color": "green",
       "effects": {
-        "somnolence": 30,
-        "tristesse": 20,
-        "bonheur": 0,
-        "anxiete": 5
-      }
+        "baisse_des_performances": 50,
+        "difficultes_concentration": 30,
+        "absences_repetees": 40,
+        "risques_abandon_scolaire": 70
+      },
+      "image": "../assets/images/ines.png"
     },
     {
-      "name": "Ecstasy",
+      "name": "École",
       "color": "blue",
       "effects": {
-        "somnolence": 0,
-        "tristesse": 0,
-        "bonheur": 70,
-        "anxiete": 15
-      }
+        "baisse_des_performances": 20,
+        "difficultes_concentration": 60,
+        "absences_repetees": 15,
+        "risques_abandon_scolaire": 50
+      },
+      "image": "../assets/images/raph.png"
     },
     {
-      "name": "Drogue Dure",
+      "name": "Travail",
       "color": "red",
       "effects": {
-        "somnolence": 10,
-        "tristesse": 30,
-        "bonheur": -20,
-        "anxiete": 80
-      }
+        "baisse_des_performances": 80,
+        "difficultes_concentration": 70,
+        "absences_repetees": 50,
+        "risques_abandon_scolaire": 90
+      },
+      "image": "../assets/images/elena.png"
     }
   ]
 }
