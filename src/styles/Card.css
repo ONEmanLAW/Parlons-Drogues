@@ -1,6 +1,6 @@
 .card {
-  width: 200px;
-  height: 300px;
+  width: 220px;
+  height: 320px;
   perspective: 1000px;
   margin: 20px;
   display: inline-block;
@@ -30,9 +30,41 @@
 
 .card-front {
   background-color: #fff;
+  flex-direction: column;
+  text-align: center;
+}
+
+.icon-container {
+  margin-bottom: 10px;
+}
+
+.card-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
 }
 
 .card-back {
   background-color: #f0f0f0;
   transform: rotateY(180deg);
+  flex-direction: column;
+  text-align: center;
+}
+
+.donut-chart-container {
+  margin: 20px 0;
+}
+
+.data-container {
+  margin: 20px 0;
+}
+
+.card-front h3, .card-back h3 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.card-front p, .card-back p {
+  font-size: 14px;
+  color: #666;
 }

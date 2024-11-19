@@ -1,19 +1,28 @@
 {
   "cards": [
     {
-      "title": "Carte 1",
-      "description": "Description de la carte 1",
-      "backContent": "Informations supplémentaires pour la carte 1"
+      "title": "Card 1",
+      "description": "Description of card 1",
+      "icon": "path/to/icon1.png",
+      "backDescription": "Learning progress",
+      "donutPercentage": 75,
+      "centerText": "🚀"
     },
     {
-      "title": "Carte 2",
-      "description": "Description de la carte 2",
-      "backContent": "Informations supplémentaires pour la carte 2"
+      "title": "Card 2",
+      "description": "Description of card 2",
+      "icon": "path/to/icon2.png",
+      "backDescription": "User reactions",
+      "donutPercentage": 50,
+      "centerText": "🎯"
     },
     {
-      "title": "Carte 3",
-      "description": "Description de la carte 3",
-      "backContent": "Informations supplémentaires pour la carte 3"
+      "title": "Card 3",
+      "description": "Description of card 3",
+      "icon": "path/to/icon3.png",
+      "backDescription": "Progress achieved",
+      "donutPercentage": 90,
+      "centerText": "🔥"
     }
   ]
 }

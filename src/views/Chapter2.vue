@@ -1,4 +1,3 @@
-<!-- views/Chapter2.vue -->
 <template>
   <Header />
   <div class="chapter">
@@ -10,15 +9,17 @@
       :imageSource="chapter.imageSource"
     />
 
-    <h2>Chapitre 2 - Cartes</h2>
-    <div class="card-container">
+    <div class="cards-container">
       <Card
-        v-for="(card, index) in cards"
-        :key="index"
+        v-for="card in cards"
+        :key="card.title"
         :title="card.title"
         :description="card.description"
         :backContent="card.backContent"
-        :backgroundImage="card.backgroundImage"
+        :icon="card.icon"
+        :backDescription="card.backDescription"
+        :donutPercentage="card.donutPercentage"
+        :centerText="card.centerText"
       />
     </div>
   </div>
