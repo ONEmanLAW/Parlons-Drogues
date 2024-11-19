@@ -4,8 +4,12 @@
   </footer>
 </template>
 
+
+
 <script setup>
 
 </script>
+
+
 
 <style scoped src="../styles/Footer.css"></style>

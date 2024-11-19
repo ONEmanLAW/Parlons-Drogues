@@ -16,6 +16,8 @@
   <Footer />
 </template>
 
+
+
 <script setup>
 import IntroChapters from '../components/IntroChapters.vue';
 
@@ -37,5 +39,7 @@ const chapter = {
   imageSource
 };
 </script>
+
+
 
 <style scoped src="../styles/Chapter.css"></style>

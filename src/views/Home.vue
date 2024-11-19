@@ -115,4 +115,6 @@ const isClickable = (index) => {
 };
 </script>
 
+
+
 <style scoped src="../styles/Home.css"></style>

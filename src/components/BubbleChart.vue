@@ -2,6 +2,8 @@
   <div ref="chartContainer" class="bubble-chart"></div>
 </template>
 
+
+
 <script setup>
 import { onMounted, ref } from 'vue';
 import * as d3 from 'd3';
@@ -62,5 +64,7 @@ function createBubbleChart() {
   });
 }
 </script>
+
+
 
 <style scoped src="../styles/BubbleChart.css"></style>

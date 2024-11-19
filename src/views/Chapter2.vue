@@ -25,6 +25,8 @@
   <Footer />
 </template>
 
+
+
 <script setup>
 import { ref, onMounted } from 'vue'; 
 import IntroChapters from '../components/IntroChapters.vue';
@@ -52,5 +54,7 @@ onMounted(() => {
   cards.value = cardsData.cards;
 });
 </script>
+
+
 
 <style scoped src="../styles/Chapter.css"></style>

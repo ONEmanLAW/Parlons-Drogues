@@ -13,6 +13,8 @@
   </div>
 </template>
 
+
+
 <script setup>
 import { ref } from 'vue';
 import { gsap } from 'gsap';
@@ -35,5 +37,7 @@ const toggleFlip = () => {
   });
 };
 </script>
+
+
 
 <style scoped src="../styles/Card.css"></style>

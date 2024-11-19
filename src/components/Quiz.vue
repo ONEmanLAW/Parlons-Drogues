@@ -16,6 +16,8 @@
   </div>
 </template>
 
+
+
 <script setup>
 import { ref, onMounted, nextTick } from 'vue';
 import * as d3 from 'd3';
@@ -102,5 +104,7 @@ const restartQuiz = () => {
   incorrectAnswers.value = 0;
 };
 </script>
+
+
 
 <style scoped src="../styles/Quiz.css"></style>

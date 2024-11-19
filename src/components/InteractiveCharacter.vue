@@ -27,6 +27,8 @@
   </div>
 </template>
 
+
+
 <script setup>
 import { reactive, ref, computed, onMounted } from 'vue';
 import * as d3 from 'd3';
@@ -86,5 +88,7 @@ onMounted(() => {
   updateEffects();
 });
 </script>
+
+
 
 <style scoped src="../styles/InteractiveCharacter.css"></style>
