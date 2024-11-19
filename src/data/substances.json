@@ -1,47 +1,56 @@
 {
   "substances": [
     {
+      "name": "Image de base",
+      "color": "gray",
+      "effects": [
+        { "name": "Effet 1", "value": 0 },
+        { "name": "Effet 2", "value": 0 },
+        { "name": "Effet 3", "value": 0 },
+        { "name": "Effet 4", "value": 0 }
+      ],
+      "image": "../assets/images/ines.png"
+    },
+    {
       "name": "Famille",
       "color": "yellow",
-      "effects": {
-        "baisse_des_performances": 30,
-        "difficultes_concentration": 40,
-        "absences_repetees": 25,
-        "risques_abandon_scolaire": 60
-      },
+      "effects": [
+        { "name": "Baisse des performances", "value": 30 },
+        { "name": "Difficultés de concentration", "value": 40 },
+        { "name": "Absences répétées", "value": 25 }
+      ],
       "image": "../assets/images/elena.png"
     },
     {
       "name": "Amis",
       "color": "green",
-      "effects": {
-        "baisse_des_performances": 50,
-        "difficultes_concentration": 30,
-        "absences_repetees": 40,
-        "risques_abandon_scolaire": 70
-      },
+      "effects": [
+        { "name": "Baisse des performances", "value": 50 },
+        { "name": "Difficultés de concentration", "value": 30 },
+        { "name": "Absences répétées", "value": 40 },
+        { "name": "Risques d'abandon scolaire", "value": 70 }
+      ],
       "image": "../assets/images/ines.png"
     },
     {
       "name": "École",
       "color": "blue",
-      "effects": {
-        "baisse_des_performances": 20,
-        "difficultes_concentration": 60,
-        "absences_repetees": 15,
-        "risques_abandon_scolaire": 50
-      },
+      "effects": [
+        { "name": "Baisse des performances", "value": 20 },
+        { "name": "Difficultés de concentration", "value": 60 },
+        { "name": "Absences répétées", "value": 15 }
+      ],
       "image": "../assets/images/raph.png"
     },
     {
       "name": "Travail",
       "color": "red",
-      "effects": {
-        "baisse_des_performances": 80,
-        "difficultes_concentration": 70,
-        "absences_repetees": 50,
-        "risques_abandon_scolaire": 90
-      },
+      "effects": [
+        { "name": "AUAHZAHD", "value": 80 },
+        { "name": "Difficultés de concentration", "value": 70 },
+        { "name": "Absences répétées", "value": 50 },
+        { "name": "Risques d'abandon scolaire", "value": 90 }
+      ],
       "image": "../assets/images/elena.png"
     }
   ]

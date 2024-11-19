@@ -3,7 +3,6 @@
     <h2>Jeu de risques cumulés</h2>
 
     <div class="character-container">
-      
       <div class="left-buttons">
         <button
           v-for="substance in leftSubstances"
@@ -16,7 +15,8 @@
       </div>
 
       <div class="character">
-        <img :src="currentImage" alt="Substance" />
+        <img v-if="!activeSubstance" :src="currentImage" alt="Image de base" />
+        <img v-if="activeSubstance" :src="currentImage" alt="Substance Image" />
       </div>
 
       <div class="right-buttons">
@@ -32,14 +32,9 @@
     </div>
 
     <div class="data-display">
-      <div v-for="(value, key) in currentEffects" :key="key" class="data-item">
-        <svg class="circle-chart" width="60" height="60" :data-value="value">
-          <circle
-            class="circle-background"
-            cx="30"
-            cy="30"
-            r="25"
-          ></circle>
+      <div v-for="(effect, index) in currentEffects" :key="index" class="data-item">
+        <svg class="circle-chart" width="60" height="60" :data-value="effect.value">
+          <circle class="circle-background" cx="30" cy="30" r="25"></circle>
           <circle
             class="circle-foreground"
             cx="30"
@@ -47,17 +42,16 @@
             r="25"
             :style="{
               strokeDasharray: circleCircumference,
-              strokeDashoffset: calculateOffset(value),
-              stroke: getGradient(value)
+              strokeDashoffset: calculateOffset(effect.value),
+              stroke: getSolidGreen(effect.value)
             }"
           ></circle>
           <text x="50%" y="50%" text-anchor="middle" alignment-baseline="middle" font-size="16" fill="#167540" font-weight="bold">
-            {{ value }}%
+            {{ effect.value }}%
           </text>
         </svg>
 
-        
-        <p>{{ translateKey(key) }}</p>
+        <p class="data-title">{{ effect.name }}</p>
       </div>
     </div>
   </div>
@@ -66,44 +60,30 @@
 <script setup>
 import { ref, computed } from "vue";
 import "../styles/InteractiveCharacter.css";
-
-
 import substancesData from "../data/substances.json";
-
 
 const substances = ref(substancesData.substances);
 const activeSubstance = ref(null);
+const baseSubstance = computed(() => substances.value.find(substance => substance.name === "Image de base"));
+const leftSubstances = computed(() => substances.value.slice(1, Math.ceil(substances.value.length / 2)));
+const rightSubstances = computed(() => substances.value.slice(Math.ceil(substances.value.length / 2)));
 
-
-const leftSubstances = computed(() => substances.value.slice(0, 2));
-const rightSubstances = computed(() => substances.value.slice(2, 4));
-
+const baseImage = baseSubstance.value.image;
 function resolveImagePath(path) {
   return new URL(path, import.meta.url).href;
 }
 
-
 const currentImage = computed(() => {
-  return activeSubstance.value
-    ? resolveImagePath(activeSubstance.value.image)
-    : resolveImagePath("../assets/images/image1.png");
+  return activeSubstance.value ? resolveImagePath(activeSubstance.value.image) : resolveImagePath(baseImage);
 });
-
 
 const currentEffects = computed(() => {
-  return activeSubstance.value ? activeSubstance.value.effects : {
-    baisse_des_performances: 0,
-    difficultes_concentration: 0,
-    absences_repetees: 0,
-    risques_abandon_scolaire: 0,
-  };
+  return activeSubstance.value ? activeSubstance.value.effects : baseSubstance.value.effects;
 });
-
 
 function selectSubstance(substance) {
   activeSubstance.value = activeSubstance.value === substance ? null : substance;
 }
-
 
 const circleRadius = 25;
 const circleCircumference = 2 * Math.PI * circleRadius;
@@ -113,26 +93,13 @@ function calculateOffset(value) {
   return circleCircumference * (1 - percentage);
 }
 
-
-function translateKey(key) {
-  const translations = {
-    baisse_des_performances: "Baisse des performances scolaires",
-    difficultes_concentration: "Difficultés de concentration",
-    absences_repetees: "Absences répétées",
-    risques_abandon_scolaire: "Risques d'abandon scolaire",
-  };
-  return translations[key] || key;
-}
-
-
-function getGradient(value) {
+function getSolidGreen(value) {
   const percentage = Math.min(value, 100);
-  const lightGreen = "#b0e57c";
-  const darkGreen = "#006400";  
-
-  const green = `rgb(${Math.floor(176 + (percentage * (Math.floor(0 + (99 - 176)) / 100)))}, ${Math.floor(229 + (percentage * (Math.floor(90 + (229 - 90)) / 100)))}, ${Math.floor(124 + (percentage * (Math.floor(180 + (124 - 180)) / 100)))})`;
-
-  return green;
+  return `rgb(
+    ${Math.floor(50 + (percentage * (255 - 50)) / 100)},
+    ${Math.floor(200 + (percentage * (255 - 200)) / 100)},
+    ${Math.floor(50 + (percentage * (100 - 50)) / 100)}
+  )`;
 }
 </script>
 
@@ -140,20 +107,25 @@ function getGradient(value) {
 .interactive-character {
   text-align: center;
   padding: 20px;
+  background-color: #ffffff; 
+  border-radius: 15px; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  max-width: 1100px;
+  margin: 20px auto; 
 }
 
 .character-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0;
+  gap: 20px; 
 }
 
 .left-buttons,
 .right-buttons {
   display: flex;
   flex-direction: column;
-  gap: 20px; 
+  gap: 20px;
 }
 
 .left-buttons button,
@@ -192,14 +164,20 @@ function getGradient(value) {
   justify-content: center;
   gap: 20px;
   margin-top: 20px;
+  flex-wrap: wrap; 
 }
 
 .data-item {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  width: 100px; 
+  margin: 10px;
 }
 
 .circle-chart {
-  transform: rotate(0deg); 
+  transform: rotate(0deg);
 }
 
 .circle-background {
@@ -214,7 +192,6 @@ function getGradient(value) {
   transition: stroke-dashoffset 0.3s ease;
 }
 
-
 circle {
   stroke: url(#gradientGreen);
 }
@@ -225,7 +202,11 @@ circle text {
   fill: #167540;
 }
 
-.data-item p {
+
+.data-title {
   margin-top: 10px;
+  word-wrap: break-word;
+  white-space: normal; 
+  max-width: 100px; 
 }
 </style>
