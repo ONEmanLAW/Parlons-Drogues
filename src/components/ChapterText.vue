@@ -115,4 +115,12 @@ onMounted(() => {
   color: #6c1e3a;
 }
 
+.chapter-4 {
+  background-color: #d6b670;
+}
+
+.chapter-4 .chapter-text p {
+  color: #ff9100;
+}
+
 </style>
