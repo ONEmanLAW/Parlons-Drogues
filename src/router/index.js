@@ -5,6 +5,7 @@ import Chapter2 from '../views/Chapter2.vue';
 import Chapter3 from '../views/Chapter3.vue';
 import Advice from '../views/Advice.vue';
 import Intro from '../views/IntroPage.vue';
+import Menu from "../views/Menu.vue";
 
 const routes = [
   { path: '/home', component: Home },
@@ -13,6 +14,7 @@ const routes = [
   { path: '/chapter3', component: Chapter3 },
   { path: '/advice', component: Advice },
   { path: '/', component: Intro }, 
+  { path: "/menu", component: Menu },
 ];
 
 const router = createRouter({
