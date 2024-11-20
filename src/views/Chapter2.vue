@@ -9,9 +9,11 @@
       :imageSource="chapter.imageSource"
     />
 
+    <Card :chapterId="2" />
+
     <ChapterText :currentChapterId="2" />
 
-    <Card :chapterId="2" />
+    <ChapterTransition :currentChapter="2" chapterText="Allez au chapitre 3" />
 
   </div>
   <Footer />
@@ -24,6 +26,8 @@ import ChapterText from '../components/ChapterText.vue';
 import Card from '../components/Card.vue';
 import Header from '../components/Header.vue'; 
 import Footer from '../components/Footer.vue';
+
+import ChapterTransition from '../components/ChapterTransition.vue';
 
 import introChaptersData from '../data/introChapters.json';
 import cardsData from '../data/cardsData.json';

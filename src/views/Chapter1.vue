@@ -13,11 +13,15 @@
 
     <Card :chapterId="1" />
 
+   
+
     <h2>Chapitre 1 - Quiz</h2>
     <Quiz />
     <InteractiveCharacter />
     <GraphComponent />
     <BodyChart />
+    <ChapterTransition :currentChapter="1" chapterText="Allez au chapitre 2" />
+    
   </div>
   <Footer />
 </template>
@@ -32,6 +36,8 @@ import InteractiveCharacter from '../components/InteractiveCharacter.vue';
 import Header from '../components/Header.vue'; 
 import Footer from '../components/Footer.vue';
 import Card from '../components/Card.vue';
+
+import ChapterTransition from '../components/ChapterTransition.vue';
 
 import introChaptersData from '../data/introChapters.json';
 

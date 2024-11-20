@@ -15,6 +15,7 @@
     <Card :chapterId="3" />
 
     <h2>Chapitre 3 - Personnage interactif</h2>
+    <ChapterTransition :currentChapter="3" chapterText="Allez au advice" />
   </div>
   <Footer />
 </template>
@@ -25,6 +26,8 @@ import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
 import Card from '../components/Card.vue';
 import ChapterText from '../components/ChapterText.vue';
+
+import ChapterTransition from '../components/ChapterTransition.vue';
 
 import introChaptersData from '../data/introChapters.json';
 import cardsData from '../data/cardsData.json';
