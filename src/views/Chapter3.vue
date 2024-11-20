@@ -1,6 +1,7 @@
 <template>
   <Header />
   <div class="chapter">
+    
     <IntroChapters
       :title="chapter.title"
       :subtitle="chapter.subtitle"
@@ -11,18 +12,7 @@
 
     <ChapterText :currentChapterId="3" />
 
-    <div class="card-container">
-      <Card
-        v-for="(card, index) in chapter.cards"
-        :key="index"
-        :title="card.title"
-        :description="card.description"
-        :backDescription="card.backDescription"
-        :icon="card.icon"
-        :donutPercentage="card.donutPercentage"
-        :centerText="card.centerText"
-      />
-    </div>
+    <Card :chapterId="3" />
 
     <h2>Chapitre 3 - Personnage interactif</h2>
   </div>

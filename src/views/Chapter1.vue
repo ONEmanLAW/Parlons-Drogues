@@ -11,18 +11,7 @@
 
     <ChapterText :currentChapterId="1" />
 
-    <div class="card-container">
-      <Card
-        v-for="(card, index) in chapter.cards"
-        :key="index"
-        :title="card.title"
-        :description="card.description"
-        :backDescription="card.backDescription"
-        :icon="card.icon"
-        :donutPercentage="card.donutPercentage"
-        :centerText="card.centerText"
-      />
-    </div>
+    <Card :chapterId="1" />
 
     <h2>Chapitre 1 - Quiz</h2>
     <Quiz />
@@ -34,7 +23,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
 import IntroChapters from '../components/IntroChapters.vue';
 import ChapterText from '../components/ChapterText.vue';
 import Quiz from '../components/Quiz.vue';
@@ -46,20 +34,15 @@ import Footer from '../components/Footer.vue';
 import Card from '../components/Card.vue';
 
 import introChaptersData from '../data/introChapters.json';
-import cardsData from '../data/cardsData.json';
+
 
 // Récupération des données du chapitre 1
-const chapterData = introChaptersData.chapters.find(ch => ch.id === 1); // Intro
-const chapterCards = cardsData.chapters.find(ch => ch.id === 1).cards; // Cartes
-
-const videoSource = new URL(`../${chapterData.videoSource}`, import.meta.url).href;
-const imageSource = new URL(`../${chapterData.imageSource}`, import.meta.url).href;
+const chapterData = introChaptersData.chapters.find((ch) => ch.id === 1);
 
 const chapter = {
   ...chapterData,
-  videoSource,
-  imageSource,
-  cards: chapterCards
+  videoSource: new URL(`../${chapterData.videoSource}`, import.meta.url).href,
+  imageSource: new URL(`../${chapterData.imageSource}`, import.meta.url).href,
 };
 </script>
 

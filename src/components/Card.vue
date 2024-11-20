@@ -1,20 +1,33 @@
 <template>
-  <div class="card" @click="toggleFlip" ref="cardRef">
-    <div :class="['card-inner', { flipped }]">
-      <div class="card-front">
-        <div class="icon-container">
-          <img :src="icon" alt="Icon" class="card-icon" />
-        </div>
-        <h3>{{ title }}</h3>
-        <p>{{ description }}</p>
-      </div>
+  <div class="chapter">
+    <div class="chapter-header">
+      <h2>{{ chapter.title }}</h2>
+      <p>{{ chapter.description }}</p>
+    </div>
 
-      <div class="card-back">
-        <h3>{{ title }}</h3>
-        <div class="donut-chart-container" ref="donutChartContainer">
-        </div>
-        <div class="data-container">
-          <p>{{ backDescription }}</p>
+    <div class="card-container">
+      <div
+        v-for="(card, index) in chapter.cards"
+        :key="index"
+        class="card"
+        @click="toggleFlip(index)"
+      >
+        <div :class="['card-inner', { flipped: flippedStates[index] }]">
+          <div class="card-front">
+            <div class="icon-container">
+              <img :src="card.icon" alt="Icon" class="card-icon" />
+            </div>
+            <h3>{{ card.title }}</h3>
+            <p>{{ card.description }}</p>
+          </div>
+
+          <div class="card-back">
+            <h3>{{ card.title }}</h3>
+            <div class="donut-chart-container" :ref="el => setDonutContainer(el, index)"></div>
+            <div class="data-container">
+              <p>{{ card.backDescription }}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -22,73 +35,89 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, nextTick } from 'vue';
 import { gsap } from 'gsap';
 import * as d3 from 'd3';
+import cardsData from '../data/cardsData.json';
 
 const props = defineProps({
-  title: String,
-  description: String,
-  backDescription: String, 
-  icon: String,
-  donutPercentage: Number, 
-  centerText: String, 
+  chapterId: Number, 
 });
 
-const flipped = ref(false);
-const cardRef = ref(null);
-const donutChartContainer = ref(null);
+const chapter = ref({}); 
+const flippedStates = ref([]); 
+const donutChartContainers = ref([]); 
 
-const toggleFlip = () => {
-  flipped.value = !flipped.value;
-  gsap.to(cardRef.value.querySelector('.card-inner'), {
-    rotateY: flipped.value ? 180 : 0,
+
+onMounted(() => {
+  const selectedChapter = cardsData.chapters.find((ch) => ch.id === props.chapterId);
+  if (selectedChapter) {
+    chapter.value = selectedChapter;
+    flippedStates.value = Array(selectedChapter.cards.length).fill(false); 
+  }
+});
+
+
+const setDonutContainer = (el, index) => {
+  if (el) {
+    donutChartContainers.value[index] = el;
+  }
+};
+
+
+const toggleFlip = (index) => {
+  flippedStates.value[index] = !flippedStates.value[index];
+  const cardElement = document.querySelectorAll('.card-inner')[index];
+  gsap.to(cardElement, {
+    rotateY: flippedStates.value[index] ? 180 : 0,
     duration: 0.4,
-    ease: "power1.inOut",
+    ease: 'power1.inOut',
   });
 };
 
 
-const drawDonutChart = (percentage) => {
-  const width = 150;
-  const height = 150;
-  const margin = 10;
-  const radius = Math.min(width, height) / 2 - margin;
+const drawDonutCharts = () => {
+  chapter.value.cards.forEach((card, index) => {
+    const container = donutChartContainers.value[index];
+    if (!container) return;
 
-  
-  const svg = d3.select(donutChartContainer.value)
-    .append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .append("g")
-    .attr("transform", `translate(${width / 2}, ${height / 2})`);
+    d3.select(container).selectAll('*').remove();
 
-  const arc = d3.arc()
-    .innerRadius(radius - 20)
-    .outerRadius(radius);
+    const width = 150;
+    const height = 150;
+    const radius = Math.min(width, height) / 2 - 10;
 
-  const pie = d3.pie()
-    .value(d => d)
-    .startAngle(0)
-    .endAngle(2 * Math.PI); 
+    const svg = d3.select(container)
+      .append('svg')
+      .attr('width', width)
+      .attr('height', height)
+      .append('g')
+      .attr('transform', `translate(${width / 2}, ${height / 2})`);
 
-  const data = [percentage, 100 - percentage];
+    const arc = d3.arc()
+      .innerRadius(radius - 20)
+      .outerRadius(radius);
 
-  svg.selectAll("path")
-    .data(pie(data))
-    .enter().append("path")
-    .attr("d", arc)
-    .attr("fill", (d, i) => i === 0 ? "#4caf50" : "#ddd");
+    const pie = d3.pie().value((d) => d);
+    const data = [card.donutPercentage, 100 - card.donutPercentage];
 
-  svg.append("text")
-    .attr("text-anchor", "middle")
-    .attr("dy", ".3em")
-    .attr("font-size", "18px")
-    .text(props.centerText ? props.centerText : `${percentage}%`);
+    svg.selectAll('path')
+      .data(pie(data))
+      .enter()
+      .append('path')
+      .attr('d', arc)
+      .attr('fill', (d, i) => (i === 0 ? '#4caf50' : '#ddd'));
+
+    svg.append('text')
+      .attr('text-anchor', 'middle')
+      .attr('dy', '.3em')
+      .text(card.centerText || `${card.donutPercentage}%`);
+  });
 };
 
-onMounted(() => {
-  drawDonutChart(props.donutPercentage);
+onMounted(async () => {
+  await nextTick();
+  drawDonutCharts();
 });
 </script>
 

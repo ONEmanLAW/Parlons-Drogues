@@ -1,9 +1,46 @@
+.chapter {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+  padding: 20px; 
+  box-sizing: border-box; 
+}
+
+
+.chapter-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.chapter-header h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.chapter-header p {
+  font-size: 16px;
+  color: #555;
+}
+
+
+.card-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  margin-top: 20px; 
+  flex-grow: 1; 
+}
+
+
 .card {
   width: 220px;
   height: 320px;
   perspective: 1000px;
   margin: 20px;
-  display: inline-block;
 }
 
 .card-inner {
@@ -41,7 +78,6 @@
 .card-icon {
   width: 40px;
   height: 40px;
-  object-fit: cover;
 }
 
 .card-back {
@@ -59,12 +95,14 @@
   margin: 20px 0;
 }
 
-.card-front h3, .card-back h3 {
+.card-front h3,
+.card-back h3 {
   font-size: 18px;
   font-weight: bold;
 }
 
-.card-front p, .card-back p {
+.card-front p,
+.card-back p {
   font-size: 14px;
   color: #666;
 }
