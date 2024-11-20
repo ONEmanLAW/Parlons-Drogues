@@ -9,7 +9,8 @@
       :imageSource="chapter.imageSource"
     />
 
-    <!-- Affichage des cartes pour ce chapitre -->
+    <ChapterText :currentChapterId="3" />
+
     <div class="card-container">
       <Card
         v-for="(card, index) in chapter.cards"
@@ -30,16 +31,17 @@
 
 <script setup>
 import IntroChapters from '../components/IntroChapters.vue';
-import introChaptersData from '../data/introChapters.json';
-import cardsData from '../data/cardsData.json';  // Importation des cartes
-
 import Header from '../components/Header.vue'; 
 import Footer from '../components/Footer.vue';
 import Card from '../components/Card.vue';
+import ChapterText from '../components/ChapterText.vue';
+
+import introChaptersData from '../data/introChapters.json';
+import cardsData from '../data/cardsData.json';
 
 // Récupération des données du chapitre 3
 const chapterData = introChaptersData.chapters.find(ch => ch.id === 3);
-const chapterCards = cardsData.chapters.find(ch => ch.id === 3).cards;  // Cartes du chapitre 3
+const chapterCards = cardsData.chapters.find(ch => ch.id === 3).cards;
 
 const videoSource = new URL(`../${chapterData.videoSource}`, import.meta.url).href;
 const imageSource = new URL(`../${chapterData.imageSource}`, import.meta.url).href;
@@ -48,7 +50,7 @@ const chapter = {
   ...chapterData,
   videoSource,
   imageSource,
-  cards: chapterCards  // Ajout des cartes du chapitre
+  cards: chapterCards 
 };
 </script>
 
