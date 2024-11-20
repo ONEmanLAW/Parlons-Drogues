@@ -1,5 +1,5 @@
 <template>
-  <div class="home" :style="backgroundStyle">
+  <div :class="['home', `chapter-${currentIndex + 1}`]">
     <div class="chapter-container">
       <div
         v-for="(chapter, index) in chapters"
@@ -14,7 +14,7 @@
           @click="goToChapter(index)"
           :class="{ clickable: isClickable(index), disabled: !isClickable(index) }"
         />
-
+        
         <div v-if="index === currentIndex" class="chapter-info">
           <h3 class="chapter-number">&#183; Chapitre {{ index + 1 }} &#183;</h3>
           <h2>{{ chapter.title }}</h2>
@@ -34,8 +34,8 @@
     </div>
 
     <div class="navigation-buttons">
-      <button :style="buttonStyle" @click="previousChapter">Previous</button>
-      <button :style="buttonStyle" @click="nextChapter">Next</button>
+      <button :class="`chapter-${currentIndex + 1}`" @click="previousChapter">Previous</button>
+      <button :class="`chapter-${currentIndex + 1}`" @click="nextChapter">Next</button>
     </div>
   </div>
 </template>
@@ -54,39 +54,8 @@ const chapters = homeChaptersData.chapters.map((chapterData) => ({
 
 const currentIndex = ref(0);
 const totalChapters = chapters.length;
-const radius = 300;
 
 const chapterSound = new Audio(new URL('../assets/sounds/sound.wav', import.meta.url).href);
-
-
-
-
-
-// FULL CSS pour gérer les différents chapitre
-const backgroundStyle = computed(() => {
-  // Chapitre 1 - 2 - 3
-  const backgroundColors = ['#ADD8E6', '#90EE90', '#FFB6C1'];
-  const textColors = ['#6FA8DC', '#66C266', '#D87A9C']; 
-  const indicatorColors = ['#6FA8DC', '#66C266', '#D87A9C']; 
-  return {
-    backgroundColor: backgroundColors[currentIndex.value],
-    color: textColors[currentIndex.value],
-    transition: "background-color 0.5s ease, color 0.5s ease",
-  };
-});
-
-const buttonStyle = computed(() => {
-  const buttonColors = ['#6FA8DC', '#66C266', '#D87A9C']; 
-  return {
-    backgroundColor: buttonColors[currentIndex.value],
-    color: '#ffffff',
-    border: 'none',
-    cursor: 'pointer',
-    padding: '10px 20px',
-    fontSize: '16px',
-    transition: 'background-color 0.3s ease, color 0.3s ease',
-  };
-});
 
 const getIndicatorStyle = (index) => {
   const indicatorColors = ['#6FA8DC', '#66C266', '#D87A9C'];
@@ -97,11 +66,6 @@ const getIndicatorStyle = (index) => {
     transition: "background-color 0.3s ease",
   };
 };
-
-
-
-
-
 
 const getChapterStyle = (index) => {
   const position = (index - currentIndex.value + totalChapters) % totalChapters;
@@ -121,8 +85,8 @@ const getChapterStyle = (index) => {
     angle = 90;
   }
 
-  const translateZ = Math.cos(angle * Math.PI / 180) * radius;
-  const translateX = Math.sin(angle * Math.PI / 180) * radius;
+  const translateZ = Math.cos(angle * Math.PI / 180) * 300;
+  const translateX = Math.sin(angle * Math.PI / 180) * 300;
 
   return {
     transform: `rotateY(${angle}deg) translateX(${translateX}px) translateZ(${translateZ}px) scale(${scale})`,
@@ -155,6 +119,8 @@ const isClickable = (index) => {
 };
 </script>
 
+
+
 <style scoped>
 .home {
   display: flex;
@@ -166,6 +132,21 @@ const isClickable = (index) => {
   perspective: 1000px;
   box-sizing: border-box;
   transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.home.chapter-1 {
+  background-color: #ADD8E6;
+  color: #6FA8DC;
+}
+
+.home.chapter-2 {
+  background-color: #90EE90;
+  color: #66C266;
+}
+
+.home.chapter-3 {
+  background-color: #FFB6C1;
+  color: #D87A9C;
 }
 
 .chapter-container {
@@ -243,6 +224,23 @@ button {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.navigation-buttons button.chapter-1 {
+  background-color: #6FA8DC;
+  color: #ffffff;
+}
+
+.navigation-buttons button.chapter-2 {
+  background-color: #66C266;
+  color: #ffffff;
+}
+
+.navigation-buttons button.chapter-3 {
+  background-color: #D87A9C;
+  color: #ffffff;
 }
 
 .chapter-indicators {
@@ -262,4 +260,5 @@ button {
 .indicator.active {
   background-color: #333;
 }
+
 </style>
