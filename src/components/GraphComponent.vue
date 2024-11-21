@@ -2,6 +2,7 @@
   <div class="chapter3">
     <h2>Graphique des Effets par Mode de Consommation</h2>
 
+  
     <div class="buttons">
       <button
         v-for="mode in modes"
@@ -13,34 +14,42 @@
       </button>
     </div>
 
+    <div class="switch-container">
+      <label class="switch">
+        <input type="checkbox" v-model="isSurdose" @change="updateChart" />
+        <span class="slider"></span>
+      </label>
+      <span>{{ isSurdose ? 'Surdose' : 'Dose' }}</span>
+    </div>
+
     <div ref="chartContainer" class="chart-container"></div>
 
     <div class="slider-container">
       <input
         type="range"
         min="1"
-        max="10"
+        max="5"
         v-model="selectedYear"
         @input="updateChart"
       />
-      <span>{{ selectedYear }} ans</span>
+      <span>{{ selectedYear }}</span>
     </div>
   </div>
 </template>
-
-
 
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import * as d3 from 'd3';
 import effectsData from '../data/effectsData.json';
 
-const modes = ['Fumé', 'Vapoté', 'Ingeré'];
+const modes = ['Fumé', 'Ingeré'];
 const selectedModes = ref([]);
 const selectedYear = ref(1);
+const isSurdose = ref(false); 
 
 const chartContainer = ref(null);
 let svg, xScale, yScale;
+
 
 const initializeChart = () => {
   const margin = { top: 20, right: 20, bottom: 50, left: 50 };
@@ -54,23 +63,19 @@ const initializeChart = () => {
     .append('g')
     .attr('transform', `translate(${margin.left},${margin.top})`);
 
-  xScale = d3.scaleLinear()
-    .domain([0, 180])
-    .range([0, width]);
-
-  yScale = d3.scaleLinear()
-    .domain([0, 50])
-    .range([height, 0]);
+  xScale = d3.scaleLinear().domain([1, 6]).range([0, width]);
+  yScale = d3.scaleLinear().domain([0, 5]).range([height, 0]);
 
   svg.append('g')
     .attr('transform', `translate(0,${height})`)
-    .call(d3.axisBottom(xScale).ticks(5).tickFormat(d => `${d} min`));
+    .call(d3.axisBottom(xScale).ticks(4));
 
   svg.append('g')
-    .call(d3.axisLeft(yScale).ticks(5).tickFormat(d => `${d}%`));
+    .call(d3.axisLeft(yScale).ticks(5));
 
   updateChart();
 };
+
 
 const updateChart = () => {
   svg.selectAll('.line').remove();
@@ -78,11 +83,14 @@ const updateChart = () => {
   svg.selectAll('.text').remove();
 
   selectedModes.value.forEach(mode => {
-    const data = effectsData[mode.toLowerCase()][selectedYear.value];
+    const modeKey = mode.toLowerCase();
+    const doseKey = isSurdose.value ? 'surdose' : 'dose';
 
-    
+    const data = effectsData[modeKey][doseKey]["data"][selectedYear.value];
+    const emojis = effectsData[modeKey][doseKey]["emojis"][selectedYear.value];
+
     const line = d3.line()
-      .x((d, i) => xScale([0, 15, 45, 90, 180][i]))
+      .x((d, i) => xScale(i + 1))
       .y(d => yScale(d))
       .curve(d3.curveCardinal);
 
@@ -94,49 +102,26 @@ const updateChart = () => {
       .attr('stroke', getColorForMode(mode))
       .attr('stroke-width', 2);
 
-    
     svg.selectAll(`.emoji-${mode}`)
       .data(data)
       .enter()
       .append('text')
       .attr('class', 'emoji')
-      .attr('x', (d, i) => xScale([0, 15, 45, 90, 180][i]))
-      .attr('y', d => yScale(d)) 
+      .attr('x', (d, i) => xScale(i + 1))
+      .attr('y', d => yScale(d))
       .attr('text-anchor', 'middle')
       .attr('font-size', '18px')
-      .text((d, i) => getEmojiForPoint(mode, i)); 
-
-
-    svg.selectAll(`.text-${mode}`)
-      .data(data)
-      .enter()
-      .append('text')
-      .attr('class', 'text')
-      .attr('x', (d, i) => xScale([0, 15, 45, 90, 180][i]))
-      .attr('y', d => yScale(d) + 20)
-      .attr('text-anchor', 'middle')
-      .attr('font-size', '12px')
-      .text(d => `${d}%`);
+      .text((d, i) => emojis[i]);
   });
 };
+
 
 const getColorForMode = (mode) => {
   const colors = {
     "Fumé": "rgba(255, 99, 132, 1)",
-    "Vapoté": "rgba(54, 162, 235, 1)",
     "Ingeré": "rgba(75, 192, 192, 1)"
   };
   return colors[mode] || 'black';
-};
-
-
-const getEmojiForPoint = (mode, index) => {
-  const emojis = {
-    "Fumé": ["💨", "🔥", "💨", "☁️", "🌬️"],
-    "Vapoté": ["💨", "🍃", "🌀", "🌬️", "🌫️"],
-    "Ingeré": ["🍽️", "🥄", "🍒", "🍍", "🍉"]
-  };
-  return emojis[mode] && emojis[mode][index] || '❓';
 };
 
 const toggleMode = (mode) => {
@@ -156,7 +141,5 @@ onMounted(() => {
 watch(selectedYear, updateChart);
 watch(selectedModes, updateChart);
 </script>
-
-
 
 <style scoped src="../styles/GraphComponent.css"></style>
