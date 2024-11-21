@@ -63,7 +63,6 @@ onMounted(() => {
       if (entry.isIntersecting && !videoHasPlayed.value) {
         const percentageVisible = entry.intersectionRatio * 100;
 
-        // 75% pour lancer la vidéo
         if (percentageVisible >= 75) {
           video.play();
           videoHasPlayed.value = true; 

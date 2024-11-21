@@ -97,7 +97,7 @@ export default {
   height: 100vh;
   padding: 20px;
   background-color: #ffe9d6;
-  font-family: Arial, sans-serif;
+  font-family: Montserrat;
   color: #333;
   box-sizing: border-box;
 }

@@ -38,7 +38,7 @@
     align-items: center;
     height: 100vh;
     background-color: #e6f2ff;
-    font-family: Arial, sans-serif;
+    font-family: Montserrat;
     padding: 30px; 
     box-sizing: border-box;
   }
@@ -107,9 +107,9 @@
   }
   
   
-  .card-left {
+  /* .card-left {
   }
-  
+   */
   .card-right {
     transform: rotate(5deg);
     margin-left: 550px; 

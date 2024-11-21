@@ -68,10 +68,10 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .emoji {
-  font-family: Arial, sans-serif;
+  font-family: Montserrat;
 }
 
 .text {
-  font-family: Arial, sans-serif;
+  font-family: Montserrat;
   fill: #333;
 }

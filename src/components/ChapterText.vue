@@ -84,7 +84,7 @@ onMounted(() => {
 .chapter-text {
   max-width: 800px;
   width: 100%;
-  font-family: Arial, sans-serif;
+  font-family: Montserrat;
   font-size: 24px;
   line-height: 1.6;
   text-align: center;
