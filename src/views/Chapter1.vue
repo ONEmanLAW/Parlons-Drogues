@@ -19,6 +19,7 @@
     <Quiz />
     <InteractiveCharacter />
     <GraphComponent />
+    <Elena1 />
     <BodyChart />
     <ChapterTransition :currentChapter="1" chapterText="Allez au chapitre 2" />
     
@@ -36,6 +37,9 @@ import InteractiveCharacter from '../components/InteractiveCharacter.vue';
 import Header from '../components/Header.vue'; 
 import Footer from '../components/Footer.vue';
 import Card from '../components/Card.vue';
+
+import Elena1 from '../components/Elena1.vue';
+
 
 import ChapterTransition from '../components/ChapterTransition.vue';
 
