@@ -2,19 +2,23 @@
   "chapters": [
     {
       "id": 1,
-      "text": "J’ai compris que ce que je pensais drôle et cool était enfaite dangereux. J’ai voulu essayer comme tout le monde mais au vu des conséquences ça en valait pas la peine. J’aurais aimé être mieux informé avant. J’ai eu la peur de ma vie et je le souhaite à personne."
+      "text": "Franchement, j’ai capté que ce que je pensais être fun et stylé, c’était en vrai super dangereux. J’ai voulu faire comme tout le monde, mais sérieux, ça valait pas le coup. Si j’avais su les risques, jamais j’aurais tenté. J’ai flippé comme jamais, et je veux que personne vive ça.",
+      "audio": "concluElena.wav"
     },
     {
       "id": 2,
-      "text": "J’ai compris que la dépendance, ça ne vient pas d’un coup. Au départ, je pensais faire des choix simples, sans conséquences, mais en réalité, c’était tout l’inverse. Il faut apprendre à ne pas laisser nos habitudes diriger notre vie et toujours garder le contrôle. Prendre les bonnes décisions, c’est pas toujours évident, alors n’hésite jamais à demander de l’aide si tu en as besoin."
+      "text": "J’ai capté qu’à vouloir trop être 'cool', tu risques de tout perdre sans même t’en rendre compte. Ce qui commence comme une simple blague peut vite se transformer en dépendance, sans que tu t'en rendes compte. Faut pas laisser ces mauvaises habitudes prendre le dessus. Apprends à prendre du recul et à garder le contrôle, même quand c’est pas facile. Et surtout, si tu sens que ça part en vrille, demande de l’aide avant que ça soit trop tard.",
+      "audio": "concluRaph.wav"
     },
     {
       "id": 3,
-      "text": "Perdre le contrôle de ma vie ma aidé à réaliser que j’étais en train de tout perdre. Ça à pas été facile pour moi de me regarder et de me dire, tu détruis ta santé. Accepter et reconnaitre d’être dans cette situation c’est pas facile, surtout quand on doit en parler avec ses parents. Au final j’ai réussi à m’en sortir mais si je peux te donner un conseil ne commence pas ou arrête avant que ça soit trop tard."
+      "text": "Quand j’ai perdu le contrôle, j’ai compris que je faisais du mal à ma santé sur le long terme. Au début, tu penses que ça t’impacte pas, mais avec le temps, tu te rends compte que ça te touche vraiment. C’était super dur d’accepter ça et d’en parler. Aujourd’hui, je vois bien les dégâts et je regrette d’avoir commencé. Si je peux te donner un conseil : ne commence pas, ou arrête avant que ça commence à détruire ta vie.",
+      "audio": "concluInes.wav"
     },
     {
       "id": 4,
-      "text": "C'est toi qui décides. Ne laisse pas une substance prendre le contrôle de ta vie. Si tu te sens concerné ou que tu t'inquiètes pour quelqu'un, il n’est jamais trop tard pour en parler. Que ce soit à un pote, un adulte de confiance ou même un pro, discuter et chercher de l’aide, c’est déjà un grand pas. Ta santé et ton bien-être valent bien plus qu’un petit trip passager. Prends soin de toi, et fais gaffe à ceux autour de toi."
+      "text": "C'est toi qui décides. Ne laisse pas une substance prendre le contrôle de ta vie. Si tu te sens concerné ou que tu t'inquiètes pour quelqu'un, il n’est jamais trop tard pour en parler. Que ce soit à un pote, un adulte de confiance ou même un pro, discuter et chercher de l’aide, c’est déjà un grand pas. Ta santé et ton bien-être valent bien plus qu’un petit trip passager. Prends soin de toi, et fais gaffe à ceux autour de toi.",
+      "audio": "concluRaph.wav"
     }
   ]
 }
