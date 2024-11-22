@@ -22,10 +22,11 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue';
+import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue';
 import { gsap } from 'gsap';
 import { TextPlugin } from 'gsap/TextPlugin';
 import chapterTextData from '../data/chapterText.json';
+import { useRouter, useRoute } from 'vue-router';
 
 gsap.registerPlugin(TextPlugin);
 
@@ -56,20 +57,26 @@ const textElement = ref(null);
 const chapterContainer = ref(null);
 const mousePosition = ref({ x: 0, y: 0 });
 let audio = null;
-let isAudioPaused = ref(true);
-const isAudioVisible = ref(false);
+let isAudioPaused = ref(true); 
+const isAudioVisible = ref(false); 
+let isAnimationComplete = ref(false); // Flag pour vérifier si l'animation est terminée
 
 const startAnimation = () => {
-  if (textElement.value) {
+  if (textElement.value && !isAnimationComplete.value) {
     gsap.fromTo(
       textElement.value,
-      { opacity: 0, text: '' },
+      { opacity: 0, visibility: "hidden", y: 20 }, // Démarrer légèrement en bas pour une entrée fluide
       {
         opacity: 1,
+        visibility: "visible", // Le texte devient visible
+        y: 0, // Remonter le texte à sa position normale
         text: chapterText.value,
         duration: 5, 
         ease: "none", 
-        stagger: 0.1,
+        stagger: 0.1, 
+        onComplete: () => {
+          isAnimationComplete.value = true; // Marquer l'animation comme terminée
+        }
       }
     );
   }
@@ -87,7 +94,7 @@ const stopAudio = () => {
   if (audio) {
     audio.pause();
     audio.currentTime = 0;
-    isAudioPaused.value = true; 
+    isAudioPaused.value = true;
   }
 };
 
@@ -123,7 +130,7 @@ onMounted(() => {
     (entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting && entry.intersectionRatio >= 0.2) {
-          startAnimation();
+          startAnimation(); 
         }
       });
     },
@@ -135,10 +142,14 @@ onMounted(() => {
   }
 });
 
-watch(() => props.currentChapterId, () => {
+onBeforeUnmount(() => {
   stopAudio();
 });
 
+watch(() => props.currentChapterId, () => {
+  stopAudio();
+  isAnimationComplete.value = false; // Réinitialiser l'animation lorsque le chapitre change
+});
 </script>
 
 <style scoped>
@@ -146,21 +157,28 @@ watch(() => props.currentChapterId, () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  padding: 20px;
+  height: 100vh; /* Remplir toute la hauteur de la page */
+  padding: 50px; /* Padding pour un espace autour du texte */
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
 }
 
 .chapter-text {
-  max-width: 800px;
-  width: 100%;
+  display: flex; /* Flex pour centrer le texte */
+  justify-content: center; /* Centrer horizontalement */
+  align-items: center; /* Centrer verticalement */
+  position: relative;
+  width: 100%; /* Prendre toute la largeur disponible */
+  max-width: 800px; /* Limiter la largeur du texte */
   font-family: Montserrat;
   font-size: 24px;
   line-height: 1.6;
   text-align: center;
-  opacity: 0;
+  opacity: 0; /* Commence avec une opacité nulle */
+  visibility: hidden; /* Le texte commence invisible */
+  white-space: pre-wrap; /* Respecter les retours à la ligne */
+  word-wrap: break-word; /* Gérer les débordements */
 }
 
 .chapter-1 {
@@ -206,5 +224,4 @@ watch(() => props.currentChapterId, () => {
   width: 40px;
   height: 40px;
 }
-
 </style>
