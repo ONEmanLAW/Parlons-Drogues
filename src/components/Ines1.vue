@@ -122,11 +122,11 @@ h1 {
 
 .cannabis-leaf {
   position: absolute;
-  width: 1000px; 
-  height: 1000px;
+  width: 750px; 
+  height: 750px;
   background: url('../assets/images/canabis.png') no-repeat center;
   background-size: contain;
-  top: 30%; 
+  top: 0%; 
   left: 50%;
   transform: translateX(-50%);
   z-index: 1; 
