@@ -20,6 +20,8 @@
     <InteractiveCharacter />
     <GraphComponent />
     <Elena1 />
+    <Raph1 />
+    <Ines1 />
     <BodyChart />
     <ChapterTransition :currentChapter="1" chapterText="Allez au chapitre 2" />
     
@@ -39,6 +41,8 @@ import Footer from '../components/Footer.vue';
 import Card from '../components/Card.vue';
 
 import Elena1 from '../components/Elena1.vue';
+import Raph1 from '../components/Raph1.vue';
+import Ines1 from '../components/Ines1.vue';
 
 
 import ChapterTransition from '../components/ChapterTransition.vue';
