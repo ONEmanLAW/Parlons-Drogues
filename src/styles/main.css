@@ -1,11 +1,15 @@
-body {
+body,html {
   font-family: Montserrat;
   margin: 0;
   padding: 0;
+
+  scrollbar-width: none; /* Pour les navigateurs Firefox */
+  -ms-overflow-style: none; /* Pour Internet Explorer et Edge */
 }
 
-html {
-  scroll-behavior: smooth;
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; 
 }
 
 * {
