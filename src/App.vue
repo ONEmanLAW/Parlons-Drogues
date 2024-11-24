@@ -15,7 +15,7 @@ const router = useRouter();
 
 
 onMounted(() => {
-  router.push('/home');
+  router.push('/');
 });
 </script>
 
