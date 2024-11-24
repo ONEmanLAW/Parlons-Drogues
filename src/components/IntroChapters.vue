@@ -114,7 +114,7 @@ const skipVideo = () => {
 .background-container {
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  height: 100vh; /* L'image de fond occupe toute la hauteur de l'écran */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -133,9 +133,9 @@ h2, h3, p {
 }
 
 .full-screen-video {
-  width: 100vw; 
-  height: 100vh; 
-  object-fit: cover;
+  width: 100%;
+  height: 100vh; /* La vidéo occupe toute la hauteur de l'écran, mais ne dépasse pas la largeur */
+  object-fit: contain; /* Permet à la vidéo de s'adapter à l'écran sans déformation ni débordement */
   display: block;
   outline: none;
   border: none;
