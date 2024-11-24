@@ -6,29 +6,32 @@
       "subtitle": "Élena et ses premières bouffées",
       "description": "Tu vas apprendre tous les effets possible à courts termes.",
       "videoSource": "assets/videos/video1.mp4",
-      "imageSource": "assets/images/elena.png"
+      "imageSource": "assets/images/elena.png",
+      "backgroundImage": "assets/images/fond-chapitre-1.png"
     },
     {
       "id": 2,
       "title": "Chapitre 2",
       "subtitle": "Raph face à l’addiction",
       "description": "Tu vas apprendre tous les effets de la dépendance.",
-      "videoSource": "assets/videos/video2.mp4",
-      "imageSource": "assets/images/raph.png"
+      "videoSource": "assets/videos/video1.mp4",
+      "imageSource": "assets/images/raph.png",
+      "backgroundImage": "assets/images/fond-chapitre-2.png"
     },
     {
       "id": 3,
       "title": "Chapitre 3",
       "subtitle": "La santé d’Inès en péril",
       "description": "Tu vas apprendre tous les effets possible à longs termes.",
-      "videoSource": "assets/videos/video3.mp4",
-      "imageSource": "assets/images/ines.png"
+      "videoSource": "assets/videos/video1.mp4",
+      "imageSource": "assets/images/ines.png",
+      "backgroundImage": "assets/images/fond-chapitre-3.png"
     },
     {
       "id": 4,
       "title": "Advice",
-      "subtitle": "La conculsion de fin",
-      "description": "Des truc suplémentaire",
+      "subtitle": "La conclusion de fin",
+      "description": "Des trucs supplémentaires.",
       "imageSource": "assets/images/elena.png"
     }
   ]

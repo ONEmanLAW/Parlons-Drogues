@@ -7,6 +7,7 @@
       :description="chapter.description"
       :videoSource="chapter.videoSource"
       :imageSource="chapter.imageSource"
+      :backgroundImage="chapter.backgroundImage"
     />
 
     <Card :chapterId="2" />
@@ -36,13 +37,13 @@ import cardsData from '../data/cardsData.json';
 const chapterData = introChaptersData.chapters.find(ch => ch.id === 2);
 const chapterCards = cardsData.chapters.find(ch => ch.id === 2)?.cards || []; 
 
-const videoSource = new URL(`../${chapterData.videoSource}`, import.meta.url).href;
-const imageSource = new URL(`../${chapterData.imageSource}`, import.meta.url).href;
+
 
 const chapter = {
   ...chapterData,
-  videoSource,
-  imageSource,
+  videoSource: new URL(`../${chapterData.videoSource}`, import.meta.url).href,
+  imageSource: new URL(`../${chapterData.imageSource}`, import.meta.url).href,
+  backgroundImage: new URL(`../${chapterData.backgroundImage}`, import.meta.url).href,
   cards: chapterCards
 };
 </script>

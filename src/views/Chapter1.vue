@@ -7,13 +7,11 @@
       :description="chapter.description"
       :videoSource="chapter.videoSource"
       :imageSource="chapter.imageSource"
+      :backgroundImage="chapter.backgroundImage"
     />
 
     <ChapterText :currentChapterId="1" />
-
     <Card :chapterId="1" />
-
-   
 
     <h2>Chapitre 1 - Quiz</h2>
     <Quiz />
@@ -24,7 +22,6 @@
     <Ines1 />
     <BodyChart />
     <ChapterTransition :currentChapter="1" chapterText="Allez au chapitre 2" />
-    
   </div>
   <Footer />
 </template>
@@ -39,25 +36,23 @@ import InteractiveCharacter from '../components/InteractiveCharacter.vue';
 import Header from '../components/Header.vue'; 
 import Footer from '../components/Footer.vue';
 import Card from '../components/Card.vue';
+import cardsData from '../data/cardsData.json';
 
 import Elena1 from '../components/Elena1.vue';
 import Raph1 from '../components/Raph1.vue';
 import Ines1 from '../components/Ines1.vue';
-
-
 import ChapterTransition from '../components/ChapterTransition.vue';
 
 import introChaptersData from '../data/introChapters.json';
 
-
-// Récupération des données du chapitre 1
 const chapterData = introChaptersData.chapters.find((ch) => ch.id === 1);
+const chapterCards = cardsData.chapters.find(ch => ch.id === 1)?.cards || []; 
 
 const chapter = {
   ...chapterData,
   videoSource: new URL(`../${chapterData.videoSource}`, import.meta.url).href,
   imageSource: new URL(`../${chapterData.imageSource}`, import.meta.url).href,
+  backgroundImage: new URL(`../${chapterData.backgroundImage}`, import.meta.url).href,
+  cards: chapterCards
 };
 </script>
-
-<style scoped src="../styles/Chapter.css"></style>
