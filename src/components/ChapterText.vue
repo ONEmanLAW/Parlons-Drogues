@@ -20,13 +20,15 @@
       <p v-if="chapterCharacterName" class="character-name">{{ chapterCharacterName }}</p>
     </div>
 
-    <div
-      v-if="isAudioVisible"
-      class="pause-play-button"
-      :style="{ top: mousePosition.y + 'px', left: mousePosition.x + 'px' }"
-      @click="toggleAudio"
-    >
-      <img :src="isAudioPaused ? playImage : pauseImage" alt="Play/Pause Button" />
+    <div v-for="(buttonImage, index) in buttonImages.play" :key="'play-' + index">
+      <div
+        v-if="currentChapterId === index + 1"
+        class="pause-play-button"
+        :style="{ top: mousePosition.y + 'px', left: mousePosition.x + 'px' }"
+        @click="toggleAudio(index, 'play')"
+      >
+        <img :src="isAudioPaused[index] ? buttonImages.play[index] : buttonImages.pause[index]" alt="Play/Pause Button" />
+      </div>
     </div>
   </div>
 </template>
@@ -64,17 +66,29 @@ const audioFile = computed(() => {
   return '';
 });
 
-const pauseImage = computed(() => new URL('../assets/images/elena.png', import.meta.url).href);
-const playImage = computed(() => new URL('../assets/images/raph.png', import.meta.url).href);
+const buttonImages = {
+  play: [
+    new URL('../assets/images/playElena.png', import.meta.url).href,
+    new URL('../assets/images/playRaph.png', import.meta.url).href,
+    new URL('../assets/images/playInes.png', import.meta.url).href, 
+    new URL('../assets/images/playConclu.png', import.meta.url).href,
+  ],
+  pause: [
+    new URL('../assets/images/pauseElena.png', import.meta.url).href,
+    new URL('../assets/images/pauseRaph.png', import.meta.url).href,
+    new URL('../assets/images/pauseInes.png', import.meta.url).href,
+    new URL('../assets/images/pauseConclu.png', import.meta.url).href,
+  ]
+};
 
+let audio = null;
+const isAudioPaused = ref([true, true, true, true]);
+const isAudioVisible = ref(false);
+const mousePosition = ref({ x: 0, y: 0 });
 const textElement = ref(null);
 const chapterContainer = ref(null);
 const chapterTitle = ref(null);
 const chapterImageEl = ref(null);
-const mousePosition = ref({ x: 0, y: 0 });
-let audio = null;
-let isAudioPaused = ref(true);
-const isAudioVisible = ref(false);
 let isAnimationComplete = ref(false);
 
 const startAnimation = () => {
@@ -98,33 +112,34 @@ const startAnimation = () => {
   }
 };
 
-const startAudio = () => {
+const startAudio = (index) => {
   if (audioFile.value && !audio) {
     audio = new Audio(audioFile.value);
     audio.play();
-    isAudioPaused.value = false;
+    isAudioPaused.value[index] = false;
   }
 };
 
-const stopAudio = () => {
+const stopAudio = (index) => {
   if (audio) {
     audio.pause();
     audio.currentTime = 0;
-    isAudioPaused.value = true;
+    isAudioPaused.value[index] = true;
   }
 };
 
-const toggleAudio = () => {
+const toggleAudio = (index, type) => {
   if (audio) {
-    if (isAudioPaused.value) {
+    if (isAudioPaused.value[index]) {
       audio.play();
-      isAudioPaused.value = false;
+      isAudioPaused.value[index] = false;
     } else {
       audio.pause();
-      isAudioPaused.value = true;
+      audio.currentTime = 0;
+      isAudioPaused.value[index] = true;
     }
   } else {
-    startAudio();
+    startAudio(index);
   }
 };
 
@@ -200,6 +215,22 @@ const animateTitleAndImage = () => {
   overflow: hidden;
 }
 
+.chapter-1 {
+  background-color: #d8ebff;
+}
+
+.chapter-2 {
+  background-color: #b0e57c;
+}
+
+.chapter-3 {
+  background-color: #f1c4e8;
+}
+
+.chapter-4 {
+  background-color: #ff9f1a;
+}
+
 .chapter-title {
   position: absolute;
   top: 20px;
@@ -251,36 +282,9 @@ const animateTitleAndImage = () => {
   word-wrap: break-word;
 }
 
-.chapter-1 {
-  background-color: #d8ebff;
-}
-
-.chapter-1 .chapter-text p {
-  color: #1e90ff;
-}
-
-.chapter-2 {
-  background-color: #d5f4e6;
-}
-
-.chapter-2 .chapter-text p {
-  color: #2e8b57;
-}
-
-.chapter-3 {
-  background-color: #f8e3e6;
-}
-
-.chapter-3 .chapter-text p {
-  color: #ff69b4;
-}
-
-.chapter-4 {
-  background-color: #ffe3a3;
-}
-
-.chapter-4 .chapter-text p {
-  color: #ff9100;
+.chapter-text p {
+  margin: 0;
+  padding: 0;
 }
 
 .pause-play-button {
