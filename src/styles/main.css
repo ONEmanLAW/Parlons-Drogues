@@ -3,13 +3,13 @@ body,html {
   margin: 0;
   padding: 0;
 
-  scrollbar-width: none; /* Pour les navigateurs Firefox */
-  -ms-overflow-style: none; /* Pour Internet Explorer et Edge */
+  /* scrollbar-width: none;
+  -ms-overflow-style: none; */
 }
 
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
-  display: none; 
+  /* display: none;  */
 }
 
 * {
