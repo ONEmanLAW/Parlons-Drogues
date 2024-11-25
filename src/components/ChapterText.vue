@@ -6,12 +6,18 @@
     @mousemove="handleMouseMove"
     @mouseleave="handleMouseLeave"
   >
-    <div class="chapter-title">
+    <div ref="chapterTitle" class="chapter-title">
       {{ chapterTitleType }}
     </div>
 
     <div class="chapter-text" ref="textElement">
       <p>{{ chapterText }}</p>
+    </div>
+
+    <div v-if="chapterImage" class="chapter-image-container">
+      <img ref="chapterImageEl" :src="chapterImage" alt="Illustration du chapitre" class="chapter-image" />
+      
+      <p v-if="chapterCharacterName" class="character-name">{{ chapterCharacterName }}</p>
     </div>
 
     <div
@@ -30,7 +36,6 @@ import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue';
 import { gsap } from 'gsap';
 import { TextPlugin } from 'gsap/TextPlugin';
 import chapterTextData from '../data/chapterText.json';
-import { useRouter, useRoute } from 'vue-router';
 
 gsap.registerPlugin(TextPlugin);
 
@@ -47,6 +52,10 @@ const chapterInfo = computed(() => {
 
 const chapterText = computed(() => chapterInfo.value.text || '');
 const chapterTitleType = computed(() => chapterInfo.value.titleType || '');
+const chapterImage = computed(() => {
+  return chapterInfo.value.image ? new URL(chapterInfo.value.image, import.meta.url).href : '';
+});
+const chapterCharacterName = computed(() => chapterInfo.value.characterName || '');
 
 const audioFile = computed(() => {
   if (chapterInfo.value.audio) {
@@ -60,11 +69,13 @@ const playImage = computed(() => new URL('../assets/images/raph.png', import.met
 
 const textElement = ref(null);
 const chapterContainer = ref(null);
+const chapterTitle = ref(null);
+const chapterImageEl = ref(null);
 const mousePosition = ref({ x: 0, y: 0 });
 let audio = null;
-let isAudioPaused = ref(true); 
-const isAudioVisible = ref(false); 
-let isAnimationComplete = ref(false); 
+let isAudioPaused = ref(true);
+const isAudioVisible = ref(false);
+let isAnimationComplete = ref(false);
 
 const startAnimation = () => {
   if (textElement.value && !isAnimationComplete.value) {
@@ -73,14 +84,14 @@ const startAnimation = () => {
       { opacity: 0, visibility: "hidden", y: 20 },
       {
         opacity: 1,
-        visibility: "visible", 
+        visibility: "visible",
         y: 0,
         text: chapterText.value,
-        duration: 5, 
-        ease: "none", 
-        stagger: 0.1, 
+        duration: 5,
+        ease: "none",
+        stagger: 0.1,
         onComplete: () => {
-          isAnimationComplete.value = true; 
+          isAnimationComplete.value = true;
         }
       }
     );
@@ -135,7 +146,8 @@ onMounted(() => {
     (entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting && entry.intersectionRatio >= 0.2) {
-          startAnimation(); 
+          startAnimation();
+          animateTitleAndImage();
         }
       });
     },
@@ -153,8 +165,26 @@ onBeforeUnmount(() => {
 
 watch(() => props.currentChapterId, () => {
   stopAudio();
-  isAnimationComplete.value = false; 
+  isAnimationComplete.value = false;
 });
+
+const animateTitleAndImage = () => {
+  if (chapterTitle.value) {
+    gsap.fromTo(
+      chapterTitle.value,
+      { opacity: 0, y: -20 },
+      { opacity: 1, y: 0, duration: 1, ease: 'power2.out' }
+    );
+  }
+
+  if (chapterImageEl.value) {
+    gsap.fromTo(
+      chapterImageEl.value,
+      { opacity: 0, scale: 0.8, y: 20 },
+      { opacity: 1, scale: 1, y: 0, duration: 1, ease: 'power2.out' }
+    );
+  }
+};
 </script>
 
 <style scoped>
@@ -174,7 +204,7 @@ watch(() => props.currentChapterId, () => {
   position: absolute;
   top: 20px;
   left: 50%;
-  transform: translateX(-50%); 
+  transform: translateX(-50%);
   display: inline-block;
   padding: 5px 10px;
   border-radius: 10px;
@@ -184,53 +214,73 @@ watch(() => props.currentChapterId, () => {
   z-index: 10;
 }
 
-.chapter-1 {
-  background-color: #6fa8dc; 
+.chapter-image-container {
+  margin-top: 20px;
+  text-align: center;
 }
 
-.chapter-1 .chapter-title {
-  background-color: #d8ebff; 
+.chapter-image {
+  max-width: 150px;
+  height: auto;
+  border-radius: 8px;
 }
 
-.chapter-2 {
-  background-color: #66c266;
-}
-
-.chapter-2 .chapter-title {
-  background-color: #dfffd8; 
-}
-
-.chapter-3 {
-  background-color: #d87a9c; 
-}
-
-.chapter-3 .chapter-title {
-  background-color: #ffd8e8; 
-}
-
-.chapter-4 {
-  background-color: #d6b670;
-}
-
-.chapter-4 .chapter-title {
-  background-color: #ffe8d8;
+.character-name {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+  text-align: center;
+  font-style: italic;
+  font-weight: bold;
 }
 
 .chapter-text {
   display: flex;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
   position: relative;
-  width: 100%; 
-  max-width: 800px; 
+  width: 100%;
+  max-width: 800px;
   font-family: Montserrat;
   font-size: 24px;
   line-height: 1.6;
   text-align: center;
-  opacity: 0; 
-  visibility: hidden; 
+  opacity: 0;
+  visibility: hidden;
   white-space: pre-wrap;
   word-wrap: break-word;
+}
+
+.chapter-1 {
+  background-color: #d8ebff;
+}
+
+.chapter-1 .chapter-text p {
+  color: #1e90ff;
+}
+
+.chapter-2 {
+  background-color: #d5f4e6;
+}
+
+.chapter-2 .chapter-text p {
+  color: #2e8b57;
+}
+
+.chapter-3 {
+  background-color: #f8e3e6;
+}
+
+.chapter-3 .chapter-text p {
+  color: #ff69b4;
+}
+
+.chapter-4 {
+  background-color: #ffe3a3;
+}
+
+.chapter-4 .chapter-text p {
+  color: #ff9100;
 }
 
 .pause-play-button {
