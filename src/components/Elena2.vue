@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="text-section">
+    <div class="text-section" ref="textSection">
       <div class="info-text">Informations</div>
       <h1>
         FUMER <span class="highlight-orange">1 JOINT</span>, C'EST COMME FUMER <br />
@@ -13,10 +13,10 @@
       </p>
     </div>
 
-    <div class="image-section">
+    <div class="image-section" ref="imageSection">
       <img
         class="main-image"
-        src="../assets/images/elena2tout.png"
+        src="../assets/images/elena2.png"
         alt="Illustration principale"
       />
     </div>
@@ -24,8 +24,69 @@
 </template>
 
 <script>
+import { onMounted } from 'vue';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
 export default {
   name: "ResponsiveImageComponent",
+  setup() {
+    onMounted(() => {
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.from(".info-text", {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        scrollTrigger: {
+          trigger: ".container",
+          start: "top 80%",
+          end: "top 50%",
+          scrub: true, 
+          markers: false, 
+        }
+      });
+
+      gsap.from(".text-section h1", {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        scrollTrigger: {
+          trigger: ".container",
+          start: "top 80%",
+          end: "top 50%",
+          scrub: true,
+          markers: false,
+        }
+      });
+
+      gsap.from(".text-section p", {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        scrollTrigger: {
+          trigger: ".container",
+          start: "top 80%",
+          end: "top 50%",
+          scrub: true,
+          markers: false,
+        }
+      });
+
+      gsap.from(".main-image", {
+        opacity: 0,
+        scale: 0.8,
+        duration: 1,
+        scrollTrigger: {
+          trigger: ".container",
+          start: "top 80%",
+          end: "top 50%",
+          scrub: true,
+          markers: false,
+        }
+      });
+    });
+  }
 };
 </script>
 
