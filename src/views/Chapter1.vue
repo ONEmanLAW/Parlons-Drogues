@@ -20,6 +20,8 @@
     <Elena1 />
     <Raph1 />
     <Ines1 />
+
+    <Elena2 />
     <BodyChart />
     <ChapterTransition :currentChapter="1" chapterText="Allez au chapitre 2" />
   </div>
@@ -41,6 +43,9 @@ import cardsData from '../data/cardsData.json';
 import Elena1 from '../components/Elena1.vue';
 import Raph1 from '../components/Raph1.vue';
 import Ines1 from '../components/Ines1.vue';
+
+import Elena2 from '../components/Elena2.vue';
+
 import ChapterTransition from '../components/ChapterTransition.vue';
 
 import introChaptersData from '../data/introChapters.json';

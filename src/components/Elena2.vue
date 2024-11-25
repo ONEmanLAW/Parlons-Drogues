@@ -1,0 +1,164 @@
+<template>
+  <div class="container">
+    <div class="text-section">
+      <div class="info-text">Informations</div>
+
+      <h1>
+        FUMER <span class="highlight-orange">1 JOINT</span>, C'EST COMME FUMER <br />
+        <span class="highlight-blue">20 CLOPES</span> D'UN COUP
+      </h1>
+
+      <p>
+        Beaucoup croient qu’un joint, c’est juste un petit moment chill. 
+        Mais en réalité, il libère autant de substances nocives pour ton corps 
+        que 20 clopes. C’est loin d’être sans <span class="highlight">risque</span> pour ta santé.
+      </p>
+    </div>
+
+    <div class="image-section">
+      <div class="background-blue"></div>
+
+      <img
+        class="main-image"
+        src="../assets/images/elena2.png"
+        alt="Illustration principale"
+      />
+
+      <div class="small-blue-box">Danger !</div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "ResponsiveDesignComponent",
+};
+</script>
+
+<style scoped>
+.container {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh; 
+  background-color: #e6f0ff; 
+  padding: 2% 5%; 
+  box-sizing: border-box;
+  gap: 20px; 
+}
+
+
+.text-section {
+  flex: 1;
+  max-width: 600px; 
+  min-width: 300px; 
+  padding-right: 20px;
+}
+
+.info-text {
+  display: inline-block;
+  font-size: clamp(0.8rem, 1.2vw, 1rem); 
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #5eafef;
+  padding: 5px 15px;
+  border-radius: 20px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.text-section h1 {
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  line-height: 1.4;
+  color: #2e2f85; 
+  margin: 0;
+  font-weight: bold;
+}
+
+.text-section h1 .highlight-orange {
+  color: #ff6d00; 
+}
+
+.text-section h1 .highlight-blue {
+  color: #2e2f85;
+}
+
+.text-section p {
+  margin-top: 20px;
+  line-height: 1.6;
+  font-size: clamp(0.9rem, 1.2vw, 1.1rem); 
+  color: #333333;
+}
+
+.text-section p .highlight {
+  color: #2e2f85; 
+  font-weight: bold;
+}
+
+
+.image-section {
+  flex: 1;
+  position: relative;
+  max-width: 600px;
+  min-width: 300px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.background-blue {
+  position: absolute;
+  width: clamp(200px, 40vw, 350px); 
+  height: clamp(200px, 40vw, 350px); 
+  background-color: #b3d7ff;
+  border-radius: 60px;
+  z-index: 1; 
+  transform: translate(-10%, -25%);
+}
+
+
+.main-image {
+  width: clamp(200px, 60vw, 500px); 
+  height: auto;
+  z-index: 2; 
+  transition: all 0.3s ease-in-out; 
+}
+
+
+.small-blue-box {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: clamp(100px, 15vw, 140px);
+  height: clamp(40px, 7vw, 50px);
+  background-color: #b3d7ff;
+  border-radius: 10px;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #2e2f85;
+  font-weight: bold;
+  font-size: clamp(0.8rem, 1vw, 0.9rem);
+}
+
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; 
+    align-items: center;
+  }
+
+  .text-section {
+    text-align: center; 
+    padding-right: 0; 
+  }
+
+  .image-section {
+    margin-top: 20px;
+  }
+}
+</style>
