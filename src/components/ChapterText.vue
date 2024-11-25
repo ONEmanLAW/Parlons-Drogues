@@ -6,6 +6,10 @@
     @mousemove="handleMouseMove"
     @mouseleave="handleMouseLeave"
   >
+    <div class="chapter-title">
+      {{ chapterTitleType }}
+    </div>
+
     <div class="chapter-text" ref="textElement">
       <p>{{ chapterText }}</p>
     </div>
@@ -42,6 +46,7 @@ const chapterInfo = computed(() => {
 });
 
 const chapterText = computed(() => chapterInfo.value.text || '');
+const chapterTitleType = computed(() => chapterInfo.value.titleType || '');
 
 const audioFile = computed(() => {
   if (chapterInfo.value.audio) {
@@ -59,23 +64,23 @@ const mousePosition = ref({ x: 0, y: 0 });
 let audio = null;
 let isAudioPaused = ref(true); 
 const isAudioVisible = ref(false); 
-let isAnimationComplete = ref(false); // Flag pour vérifier si l'animation est terminée
+let isAnimationComplete = ref(false); 
 
 const startAnimation = () => {
   if (textElement.value && !isAnimationComplete.value) {
     gsap.fromTo(
       textElement.value,
-      { opacity: 0, visibility: "hidden", y: 20 }, // Démarrer légèrement en bas pour une entrée fluide
+      { opacity: 0, visibility: "hidden", y: 20 },
       {
         opacity: 1,
-        visibility: "visible", // Le texte devient visible
-        y: 0, // Remonter le texte à sa position normale
+        visibility: "visible", 
+        y: 0,
         text: chapterText.value,
         duration: 5, 
         ease: "none", 
         stagger: 0.1, 
         onComplete: () => {
-          isAnimationComplete.value = true; // Marquer l'animation comme terminée
+          isAnimationComplete.value = true; 
         }
       }
     );
@@ -148,69 +153,84 @@ onBeforeUnmount(() => {
 
 watch(() => props.currentChapterId, () => {
   stopAudio();
-  isAnimationComplete.value = false; // Réinitialiser l'animation lorsque le chapitre change
+  isAnimationComplete.value = false; 
 });
 </script>
 
 <style scoped>
 .chapter-text-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Remplir toute la hauteur de la page */
-  padding: 50px; /* Padding pour un espace autour du texte */
+  height: 100vh;
+  padding: 50px;
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
 }
 
-.chapter-text {
-  display: flex; /* Flex pour centrer le texte */
-  justify-content: center; /* Centrer horizontalement */
-  align-items: center; /* Centrer verticalement */
-  position: relative;
-  width: 100%; /* Prendre toute la largeur disponible */
-  max-width: 800px; /* Limiter la largeur du texte */
-  font-family: Montserrat;
-  font-size: 24px;
-  line-height: 1.6;
-  text-align: center;
-  opacity: 0; /* Commence avec une opacité nulle */
-  visibility: hidden; /* Le texte commence invisible */
-  white-space: pre-wrap; /* Respecter les retours à la ligne */
-  word-wrap: break-word; /* Gérer les débordements */
+.chapter-title {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%); 
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #333;
+  z-index: 10;
 }
 
 .chapter-1 {
-  background-color: #6fa8dc;
+  background-color: #6fa8dc; 
 }
 
-.chapter-1 .chapter-text p {
-  color: #034c8c;
+.chapter-1 .chapter-title {
+  background-color: #d8ebff; 
 }
 
 .chapter-2 {
   background-color: #66c266;
 }
 
-.chapter-2 .chapter-text p {
-  color: #255c25;
+.chapter-2 .chapter-title {
+  background-color: #dfffd8; 
 }
 
 .chapter-3 {
-  background-color: #d87a9c;
+  background-color: #d87a9c; 
 }
 
-.chapter-3 .chapter-text p {
-  color: #6c1e3a;
+.chapter-3 .chapter-title {
+  background-color: #ffd8e8; 
 }
 
 .chapter-4 {
   background-color: #d6b670;
 }
 
-.chapter-4 .chapter-text p {
-  color: #ff9100;
+.chapter-4 .chapter-title {
+  background-color: #ffe8d8;
+}
+
+.chapter-text {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  position: relative;
+  width: 100%; 
+  max-width: 800px; 
+  font-family: Montserrat;
+  font-size: 24px;
+  line-height: 1.6;
+  text-align: center;
+  opacity: 0; 
+  visibility: hidden; 
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .pause-play-button {
