@@ -11,11 +11,11 @@
       :backgroundImage="chapter.backgroundImage"
     />
 
-    <ChapterText :currentChapterId="3" />
+    
 
     <Card :chapterId="3" />
 
-    <h2>Chapitre 3 - Personnage interactif</h2>
+    <ChapterText :currentChapterId="3" />
     <ChapterTransition :currentChapter="3" chapterText="Allez au advice" />
   </div>
   <Footer />

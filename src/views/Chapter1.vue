@@ -10,7 +10,7 @@
       :backgroundImage="chapter.backgroundImage"
     />
 
-    <ChapterText :currentChapterId="1" />
+    
     <Card :chapterId="1" />
 
     <h2>Chapitre 1 - Quiz</h2>
@@ -23,6 +23,7 @@
 
     <Elena2 />
     <BodyChart />
+    <ChapterText :currentChapterId="1" />
     <ChapterTransition :currentChapter="1" chapterText="Allez au chapitre 2" />
   </div>
   <Footer />

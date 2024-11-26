@@ -75,12 +75,16 @@ const navigateToChapter = () => {
   justify-content: center;
   align-items: center;
   flex-direction: column; 
+  
+  /* clip-path: ellipse(90% 100% at 50% 100%); */
 }
+
 
 .chapter-transition .background {
   width: 100%;
   height: 300px; 
   overflow: hidden;
+  
 }
 
 .chapter-transition .background img {
@@ -95,7 +99,6 @@ const navigateToChapter = () => {
   margin-top: 20px;
 }
 
-/* Style pour le bouton */
 .next-chapter-button {
   padding: 10px 20px;
   background-color: white;

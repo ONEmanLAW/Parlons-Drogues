@@ -29,7 +29,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 export default {
-  name: "ResponsiveImageComponent",
+  name: "Elena2",
   setup() {
     onMounted(() => {
       gsap.registerPlugin(ScrollTrigger);
