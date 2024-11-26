@@ -7,7 +7,7 @@
         <h2 class="card-title">DROGUES INFO SERVICE</h2>
         <ul class="card-content">
           <li>
-            <img class="icon" src="../assets/images/icone1orange.svg" alt="Site" />
+            <img class="icon" src="../assets/images/icone1orange.png" alt="Site" />
             <div class="text">
               <a href="https://drogues-info-service.fr" target="_blank">
                 drogues-info-service.fr
@@ -15,14 +15,14 @@
             </div>
           </li>
           <li>
-            <img class="icon" src="../assets/images/icone2orange.svg" alt="Téléphone" />
+            <img class="icon" src="../assets/images/icone2orange.png" alt="Téléphone" />
             <div class="text">
               <strong>0 800 23 13 13</strong>
               <p>Appel gratuit et anonyme disponible 7j/7 de 8h à 2h</p>
             </div>
           </li>
           <li>
-            <img class="icon" src="../assets/images/icone3orange.svg" alt="Chat" />
+            <img class="icon" src="../assets/images/icone3orange.png" alt="Chat" />
             <div class="text">
               <strong>Chat en ligne</strong>
               <p>
@@ -38,7 +38,7 @@
         <h2 class="card-title">GROUPE D’ENTRAIDE ET FORUM</h2>
         <ul class="card-content">
           <li>
-            <img class="icon" src="../assets/images/icone4orange.svg" alt="Forum" />
+            <img class="icon" src="../assets/images/icone4orange.png" alt="Forum" />
             <div class="text">
               <strong>Narcotiques Anonymes</strong>
               <p>
@@ -54,7 +54,7 @@
             </div>
           </li>
           <li>
-            <img class="icon" src="../assets/images/icone5orange.svg" alt="Forum" />
+            <img class="icon" src="../assets/images/icone5orange.png" alt="Forum" />
             <div class="text">
               <strong>Forum Addict’AIDE</strong>
               <p>

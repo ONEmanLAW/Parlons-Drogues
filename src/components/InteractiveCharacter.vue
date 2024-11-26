@@ -7,25 +7,14 @@
       </div>
 
       <div class="character-container">
-        <div class="left-buttons">
-          <button
-            v-for="substance in leftSubstances"
-            :key="substance.name"
-            :class="{ active: activeSubstance === substance }"
-            @click="selectSubstance(substance)"
-          >
-            {{ substance.name }}
-          </button>
-        </div>
-
         <div class="character">
           <img v-if="!activeSubstance" :src="currentImage" alt="Image de base" />
           <img v-if="activeSubstance" :src="currentImage" alt="Substance Image" />
         </div>
 
-        <div class="right-buttons">
+        <div class="buttons-container">
           <button
-            v-for="substance in rightSubstances"
+            v-for="substance in substancesToDisplay"
             :key="substance.name"
             :class="{ active: activeSubstance === substance }"
             @click="selectSubstance(substance)"
@@ -69,8 +58,9 @@ import substancesData from "../data/substances.json";
 const substances = ref(substancesData.substances);
 const activeSubstance = ref(null);
 const baseSubstance = computed(() => substances.value.find(substance => substance.name === "Image de base"));
-const leftSubstances = computed(() => substances.value.slice(1, Math.ceil(substances.value.length / 2)));
-const rightSubstances = computed(() => substances.value.slice(Math.ceil(substances.value.length / 2)));
+const substancesToDisplay = computed(() => {
+  return substances.value.filter(substance => substance.name !== "Image de base");
+});
 
 const baseImage = baseSubstance.value.image;
 function resolveImagePath(path) {
@@ -150,35 +140,10 @@ h2 {
 
 .character-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 50px; /* Réduction de l'écart entre les éléments */
-}
-
-.left-buttons,
-.right-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 5px; /* Réduction de l'écart entre les boutons */
-}
-
-.left-buttons button,
-.right-buttons button {
-  margin: 0;
-  background-color: white;
-  color: #167540;
-  font-weight: bold;
-  padding: 20px 40px;
-  font-size: 18px;
-  border: 2px solid #167540;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-}
-
-.left-buttons button.active,
-.right-buttons button.active {
-  background-color: #167540;
-  color: white;
+  gap: 30px;
 }
 
 .character {
@@ -193,6 +158,31 @@ h2 {
   width: 300px;
   height: auto;
   border-radius: 10px;
+}
+
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;  
+}
+
+.buttons-container button {
+  margin: 0;
+  background-color: white;
+  color: #167540;
+  font-weight: bold;
+  padding: 15px 30px;
+  font-size: 18px;
+  border: 2px solid #167540;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.buttons-container button.active {
+  background-color: #167540;
+  color: white;
 }
 
 .data-display {

@@ -22,7 +22,7 @@
       "image": "../assets/images/elena.png"
     },
     {
-      "name": "Amis",
+      "name": "Social",
       "color": "green",
       "effects": [
         { "name": "Baisse des performances", "value": 50 },
@@ -31,16 +31,6 @@
         { "name": "Risques d'abandon scolaire", "value": 70 }
       ],
       "image": "../assets/images/ines.png"
-    },
-    {
-      "name": "École",
-      "color": "blue",
-      "effects": [
-        { "name": "Baisse des performances", "value": 20 },
-        { "name": "Difficultés de concentration", "value": 60 },
-        { "name": "Absences répétées", "value": 15 }
-      ],
-      "image": "../assets/images/raph.png"
     },
     {
       "name": "Travail",
