@@ -4,6 +4,7 @@
       "id": 1,
       "name": "Cerveau",
       "color": "#FF5733",
+      "image": "cerveau.png",
       "data": {
         "data1": [
           { "label": "Paranoïa", "value": 40 },
@@ -15,7 +16,7 @@
         ],
         "progress": {
           "data1": 60,
-          "data2": 70 
+          "data2": 70
         }
       }
     },
@@ -23,6 +24,7 @@
       "id": 2,
       "name": "Poumons",
       "color": "#33FF57",
+      "image": "poumon.png",
       "data": {
         "data1": [
           { "label": "Irritation", "value": 55 },
@@ -34,7 +36,7 @@
         ],
         "progress": {
           "data1": 55,
-          "data2": 65  
+          "data2": 65
         }
       }
     },
@@ -42,25 +44,16 @@
       "id": 3,
       "name": "Foie",
       "color": "#3357FF",
+      "image": "foie.png",
       "data": {
-        "data1": [
-          { "label": "Dépuration", "value": 50 },
-          { "label": "Accumulation de toxines", "value": 50 }
-        ],
-        "data2": [
-          { "label": "Métabolisme", "value": 60 },
-          { "label": "Inflammation", "value": 40 }
-        ],
-        "progress": {
-          "data1": 50,  
-          "data2": 60   
-        }
+        "text": "Le foie est responsable de la détoxification du corps et du métabolisme des nutriments. Un foie sain est essentiel pour le bien-être global."
       }
     },
     {
       "id": 4,
       "name": "Cœur",
       "color": "#FF33A1",
+      "image": "coeur.png",
       "data": {
         "data1": [
           { "label": "Fréquence cardiaque", "value": 80 },
@@ -70,9 +63,14 @@
           { "label": "Tension artérielle", "value": 75 },
           { "label": "Stress", "value": 25 }
         ],
+        "data3": [
+          { "label": "Santé cardio", "value": 85 },
+          { "label": "Risque d'AVC", "value": 15 }
+        ],
         "progress": {
-          "data1": 80,  
-          "data2": 75   
+          "data1": 80,
+          "data2": 75,
+          "data3": 85
         }
       }
     }
