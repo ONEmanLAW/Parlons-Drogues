@@ -8,7 +8,7 @@
         {
           "title": "Card 1",
           "description": "Description for card 1",
-          "icon": "/assets/images/elena1.png",
+          "icon": "/assets/images/icone1bleu.png",
           "backDescription": "Details for card 1",
           "donutPercentage": 60,
           "centerText": "💡"
@@ -16,7 +16,7 @@
         {
           "title": "Card 2",
           "description": "Description for card 2",
-          "icon": "/assets/images/icone2blue.svg",
+          "icon": "/assets/images/icone2bleu.png",
           "backDescription": "Details for card 2",
           "donutPercentage": 75,
           "centerText": "📈"
@@ -24,7 +24,7 @@
         {
           "title": "Card 3",
           "description": "Description for card 3",
-          "icon": "/assets/images/icone3blue.svg",
+          "icon": "/assets/images/icone3bleu.png",
           "backDescription": "Details for card 3",
           "donutPercentage": 90,
           "centerText": "🚀"
@@ -39,7 +39,7 @@
         {
           "title": "Card 4",
           "description": "Description for card 4",
-          "icon": "/assets/images/icone1vert.svg",
+          "icon": "/assets/images/icone1vert.png",
           "backDescription": "Details for card 4",
           "donutPercentage": 40,
           "centerText": "🎯"
@@ -47,7 +47,7 @@
         {
           "title": "Card 5",
           "description": "Description for card 5",
-          "icon": "/assets/images/icone2vert.svg",
+          "icon": "/assets/images/icone2vert.png",
           "backDescription": "Details for card 5",
           "donutPercentage": 65,
           "centerText": "📊"
@@ -55,7 +55,7 @@
         {
           "title": "Card 6",
           "description": "Description for card 6",
-          "icon": "/assets/images/icone3vert.svg",
+          "icon": "/assets/images/icone3vert.png",
           "backDescription": "Details for card 6",
           "donutPercentage": 85,
           "centerText": "⚡"
@@ -70,7 +70,7 @@
         {
           "title": "Card 7",
           "description": "Description for card 7",
-          "icon": "/assets/images/icone1rose.svg",
+          "icon": "/assets/images/icone1rose.png",
           "backDescription": "Details for card 7",
           "donutPercentage": 30,
           "centerText": "🔥"
@@ -78,7 +78,7 @@
         {
           "title": "Card 8",
           "description": "Description for card 8",
-          "icon": "/assets/images/icone2rose.svg",
+          "icon": "/assets/images/icone2rose.png",
           "backDescription": "Details for card 8",
           "donutPercentage": 50,
           "centerText": "🌟"
@@ -86,7 +86,7 @@
         {
           "title": "Card 9",
           "description": "Description for card 9",
-          "icon": "/assets/images/icone3rose.svg",
+          "icon": "/assets/images/icone3rose.png",
           "backDescription": "Details for card 9",
           "donutPercentage": 100,
           "centerText": "💯"
