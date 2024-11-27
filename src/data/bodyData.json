@@ -6,17 +6,21 @@
       "color": "#FF5733",
       "image": "cerveau.png",
       "data": {
-        "data1": [
-          { "label": "Paranoïa", "value": 40 },
-          { "label": "Mémoire", "value": 60 }
-        ],
-        "data2": [
-          { "label": "Concentration", "value": 70 },
-          { "label": "Stress", "value": 30 }
-        ],
-        "progress": {
-          "data1": 60,
-          "data2": 70
+        "data1": {
+          "title": "Fonctionnement du cerveau",
+          "text": ["Paranoïa", "Mémoire"]
+        },
+        "data2": {
+          "title": "Activité cérébrale",
+          "data": [
+            { "label": "Concentration", "value": 70 },
+            { "label": "Stress", "value": 30 }
+          ]
+        },
+        "data3": {
+          "smallTextTop": "Santé mentale",
+          "largeText": "Le cerveau joue un rôle clé dans la cognition et les émotions.",
+          "smallTextBottom": "Gardez un équilibre sain entre travail et détente."
         }
       }
     },
@@ -26,17 +30,21 @@
       "color": "#33FF57",
       "image": "poumon.png",
       "data": {
-        "data1": [
-          { "label": "Irritation", "value": 55 },
-          { "label": "Toux", "value": 45 }
-        ],
-        "data2": [
-          { "label": "Bronchite", "value": 65 },
-          { "label": "Essoufflement", "value": 35 }
-        ],
-        "progress": {
-          "data1": 55,
-          "data2": 65
+        "data1": {
+          "title": "Fonctionnement des poumons",
+          "text": ["Irritation", "Toux"]
+        },
+        "data2": {
+          "title": "Santé pulmonaire",
+          "data": [
+            { "label": "Bronchite", "value": 65 },
+            { "label": "Essoufflement", "value": 35 }
+          ]
+        },
+        "data3": {
+          "smallTextTop": "Respiration",
+          "largeText": "Les poumons assurent une bonne oxygénation du corps.",
+          "smallTextBottom": "Évitez la fumée et pratiquez des exercices respiratoires."
         }
       }
     },
@@ -55,22 +63,21 @@
       "color": "#FF33A1",
       "image": "coeur.png",
       "data": {
-        "data1": [
-          { "label": "Fréquence cardiaque", "value": 80 },
-          { "label": "Palpitations", "value": 20 }
-        ],
-        "data2": [
-          { "label": "Tension artérielle", "value": 75 },
-          { "label": "Stress", "value": 25 }
-        ],
-        "data3": [
-          { "label": "Santé cardio", "value": 85 },
-          { "label": "Risque d'AVC", "value": 15 }
-        ],
-        "progress": {
-          "data1": 80,
-          "data2": 75,
-          "data3": 85
+        "data1": {
+          "title": "Fonctionnement du cœur",
+          "text": ["Fréquence cardiaque", "Palpitations"]
+        },
+        "data2": {
+          "title": "Santé cardiaque",
+          "data": [
+            { "label": "Tension artérielle", "value": 75 },
+            { "label": "Stress", "value": 25 }
+          ]
+        },
+        "data3": {
+          "smallTextTop": "Rythme cardiaque",
+          "largeText": "Un cœur en bonne santé améliore votre qualité de vie.",
+          "smallTextBottom": "Mangez équilibré et restez actif."
         }
       }
     }

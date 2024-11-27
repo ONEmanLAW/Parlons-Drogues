@@ -1,15 +1,24 @@
 <template>
   <div class="body-chart">
-    <div class="body-buttons">
-      <button
-        v-for="part in bodyParts"
-        :key="part.id"
-        :style="{ backgroundColor: part.color }"
-        @click="selectBodyPart(part)"
-        class="body-button"
-      >
-        {{ part.name }}
-      </button>
+    <div class="body-container">
+      <div class="image-container">
+        <img
+          :src="`../assets/images/persoInes.png`"
+          alt="Image du corps humain"
+          class="body-image"
+        />
+
+        <div class="buttons-container">
+          <button
+            v-for="(part) in bodyParts"
+            :key="part.id"
+            @click="selectBodyPart(part)"
+            class="body-button"
+          >
+            {{ part.name }}
+          </button>
+        </div>
+      </div>
     </div>
 
     <div class="page-container" v-if="selectedBodyPart">
@@ -41,7 +50,11 @@
 
       <div class="chart-container">
         <div v-if="selectedBodyPart.image" class="image-container">
-          <img :src="`/assets/images/${selectedBodyPart.image}`" alt="" class="body-image" />
+          <img
+            :src="`/assets/images/${selectedBodyPart.image}`"
+            alt="Image of {{ selectedBodyPart.name }}"
+            class="body-image"
+          />
           <div class="body-title" :style="{ color: selectedBodyPart.color }">
             {{ selectedBodyPart.name }}
           </div>
@@ -50,25 +63,32 @@
         <div v-if="selectedBodyPart.data.text" class="body-description">
           {{ selectedBodyPart.data.text }}
         </div>
-        
-        <div v-else>
-          <div class="body-name" :style="{ color: selectedBodyPart.color }">
-            {{ selectedBodyPart.name }}
-          </div>
-          <div ref="pieChart" class="pie-chart"></div>
-        </div>
-      </div>
 
-      <div v-if="!selectedBodyPart.data.text" class="progress-bar-container">
-        <div class="progress-bar-background">
-          <div
-            class="progress-bar-fill"
-            :style="{
-              width: progressBarWidth + '%',
-              backgroundColor: selectedBodyPart.color
-            }"
-          >
-            <span class="progress-label">{{ progressBarWidth }}%</span>
+        <div v-else>
+          <div v-if="selectedData === 'data1'" class="data1-container">
+            <h3>{{ selectedBodyPart.data.data1.title }}</h3>
+            <p>{{ selectedBodyPart.data.data1.textIntro }}</p> 
+            <ul>
+              <li v-for="(item, index) in selectedBodyPart.data.data1.text" :key="index">
+                {{ index + 1 }}. {{ item }}
+              </li>
+            </ul>
+          </div>
+
+          <div v-if="selectedData === 'data2'" class="data2-container">
+            <h3>{{ selectedBodyPart.data.data2.title }}</h3>
+            <div class="pie-chart-container">
+              <div ref="pieChart" class="pie-chart"></div>
+            </div>
+            <div class="data-text-right">
+              <p>{{ selectedBodyPart.data.data2.text }}</p>
+            </div>
+          </div>
+
+          <div v-if="selectedData === 'data3'" class="data3-container">
+            <div class="small-text-top">{{ selectedBodyPart.data.data3.smallTextTop }}</div>
+            <div class="large-text">{{ selectedBodyPart.data.data3.largeText }}</div>
+            <div class="small-text-bottom">{{ selectedBodyPart.data.data3.smallTextBottom }}</div>
           </div>
         </div>
       </div>
@@ -83,29 +103,18 @@ import bodyData from '../data/bodyData.json';
 
 const bodyParts = bodyData.bodyParts;
 const selectedBodyPart = ref(null);
-const selectedDataByPart = ref({});
 const selectedData = ref("data1");
 const pieChart = ref(null);
-const progressBarWidth = ref(0);
 
 const selectBodyPart = (part) => {
   selectedBodyPart.value = part;
-  selectedData.value = selectedDataByPart.value[part.id] || 'data1';
-
-  if (!selectedBodyPart.value.data.text) {
-    updatePieChart();
-    updateProgressBar();
-  }
+  selectedData.value = "data1";
+  if (!selectedBodyPart.value.data.text) updatePieChart();
 };
 
 const selectData = (dataType) => {
-  if (selectedBodyPart.value) {
-    selectedData.value = dataType;
-    selectedDataByPart.value[selectedBodyPart.value.id] = dataType;
-
-    updatePieChart();
-    updateProgressBar();
-  }
+  selectedData.value = dataType;
+  if (selectedData.value === "data2") updatePieChart();
 };
 
 const updatePieChart = () => {
@@ -113,8 +122,7 @@ const updatePieChart = () => {
     const pieContainer = d3.select(pieChart.value);
     pieContainer.selectAll("*").remove();
 
-    if (!selectedBodyPart.value || !selectedBodyPart.value.data) return;
-    const data = selectedBodyPart.value.data[selectedData.value];
+    const data = selectedBodyPart.value.data[selectedData.value].data;
     if (!data) return;
 
     const width = 200;
@@ -141,47 +149,65 @@ const updatePieChart = () => {
       .attr("fill", (d, i) => d3.schemeCategory10[i % 10])
       .attr("stroke", "white")
       .style("stroke-width", "2px")
-      .attr("opacity", 0)
       .transition()
       .duration(1000)
-      .attr("opacity", 1)
-      .attrTween("d", function (d) {
-        const i = d3.interpolate({ startAngle: 0, endAngle: 0 }, d);
-        return function (t) {
+      .attrTween("d", function(d) {
+        const i = d3.interpolate(
+          { startAngle: 0, endAngle: 0 },
+          d
+        );
+        return function(t) {
           return arc(i(t));
         };
       });
+
+    svg
+      .selectAll("text")
+      .data(data_ready)
+      .enter()
+      .append("text")
+      .attr("transform", (d) => `translate(${arc.centroid(d)})`)
+      .attr("text-anchor", "middle")
+      .text((d) => d.data.label);
   });
 };
 
-const updateProgressBar = () => {
-  if (selectedBodyPart.value && selectedBodyPart.value.data && selectedData.value) {
-    const data = selectedBodyPart.value.data[selectedData.value];
-    if (data && data[0] && data[0].value !== undefined) {
-      progressBarWidth.value = data[0].value;
-    } else {
-      progressBarWidth.value = 0;
-    }
-  }
-};
-
 onMounted(() => {
-  updatePieChart();
+  if (selectedBodyPart.value) updatePieChart();
 });
 </script>
 
 <style scoped>
-/* Styles similaires aux précédents */
 .body-chart {
   display: flex;
   justify-content: flex-start;
   padding: 20px;
 }
 
-.body-buttons {
+.body-container {
   display: flex;
   flex-direction: column;
   margin-right: 20px;
+}
+
+.image-container {
+  position: relative;
+}
+
+.body-image {
+  width: 300px;
+  height: 500px;
+  object-fit: contain;
+}
+
+.buttons-container {
+  position: absolute;
+  top: 50%;  
+  left: 10%;  
+  transform: translateY(-50%);  
+  display: flex;
+  flex-direction: column;
+  gap: 10px; 
 }
 
 .body-button {
@@ -190,8 +216,14 @@ onMounted(() => {
   font-weight: bold;
   border: none;
   cursor: pointer;
-  margin: 5px 0;
   text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);  
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.body-button:hover {
+  background-color: rgba(0, 0, 0, 0.7);  
 }
 
 .page-container {
@@ -237,74 +269,31 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  gap: 20px;
 }
 
-.body-description {
+.data1-container, .data2-container, .data3-container {
+  width: 100%;
+}
+
+.data-text-right {
   font-size: 16px;
-  text-align: center;
-  color: #555;
-  margin-bottom: 20px;
+  text-align: right;
 }
 
-.body-name {
-  font-size: 20px;
+.pie-chart-container {
+  width: 250px;
+  height: 250px;
+}
+
+.large-text {
+  font-size: 24px;
   font-weight: bold;
-  margin-bottom: 10px;
+  color: #333;
 }
 
-.body-title {
-  font-size: 20px;
-  font-weight: bold;
-  margin-top: 10px;
-  text-align: center;
-}
-
-.image-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.body-image {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-}
-
-.pie-chart {
-  margin-bottom: 20px;
-}
-
-.progress-bar-container {
-  width: 100%;
-  background-color: #eee;
-  border-radius: 5px;
-  height: 20px;
-  margin-top: 10px;
-}
-
-.progress-bar-background {
-  width: 100%;
-  height: 100%;
-  background-color: #eee;
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-.progress-bar-fill {
-  height: 100%;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: width 1s ease-out;
-}
-
-.progress-label {
-  color: white;
-  font-weight: bold;
+.small-text-top, .small-text-bottom {
   font-size: 14px;
+  color: #555;
 }
 </style>
