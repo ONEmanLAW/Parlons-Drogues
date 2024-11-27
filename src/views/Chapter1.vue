@@ -21,7 +21,7 @@
     <Raph1 />
     <Ines1 />
 
-    <Elena2 />
+    <Elena2 :currentChapter="1"/>
     <BodyChart />
     <ChapterText :currentChapterId="1" />
     <ChapterTransition :currentChapter="1" chapterText="Allez au chapitre 2" />

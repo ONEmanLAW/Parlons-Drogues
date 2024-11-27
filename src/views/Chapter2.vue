@@ -11,9 +11,9 @@
     />
 
     <Card :chapterId="2" />
+    <Elena2 :currentChapter="2"/>
 
     <ChapterText :currentChapterId="2" />
-
     <ChapterTransition :currentChapter="2" chapterText="Allez au chapitre 3" />
 
   </div>
@@ -32,6 +32,8 @@ import ChapterTransition from '../components/ChapterTransition.vue';
 
 import introChaptersData from '../data/introChapters.json';
 import cardsData from '../data/cardsData.json';
+
+import Elena2 from '../components/Elena2.vue';
 
 // Récupération des données du chapitre 2
 const chapterData = introChaptersData.chapters.find(ch => ch.id === 2);

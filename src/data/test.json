@@ -1,0 +1,40 @@
+{
+  "chapters": [
+    {
+      "id": 1,
+      "color": "#e6f0ff",
+      "textColor": "#2e2f85",
+      "highlightOrange": "#ff6d00",
+      "highlightBlue": "#2e2f85",
+      "infoTextColor": "#ffffff",
+      "infoBackgroundColor": "#5eafef",
+      "title": "FUMER 1 JOINT, C'EST COMME FUMER 20 CLOPES D'UN COUP",
+      "paragraph": "Beaucoup croient qu’un joint, c’est juste un petit moment chill. Mais en réalité, il libère autant de substances nocives pour ton corps que 20 clopes. C’est loin d’être sans risque pour ta santé.",
+      "image": "../assets/images/elena2.png"
+    },
+    {
+      "id": 2,
+      "color": "#e6ffe6",
+      "textColor": "#005f00",
+      "highlightOrange": "#ff6d00",
+      "highlightBlue": "#005f00",
+      "infoTextColor": "#ffffff",
+      "infoBackgroundColor": "#2fdf2f",
+      "title": "5/10 dépendants rechutent en tentant d'arrêter",
+      "paragraph": "Se débarrasser de la dépendance au cannabis, c’est vraiment pas simple. Même si t’as envie d’arrêter, les symptômes de sevrage et les habitudes rendent ça hyper compliqué. Au final, la moitié des gens rechutent dans les 6 mois après avoir essayé.",
+      "image": "../assets/images/raph2.png"
+    },
+    {
+      "id": 3,
+      "color": "#ffe6f0",
+      "textColor": "#85002e",
+      "highlightOrange": "#ff6d00",
+      "highlightBlue": "#85002e",
+      "infoTextColor": "#ffffff",
+      "infoBackgroundColor": "#ef5eaf",
+      "title": "Perdre 8 points de QI, c’est vieillir mentalement de 6 ans",
+      "paragraph": "Ton cerveau tourne moins bien, un peu comme si t’étais plus vieux : tu galères à te concentrer, à te souvenir des trucs, ou à réfléchir vite.",
+      "image": "../assets/images/ines2.png"
+    }
+  ]
+}

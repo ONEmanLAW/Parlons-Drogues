@@ -1,36 +1,45 @@
 <template>
-  <div class="container">
-    <div class="text-section" ref="textSection">
-      <div class="info-text">Informations</div>
+  <div v-if="currentChapterData" :class="`container`" :style="{ backgroundColor: currentChapterData.color }">
+    <div :class="`text-section`">
+      <div
+        :class="`info-text`"
+        :style="{ color: currentChapterData.infoTextColor, backgroundColor: currentChapterData.infoBackgroundColor }"
+      >
+        Informations
+      </div>
       <h1>
-        FUMER <span class="highlight-orange">1 JOINT</span>, C'EST COMME FUMER <br />
-        <span class="highlight-blue">20 CLOPES</span> D'UN COUP
+        {{ currentChapterData.title.split(',')[0] }},<br />
+        <span :style="{ color: currentChapterData.highlightOrange }">{{ currentChapterData.title.split(',')[1] }}</span>
       </h1>
       <p>
-        Beaucoup croient qu’un joint, c’est juste un petit moment chill. 
-        Mais en réalité, il libère autant de substances nocives pour ton corps 
-        que 20 clopes. C’est loin d’être sans <span class="highlight">risque</span> pour ta santé.
+        {{ currentChapterData.paragraph }}
       </p>
     </div>
-
-    <div class="image-section" ref="imageSection">
-      <img
-        class="main-image"
-        src="../assets/images/elena2.png"
-        alt="Illustration principale"
-      />
+    <div :class="`image-section`">
+      <img class="main-image" :src="currentChapterData.image" alt="Illustration" />
     </div>
   </div>
 </template>
 
 <script>
-import { onMounted } from 'vue';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { onMounted, computed } from "vue";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import chapters from "../data/test.json";
 
 export default {
   name: "Elena2",
-  setup() {
+  props: {
+    currentChapter: {
+      type: Number,
+      required: true
+    }
+  },
+  setup(props) {
+    const currentChapterData = computed(() =>
+      chapters.chapters.find((chapter) => chapter.id === props.currentChapter)
+    );
+
     onMounted(() => {
       gsap.registerPlugin(ScrollTrigger);
 
@@ -42,8 +51,7 @@ export default {
           trigger: ".container",
           start: "top 80%",
           end: "top 50%",
-          scrub: true, 
-          markers: false, 
+          scrub: true
         }
       });
 
@@ -55,8 +63,7 @@ export default {
           trigger: ".container",
           start: "top 80%",
           end: "top 50%",
-          scrub: true,
-          markers: false,
+          scrub: true
         }
       });
 
@@ -68,8 +75,7 @@ export default {
           trigger: ".container",
           start: "top 80%",
           end: "top 50%",
-          scrub: true,
-          markers: false,
+          scrub: true
         }
       });
 
@@ -81,14 +87,18 @@ export default {
           trigger: ".container",
           start: "top 80%",
           end: "top 50%",
-          scrub: true,
-          markers: false,
+          scrub: true
         }
       });
     });
+
+    return {
+      currentChapterData
+    };
   }
 };
 </script>
+
 
 <style scoped>
 .container {
