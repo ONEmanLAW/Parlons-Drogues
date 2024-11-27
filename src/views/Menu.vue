@@ -12,7 +12,6 @@
       >
         <img :src="getImageSource(chapter.imageSource)" :alt="chapter.title" />
         <p>{{ chapter.title }}</p>
-        <p>{{ chapter.subtitle }}</p>
       </div>
     </div>
   </div>

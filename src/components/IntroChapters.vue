@@ -7,7 +7,6 @@
       <p>{{ description }}</p>
     </div>
 
-    <!-- Conteneur vidéo avec couleur de fond spécifique -->
     <div class="video-container" :style="{ backgroundColor: chapterBackgroundColor }">
       <div class="video-wrapper">
         <video
@@ -40,15 +39,14 @@ const props = defineProps({
   videoSource: String,
   imageSource: String,
   backgroundImage: String,
-  chapterId: Number,  // ID du chapitre pour récupérer la couleur de fond
-  backgroundColor: String,  // Couleur de fond dynamique
+  chapterId: Number,
+  backgroundColor: String,  
 });
 
 const videoElement = ref(null);
 const videoPlaying = ref(false);
 const videoHasPlayed = ref(false);
 
-// Récupérer la couleur de fond depuis la prop
 const chapterBackgroundColor = props.backgroundColor;
 
 const scrollToVideo = () => {
@@ -115,7 +113,7 @@ const skipVideo = () => {
 .background-container {
   background-size: cover;
   background-position: center;
-  height: 100vh; /* L'image de fond occupe toute la hauteur de l'écran */
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -133,41 +131,39 @@ h2, h3, p {
   margin: 10px 0;
 }
 
-/* Conteneur vidéo */
 .video-container {
   position: relative;
-  height: 100vh; /* Le conteneur vidéo occupe toute la hauteur de l'écran */
-  padding: 0 60px 60px 60px; /* Pas de padding en haut, mais 30px sur les côtés et en bas */
-  background-color: var(--chapter-bg-color); /* Couleur de fond spécifique pour chaque chapitre */
-  box-sizing: border-box; /* Le padding ne dépasse pas la taille du conteneur */
+  height: 100vh;
+  padding: 0 60px 60px 60px; 
+  background-color: var(--chapter-bg-color); 
+  box-sizing: border-box; 
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Aligner la vidéo au top du conteneur */
+  justify-content: flex-start; 
   align-items: center;
 }
 
-/* Conteneur interne de la vidéo */
 .video-wrapper {
   width: 100%;
-  height: 100%; /* La vidéo doit occuper toute la hauteur de son conteneur */
+  height: 100%; 
   position: absolute;
-  top: 0; /* Coller la vidéo au haut du conteneur */
+  top: 0;
   left: 0;
   right: 0;
-  padding: 0; /* Pas de padding dans ce conteneur */
+  padding: 0; 
   box-sizing: border-box;
 }
 
-/* Assurez-vous que la vidéo est collée en haut du conteneur */
+
 .full-screen-video {
   width: 100%;
-  height: calc(100% - 30px); /* La vidéo occupe toute la hauteur moins 30px (pour le padding en bas) */
-  object-fit: contain; /* La vidéo s'adapte sans déformation */
+  height: calc(100% - 30px); 
+  object-fit: contain;
   display: block;
   outline: none;
   border: none;
-  margin: 0; /* Aucune marge autour de la vidéo */
-  padding: 0; /* Aucune marge interne */
+  margin: 0; 
+  padding: 0;
   transition: opacity 0.3s ease;
 }
 

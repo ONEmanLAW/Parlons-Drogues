@@ -26,19 +26,19 @@
 
       <div class="data-display">
         <div v-for="(effect, index) in currentEffects" :key="index" class="data-item">
-          <svg class="circle-chart" width="60" height="60" :data-value="effect.value">
-            <circle class="circle-background" cx="30" cy="30" r="25"></circle>
+          <svg class="circle-chart" width="70" height="70" :data-value="effect.value">
+            <circle class="circle-background" cx="35" cy="35" r="30"></circle>
             <circle
               class="circle-foreground"
-              cx="30"
-              cy="30" r="25"
+              cx="35"
+              cy="35" r="30"
               :style="{
                 strokeDasharray: circleCircumference,
                 strokeDashoffset: calculateOffset(effect.value),
                 stroke: getSolidGreen(effect.value)
               }"
             ></circle>
-            <text x="50%" y="50%" text-anchor="middle" alignment-baseline="middle" font-size="16" fill="#167540" font-weight="bold">
+            <text x="50%" y="50%" text-anchor="middle" alignment-baseline="middle" font-size="18" fill="#167540" font-weight="bold">
               {{ effect.value }}%
             </text>
           </svg>
@@ -79,7 +79,7 @@ function selectSubstance(substance) {
   activeSubstance.value = activeSubstance.value === substance ? null : substance;
 }
 
-const circleRadius = 25;
+const circleRadius = 30;
 const circleCircumference = 2 * Math.PI * circleRadius;
 
 function calculateOffset(value) {
@@ -104,6 +104,8 @@ function getSolidGreen(value) {
   align-items: center;
   height: 100vh;
   background-color: #f4f4f4;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .card {
@@ -111,7 +113,7 @@ function getSolidGreen(value) {
   padding: 40px;
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-  width: 80%;
+  width: 100%;
   max-width: 1100px;
   min-height: 80vh;
   display: flex;
@@ -126,14 +128,14 @@ function getSolidGreen(value) {
 }
 
 h2 {
-  font-size: 36px;
+  font-size: 2rem;
   color: #167540;
   font-weight: bold;
   margin: 0;
 }
 
 .description {
-  font-size: 18px;
+  font-size: 1.2rem;
   color: #555;
   margin-top: 5px;
 }
@@ -143,29 +145,29 @@ h2 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 70px;
 }
 
 .character {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 1;
-  max-width: 250px;
+  max-width: 500px;
+  width: 100%;
 }
 
 .character img {
-  width: 300px;
+  width: 100%;
   height: auto;
+  max-width: 400px;
   border-radius: 10px;
 }
-
 
 .buttons-container {
   display: flex;
   justify-content: center;
   gap: 20px;
-  margin-top: 20px;  
+  margin-top: 20px;
 }
 
 .buttons-container button {
@@ -174,7 +176,7 @@ h2 {
   color: #167540;
   font-weight: bold;
   padding: 15px 30px;
-  font-size: 18px;
+  font-size: 1.2rem;
   border: 2px solid #167540;
   border-radius: 5px;
   transition: all 0.3s ease;
@@ -187,12 +189,30 @@ h2 {
 
 .data-display {
   display: flex;
-  justify-content: center;
-  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
   margin-top: 20px;
-  flex-wrap: nowrap;
-  overflow-y: auto;
   max-height: 200px;
+  width: 100%;
+  box-sizing: border-box;
+  padding-right: 10px;
+  overflow-y: hidden;
+}
+
+.data-display::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.data-display::-webkit-scrollbar-thumb {
+  background-color: #167540;
+  border-radius: 10px;
+}
+
+.data-display::-webkit-scrollbar-track {
+  background-color: #e0e0e0;
+  border-radius: 10px;
 }
 
 .data-item {
@@ -200,18 +220,20 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 120px;
-  height: 180px;
+  width: 23%;
+  height: 200px;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
 }
 
 .data-title {
-  font-size: 18px;
-  margin: 0;
+  font-size: 1.1rem;
+  margin: 10px 0 0 0;
   word-wrap: break-word;
   white-space: normal;
-  max-width: 120px;
-  height: 40px;
-  line-height: 1.2;
+  max-width: 140px;
+  line-height: 1.3;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -231,4 +253,68 @@ h2 {
   stroke-width: 6;
   transition: stroke-dashoffset 0.3s ease;
 }
+
+@media (max-width: 1024px) {
+  .data-item {
+    width: 48%;
+  }
+
+  .data-display {
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .data-item {
+    width: 100%;
+  }
+
+  .card {
+    padding: 20px;
+    width: 100%;
+    max-width: none;
+  }
+
+  .character-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .buttons-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .buttons-container button {
+    padding: 12px 20px;
+    font-size: 1rem;
+  }
+
+  .character img {
+    width: 100%;
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .data-item {
+    width: 100%;
+  }
+
+  .character img {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .data-title {
+    font-size: 0.9rem;
+  }
+
+  .buttons-container button {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+}
 </style>
+
+
