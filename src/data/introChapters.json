@@ -4,10 +4,11 @@
       "id": 1,
       "title": "Chapitre 1",
       "subtitle": "Élena et ses premières bouffées",
-      "description": "Tu vas apprendre tous les effets possible à courts termes.",
+      "description": "Tu vas apprendre tous les effets possibles à court terme.",
       "videoSource": "assets/videos/video1.mp4",
       "imageSource": "assets/images/elena.png",
-      "backgroundImage": "assets/images/fond-chapitre-1.png"
+      "backgroundImage": "assets/images/fond-chapitre-1.png",
+      "backgroundColor": "#0000FF" 
     },
     {
       "id": 2,
@@ -16,23 +17,26 @@
       "description": "Tu vas apprendre tous les effets de la dépendance.",
       "videoSource": "assets/videos/video1.mp4",
       "imageSource": "assets/images/raph.png",
-      "backgroundImage": "assets/images/fond-chapitre-2.png"
+      "backgroundImage": "assets/images/fond-chapitre-2.png",
+      "backgroundColor": "#008000"  
     },
     {
       "id": 3,
       "title": "Chapitre 3",
       "subtitle": "La santé d’Inès en péril",
-      "description": "Tu vas apprendre tous les effets possible à longs termes.",
+      "description": "Tu vas apprendre tous les effets possibles à long terme.",
       "videoSource": "assets/videos/video1.mp4",
       "imageSource": "assets/images/ines.png",
-      "backgroundImage": "assets/images/fond-chapitre-3.png"
+      "backgroundImage": "assets/images/fond-chapitre-3.png",
+      "backgroundColor": "#FFC0CB"  
     },
     {
       "id": 4,
       "title": "Advice",
       "subtitle": "La conclusion de fin",
       "description": "Des trucs supplémentaires.",
-      "imageSource": "assets/images/elena.png"
+      "imageSource": "assets/images/elena.png",
+      "backgroundColor": "#D3D3D3" 
     }
   ]
 }

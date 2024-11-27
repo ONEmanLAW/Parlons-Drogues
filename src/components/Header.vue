@@ -1,21 +1,22 @@
 <template>
   <header>
-    <h1>Parlons Drogues</h1>
-    <nav>
-      <ul>
-        <li><router-link to="/">Intro</router-link></li>
-        <li><router-link to="/home">Home</router-link></li>
-        <li><router-link to="/chapter1">Chapitre 1</router-link></li>
-        <li><router-link to="/chapter2">Chapitre 2</router-link></li>
-        <li><router-link to="/chapter3">Chapitre 3</router-link></li>
-        <li><router-link to="/advice">Conseils</router-link></li>
-      </ul>
-    </nav>
-    <router-link to="/menu" class="menu-button">Menu</router-link>
+    <img src="../assets/images/canabis.png" alt="Logo" class="logo" />
+    <router-link to="/menu" class="menu-button" @click="toggleMenu">
+      <div :class="['bar', { 'open': menuOpen }]"></div>
+      <div :class="['bar', { 'open': menuOpen }]"></div>
+      <div :class="['bar', { 'open': menuOpen }]"></div>
+    </router-link>
   </header>
 </template>
 
 <script setup>
+import { ref } from 'vue';
+
+const menuOpen = ref(false);
+
+const toggleMenu = () => {
+  menuOpen.value = !menuOpen.value;
+};
 </script>
 
 <style scoped>
@@ -23,35 +24,54 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  right: 0;
   padding: 10px 20px;
-  background-color: #167540;
-  color: white;
-}
-
-nav ul {
-  display: flex;
-  gap: 15px;
-  list-style: none;
-}
-
-nav ul li a {
-  text-decoration: none;
-  color: white;
+  z-index: 10;
 }
 
 .menu-button {
-  background-color: white;
-  color: #167540;
-  border: 2px solid #167540;
-  border-radius: 5px;
-  padding: 5px 10px;
-  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 30px;
+  height: 24px;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  padding: 5px;
+  transition: all 0.3s ease;
+  border: none;
+  background: transparent;
 }
 
-.menu-button:hover {
-  background-color: #167540;
-  color: white;
+.bar {
+  width: 30px;
+  height: 4px;
+  background-color: #a8a8a8;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.menu-button:hover .bar {
+  background-color: #7a7a7a;
+}
+
+.menu-button .bar.open:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+
+.menu-button .bar.open:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-button .bar.open:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+.logo {
+  width: 40px;
+  height: auto;
 }
 </style>

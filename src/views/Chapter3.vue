@@ -9,6 +9,7 @@
       :videoSource="chapter.videoSource"
       :imageSource="chapter.imageSource"
       :backgroundImage="chapter.backgroundImage"
+      :backgroundColor="chapter.backgroundColor"
     />
 
     
