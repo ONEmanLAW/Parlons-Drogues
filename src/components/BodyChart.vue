@@ -1,12 +1,15 @@
 <template>
   <div class="body-chart">
-    <div class="body-container">
-      <div class="image-container">
-        <img
-          :src="`../assets/images/persoInes.png`"
-          alt="Image du corps humain"
-          class="body-image"
-        />
+    <div class="container">
+      
+      <div class="left-container">
+        <div class="image-container">
+          <img
+            :src="`../assets/images/persoInes.png`"
+            alt="Image du corps humain"
+            class="body-image"
+          />
+        </div>
 
         <div class="buttons-container">
           <button
@@ -19,79 +22,83 @@
           </button>
         </div>
       </div>
-    </div>
 
-    <div class="page-container" v-if="selectedBodyPart">
-      <div class="page-header">
-        <div class="tabs" v-if="!selectedBodyPart.data.text">
-          <div
-            class="tab"
-            :class="{ active: selectedData === 'data1' }"
-            @click="selectData('data1')"
-          >
-            Data 1
+      <div class="right-container" v-if="selectedBodyPart">
+        <div class="page-header">
+          <div class="tabs" v-if="!selectedBodyPart.data.text">
+            <div
+              class="tab"
+              :class="{ active: selectedData === 'data1' }"
+              @click="selectData('data1')"
+            >
+              Data 1
+            </div>
+            <div
+              class="tab"
+              :class="{ active: selectedData === 'data2' }"
+              @click="selectData('data2')"
+            >
+              Data 2
+            </div>
+            <div
+              class="tab"
+              :class="{ active: selectedData === 'data3' }"
+              @click="selectData('data3')"
+            >
+              Data 3
+            </div>
           </div>
-          <div
-            class="tab"
-            :class="{ active: selectedData === 'data2' }"
-            @click="selectData('data2')"
-          >
-            Data 2
+        </div>
+
+        <div class="chart-container">
+          <div v-if="selectedBodyPart.image" class="image-container">
+            <img
+              :src="`/assets/images/${selectedBodyPart.image}`"
+              alt="Image of {{ selectedBodyPart.name }}"
+              class="body-image"
+            />
+            <div class="body-title" :style="{ color: selectedBodyPart.color }">
+              {{ selectedBodyPart.name }}
+            </div>
           </div>
-          <div
-            class="tab"
-            :class="{ active: selectedData === 'data3' }"
-            @click="selectData('data3')"
-          >
-            Data 3
+
+          <div v-if="selectedBodyPart.data.text" class="body-description">
+            {{ selectedBodyPart.data.text }}
+          </div>
+
+          <div v-else>
+            <!-- Data 1 -->
+            <div v-if="selectedData === 'data1'" class="data1-container">
+              <h3>{{ selectedBodyPart.data.data1.title }}</h3>
+              <p>{{ selectedBodyPart.data.data1.textIntro }}</p> 
+              <ul>
+                <li v-for="(item, index) in selectedBodyPart.data.data1.text" :key="index">
+                  {{ index + 1 }}. {{ item }}
+                </li>
+              </ul>
+            </div>
+
+            <!-- Data 2 -->
+            <div v-if="selectedData === 'data2'" class="data2-container">
+              <h3>{{ selectedBodyPart.data.data2.title }}</h3>
+              <div class="pie-chart-container">
+                <div ref="pieChart" class="pie-chart"></div>
+              </div>
+              <div class="data-text-right">
+                <p>{{ selectedBodyPart.data.data2.text }}</p> 
+              </div>
+            </div>
+
+            <!-- Data 3 -->
+            <div v-if="selectedData === 'data3'" class="data3-container">
+              <div class="small-text-top">{{ selectedBodyPart.data.data3.smallTextTop }}</div>
+              <div class="large-text">{{ selectedBodyPart.data.data3.largeText }}</div>
+              <div class="small-text-bottom">{{ selectedBodyPart.data.data3.smallTextBottom }}</div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="chart-container">
-        <div v-if="selectedBodyPart.image" class="image-container">
-          <img
-            :src="`/assets/images/${selectedBodyPart.image}`"
-            alt="Image of {{ selectedBodyPart.name }}"
-            class="body-image"
-          />
-          <div class="body-title" :style="{ color: selectedBodyPart.color }">
-            {{ selectedBodyPart.name }}
-          </div>
-        </div>
-
-        <div v-if="selectedBodyPart.data.text" class="body-description">
-          {{ selectedBodyPart.data.text }}
-        </div>
-
-        <div v-else>
-          <div v-if="selectedData === 'data1'" class="data1-container">
-            <h3>{{ selectedBodyPart.data.data1.title }}</h3>
-            <p>{{ selectedBodyPart.data.data1.textIntro }}</p> 
-            <ul>
-              <li v-for="(item, index) in selectedBodyPart.data.data1.text" :key="index">
-                {{ index + 1 }}. {{ item }}
-              </li>
-            </ul>
-          </div>
-
-          <div v-if="selectedData === 'data2'" class="data2-container">
-            <h3>{{ selectedBodyPart.data.data2.title }}</h3>
-            <div class="pie-chart-container">
-              <div ref="pieChart" class="pie-chart"></div>
-            </div>
-            <div class="data-text-right">
-              <p>{{ selectedBodyPart.data.data2.text }}</p>
-            </div>
-          </div>
-
-          <div v-if="selectedData === 'data3'" class="data3-container">
-            <div class="small-text-top">{{ selectedBodyPart.data.data3.smallTextTop }}</div>
-            <div class="large-text">{{ selectedBodyPart.data.data3.largeText }}</div>
-            <div class="small-text-bottom">{{ selectedBodyPart.data.data3.smallTextBottom }}</div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -180,18 +187,26 @@ onMounted(() => {
 <style scoped>
 .body-chart {
   display: flex;
-  justify-content: flex-start;
-  padding: 20px;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-.body-container {
+.container {
+  display: flex;
+  justify-content: space-between; 
+  width: 90%;
+  align-items: center;
+}
+
+.left-container {
   display: flex;
   flex-direction: column;
-  margin-right: 20px;
+  align-items: center;
 }
 
 .image-container {
-  position: relative;
+  margin-bottom: 20px;
 }
 
 .body-image {
@@ -201,13 +216,10 @@ onMounted(() => {
 }
 
 .buttons-container {
-  position: absolute;
-  top: 50%;  
-  left: 10%;  
-  transform: translateY(-50%);  
   display: flex;
   flex-direction: column;
-  gap: 10px; 
+  gap: 15px; 
+  margin-left: 20px;
 }
 
 .body-button {
@@ -218,7 +230,6 @@ onMounted(() => {
   cursor: pointer;
   text-align: center;
   background-color: rgba(0, 0, 0, 0.5);  
-  border-radius: 5px;
   transition: background-color 0.3s;
 }
 
@@ -226,11 +237,11 @@ onMounted(() => {
   background-color: rgba(0, 0, 0, 0.7);  
 }
 
-.page-container {
+.right-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 400px;
+  width: 60%;
   background-color: #fff;
   border-radius: 10px;
   padding: 20px;
@@ -255,13 +266,13 @@ onMounted(() => {
   padding: 10px;
   cursor: pointer;
   font-weight: bold;
-  background-color: #f1f1f1;
-  border: 1px solid #ddd;
+  background-color: #ddd;
   border-radius: 5px;
+  transition: background-color 0.3s;
 }
 
 .tab.active {
-  background-color: #333;
+  background-color: #00aaff;
   color: white;
 }
 
@@ -269,21 +280,17 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-}
-
-.data1-container, .data2-container, .data3-container {
-  width: 100%;
-}
-
-.data-text-right {
-  font-size: 16px;
-  text-align: right;
 }
 
 .pie-chart-container {
   width: 250px;
   height: 250px;
+}
+
+.data-text-right {
+  font-size: 16px;
+  text-align: right;
+  color: #333;
 }
 
 .large-text {

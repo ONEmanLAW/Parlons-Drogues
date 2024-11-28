@@ -2,12 +2,12 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center; 
-  align-items: center; 
-  padding: 20px; 
-  box-sizing: border-box; 
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden; /* Empêche de faire défiler tout le contenu de la page */
 }
-
 
 .chapter-header {
   text-align: center;
@@ -24,23 +24,69 @@
   color: #555;
 }
 
+/* Question label */
+.question-label {
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  padding: 10px 20px; /* Ajustement du padding pour ne pas prendre trop de place */
+  border-radius: 5px;
+  margin-bottom: 10px;
+  text-align: center;
+  display: inline-block; /* Le fond ne prendra que la taille du texte */
+}
+
+/* Couleur d'arrière-plan en fonction du chapitre */
+.chapter[data-id="1"] .question-label {
+  background-color: blue;
+}
+
+.chapter[data-id="2"] .question-label {
+  background-color: green;
+}
+
+.chapter[data-id="3"] .question-label {
+  background-color: pink;
+}
 
 .card-container {
   display: flex;
-  gap: 20px;
   flex-wrap: wrap;
-  justify-content: center;
-  align-content: center;
-  margin-top: 20px; 
-  flex-grow: 1; 
+  justify-content: center; /* Centre les cartes horizontalement */
+  align-items: center; /* Centre les cartes verticalement */
+  margin-top: 20px;
+  flex-grow: 1;
+  overflow-y: auto; /* Permet le défilement vertical si nécessaire */
+  max-height: 100vh; /* Limite la hauteur à 100% de la fenêtre */
+  padding-right: 15px; /* Espace pour éviter la barre de défilement */
+  gap: 20px;
+  width: 100%; /* S'assure que le conteneur occupe toute la largeur */
+  box-sizing: border-box; /* Inclut le padding dans les calculs de largeur */
 }
 
+/* Personnalisation de la barre de défilement */
+.card-container::-webkit-scrollbar {
+  width: 10px; /* Largeur de la barre de défilement */
+}
+
+.card-container::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3); /* Couleur de la barre de défilement */
+  border-radius: 10px;
+}
+
+.card-container::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Couleur de fond de la barre de défilement */
+}
 
 .card {
-  width: 220px;
-  height: 320px;
+  width: 300px; /* Augmentation de la taille des cartes */
+  height: 450px; /* Augmentation de la taille des cartes */
   perspective: 1000px;
   margin: 20px;
+  flex-shrink: 0; /* Empêche la carte de rétrécir */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .card-inner {
@@ -76,8 +122,8 @@
 }
 
 .card-icon {
-  width: 40px;
-  height: 40px;
+  width: 60px; /* Augmentation de la taille de l'icône */
+  height: 60px; /* Augmentation de la taille de l'icône */
 }
 
 .card-back {
@@ -97,12 +143,46 @@
 
 .card-front h3,
 .card-back h3 {
-  font-size: 18px;
+  font-size: 24px; /* Augmentation de la taille du titre */
   font-weight: bold;
 }
 
 .card-front p,
 .card-back p {
-  font-size: 14px;
+  font-size: 18px; /* Augmentation de la taille du texte */
   color: #666;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .card-container {
+    justify-content: center;
+    gap: 20px;
+  }
+
+  /* Les cartes garderont leur taille initiale (300px x 450px) */
+}
+
+@media (max-width: 800px) {
+  .card-container {
+    justify-content: center;
+  }
+
+  /* Les cartes garderont leur taille initiale (300px x 450px) */
+}
+
+@media (max-width: 600px) {
+  .card-container {
+    justify-content: center;
+  }
+
+  /* Les cartes garderont leur taille initiale (300px x 450px) */
+}
+
+@media (max-width: 400px) {
+  .card-container {
+    justify-content: center;
+  }
+
+  /* Les cartes garderont leur taille initiale (300px x 450px) */
 }

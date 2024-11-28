@@ -1,16 +1,24 @@
 <template>
-  <div class="chapter">
-    <div class="chapter-header">
+  <div class="chapter" ref="chapterContainer">
+    <div 
+      class="question-label" 
+      :style="getBackgroundColor"
+    >
+      Question
+    </div>
+
+    <div class="chapter-header" ref="chapterHeader">
       <h2>{{ chapter.title }}</h2>
       <p>{{ chapter.description }}</p>
     </div>
 
-    <div class="card-container">
+    <div class="card-container" ref="cardContainer">
       <div
         v-for="(card, index) in chapter.cards"
         :key="index"
         class="card"
         @click="toggleFlip(index)"
+        :ref="el => setCard(el, index)"
       >
         <div :class="['card-inner', { flipped: flippedStates[index] }]">
           <div class="card-front">
@@ -35,35 +43,61 @@
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick } from 'vue';
+import { ref, computed, onMounted, nextTick } from 'vue';
 import { gsap } from 'gsap';
 import * as d3 from 'd3';
 import cardsData from '../data/cardsData.json';
 
 const props = defineProps({
-  chapterId: Number, 
+  chapterId: Number,
 });
 
-const chapter = ref({}); 
-const flippedStates = ref([]); 
-const donutChartContainers = ref([]); 
+const chapter = ref({});
+const flippedStates = ref([]);
+const donutChartContainers = ref([]);
+const chapterHeader = ref(null);
+const cardContainer = ref(null);
+const cards = ref([]);
+const chapterContainer = ref(null);
 
 
 onMounted(() => {
   const selectedChapter = cardsData.chapters.find((ch) => ch.id === props.chapterId);
   if (selectedChapter) {
     chapter.value = selectedChapter;
-    flippedStates.value = Array(selectedChapter.cards.length).fill(false); 
+    flippedStates.value = Array(selectedChapter.cards.length).fill(false);
+  }
+  observeScroll();
+});
+
+
+const getBackgroundColor = computed(() => {
+  const chapterId = props.chapterId;
+  if (!chapterId) return { backgroundColor: '#999' };
+
+  switch (chapterId) {
+    case 1:
+      return { backgroundColor: '#007BFF' };
+    case 2:
+      return { backgroundColor: '#28A745' }; 
+    case 3:
+      return { backgroundColor: '#FF69B4' }; 
+    default:
+      return { backgroundColor: '#999' }; 
   }
 });
 
+const setCard = (el, index) => {
+  if (el) {
+    cards.value[index] = el;
+  }
+};
 
 const setDonutContainer = (el, index) => {
   if (el) {
     donutChartContainers.value[index] = el;
   }
 };
-
 
 const toggleFlip = (index) => {
   flippedStates.value[index] = !flippedStates.value[index];
@@ -74,7 +108,6 @@ const toggleFlip = (index) => {
     ease: 'power1.inOut',
   });
 };
-
 
 const drawDonutCharts = () => {
   chapter.value.cards.forEach((card, index) => {
@@ -119,6 +152,45 @@ onMounted(async () => {
   await nextTick();
   drawDonutCharts();
 });
+
+const animateElements = () => {
+  gsap.from(chapterHeader.value, {
+    opacity: 0,
+    y: 50,
+    duration: 1,
+    ease: 'power1.out',
+  });
+
+
+  gsap.from(cards.value, {
+    opacity: 0,
+    x: -100,
+    stagger: 0.2,
+    duration: 1,
+    ease: 'power1.out',
+  });
+};
+
+const observeScroll = () => {
+  const options = {
+    root: null, 
+    rootMargin: '0px',
+    threshold: 0.4,
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateElements();
+        observer.disconnect();
+      }
+    });
+  }, options);
+
+  if (chapterContainer.value) {
+    observer.observe(chapterContainer.value);
+  }
+};
 </script>
 
 <style scoped src="../styles/Card.css"></style>

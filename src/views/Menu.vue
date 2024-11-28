@@ -22,7 +22,6 @@ import { onMounted, ref } from "vue";
 import { gsap } from "gsap";
 import { useRouter } from "vue-router";
 
-// La on récup les images, les titre ect
 import chaptersData from "../data/introChapters.json";
 
 const menuPage = ref(null);
@@ -56,9 +55,9 @@ function goBack() {
 
 function goToChapter(chapterId) {
   if (chapterId === 4) {
-    router.push("/advice");  // Pour la page Conseils
+    router.push("/advice"); 
   } else {
-    router.push(`/chapter${chapterId}`);  // Pour les chapitres 1, 2, et 3
+    router.push(`/chapter${chapterId}`); 
   }
 }
 
@@ -75,7 +74,7 @@ function getImageSource(imagePath) {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #167540;
+  background-color: #2b2e2c;
   color: white;
   display: flex;
   flex-direction: column;
@@ -90,7 +89,7 @@ function getImageSource(imagePath) {
   top: 20px;
   right: 20px;
   background-color: white;
-  color: #167540;
+  color: #adb6b1;
   border: none;
   border-radius: 50%;
   width: 40px;
