@@ -4,7 +4,7 @@
       "id": 1,
       "name": "Cerveau",
       "color": "#FF5733",
-      "image": "cerveau.png",
+      "image": "cerveau.gif",
       "data": {
         "data1": {
           "title": "Fonctionnement du cerveau",
@@ -28,7 +28,7 @@
       "id": 2,
       "name": "Poumons",
       "color": "#33FF57",
-      "image": "poumon.png",
+      "image": "poumon.gif",
       "data": {
         "data1": {
           "title": "Fonctionnement des poumons",
@@ -61,7 +61,7 @@
       "id": 4,
       "name": "Cœur",
       "color": "#FF33A1",
-      "image": "coeur.png",
+      "image": "coeur.gif",
       "data": {
         "data1": {
           "title": "Fonctionnement du cœur",
