@@ -14,8 +14,6 @@
     
     <Card :chapterId="1" />
 
-    <h2>Chapitre 1 - Quiz</h2>
-    <Quiz />
     <InteractiveCharacter />
     <GraphComponent />
     <Elena1 />
@@ -33,7 +31,6 @@
 <script setup>
 import IntroChapters from '../components/IntroChapters.vue';
 import ChapterText from '../components/ChapterText.vue';
-import Quiz from '../components/Quiz.vue';
 import BodyChart from '../components/BodyChart.vue';
 import GraphComponent from '../components/GraphComponent.vue';
 import InteractiveCharacter from '../components/InteractiveCharacter.vue';
