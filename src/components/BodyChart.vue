@@ -56,7 +56,7 @@
         </div>
 
         <div class="chart-container">
-          <div v-if="selectedBodyPart.image" class="image-container">
+          <div v-if="selectedBodyPart.image && selectedBodyPart.name !== 'Foie'" class="image-container">
             <div class="body-title" :style="{ color: selectedBodyPart.color }">
               {{ selectedBodyPart.name }}
             </div>
@@ -67,7 +67,10 @@
             />
           </div>
 
-          <div v-if="selectedBodyPart.data.text" class="body-description">
+          <div v-if="selectedBodyPart.name === 'Foie'" class="body-description">
+            <div class="body-title" :style="{ color: selectedBodyPart.color }">
+              {{ selectedBodyPart.name }}
+            </div>
             {{ selectedBodyPart.data.text }}
           </div>
 
