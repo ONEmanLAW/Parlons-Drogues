@@ -45,7 +45,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #e8faf1;
+  background-color: #ECFFF4;
   font-family: Arial, sans-serif;
   height: 100vh; 
   padding: 30px;
@@ -60,13 +60,16 @@ export default {
 
 .info-badge {
   display: inline-block;
-  background-color: #b8efcc;
-  color: #333;
+  background-color: #BCFFC8;
+  color: #167540;
+  font-weight: bold;
   padding: 5px 10px;
   border-radius: 10px;
   font-size: 14px;
   margin-bottom: 10px;
 }
+
+
 
 h1 {
   font-size: 2.5rem;
@@ -88,7 +91,7 @@ h1 {
   display: flex;
   align-items: center;
   padding: 30px;
-  background-color: #2c7a4d;
+  background-color: #167540;
   color: white;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -112,6 +115,7 @@ h1 {
 .main-card h2 {
   font-size: 2rem;
   margin-bottom: 15px;
+  color: #BCFFC8;
 }
 
 .main-card p {
@@ -138,7 +142,7 @@ h1 {
 }
 
 .secondary-card {
-  background-color: #4caf50;
+  background-color: #167540;
   color: white;
   flex: 1;
   min-width: 250px;

@@ -37,7 +37,7 @@ export default {
   justify-content: flex-start;
   align-items: center;
   height: 100vh;
-  background-color: #e6f2ff;
+  background-color: #E6F5FF;
   font-family: Montserrat;
   padding: 30px;
   box-sizing: border-box;
@@ -53,8 +53,9 @@ export default {
 
 .info-badge {
   display: inline-block;
-  background-color: #d8ebff;
-  color: #333;
+  background-color: #A4E1FF;
+  color: #3135B7;
+  font-weight: bold;
   padding: 5px 10px;
   border-radius: 10px;
   font-size: 14px;
@@ -79,7 +80,7 @@ h1 {
 }
 
 .card {
-  background-color: #1e3a8a;
+  background-color: #3135B7;
   color: white;
   border-radius: 15px;
   display: flex;
@@ -101,7 +102,7 @@ h1 {
 .card-content h2 {
   font-size: 40px;
   margin: 0 0 10px 0;
-  color: #4a90e2;
+  color: #A4E1FF;
 }
 
 .card-content p {

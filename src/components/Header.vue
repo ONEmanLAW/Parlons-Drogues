@@ -1,6 +1,6 @@
 <template>
   <header>
-    <img src="../assets/images/canabis.png" alt="Logo" class="logo" />
+    <img src="../assets/images/logo-noir.png" alt="Logo" class="logo" />
     <router-link to="/menu" class="menu-button" @click="toggleMenu">
       <div :class="['bar', { 'open': menuOpen }]"></div>
       <div :class="['bar', { 'open': menuOpen }]"></div>
@@ -71,7 +71,7 @@ header {
 }
 
 .logo {
-  width: 40px;
+  width: 150px;
   height: auto;
 }
 </style>

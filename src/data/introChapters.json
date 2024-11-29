@@ -8,7 +8,7 @@
       "videoSource": "assets/videos/video1.mp4",
       "imageSource": "assets/images/elena.png",
       "backgroundImage": "assets/images/fond-chapitre-1.png",
-      "backgroundColor": "#0000FF" 
+      "backgroundColor": "#3135B7" 
     },
     {
       "id": 2,
@@ -18,7 +18,7 @@
       "videoSource": "assets/videos/video1.mp4",
       "imageSource": "assets/images/raph.png",
       "backgroundImage": "assets/images/fond-chapitre-2.png",
-      "backgroundColor": "#008000"  
+      "backgroundColor": "#167540"  
     },
     {
       "id": 3,
@@ -28,7 +28,7 @@
       "videoSource": "assets/videos/video1.mp4",
       "imageSource": "assets/images/ines.png",
       "backgroundImage": "assets/images/fond-chapitre-3.png",
-      "backgroundColor": "#FFC0CB"  
+      "backgroundColor": "#AC0266"  
     },
     {
       "id": 4,
@@ -36,7 +36,7 @@
       "subtitle": "La conclusion de fin",
       "description": "Des trucs supplémentaires.",
       "imageSource": "assets/images/elena.png",
-      "backgroundColor": "#D3D3D3" 
+      "backgroundColor": "#FF7424" 
     }
   ]
 }

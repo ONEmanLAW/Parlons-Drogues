@@ -96,20 +96,22 @@ export default {
   justify-content: space-between; 
   height: 100vh;
   padding: 20px;
-  background-color: #ffe9d6;
+  background-color: #FFF2E5;
   font-family: Montserrat;
   color: #333;
   box-sizing: border-box;
 }
 
+
+
 .aide-label {
-  background-color: #fbd9c3;
-  color: #f68b45;
-  border-radius: 25px;
-  padding: 10px 30px;
-  font-size: 24px;
+  display: inline-block;
+  background-color:  #FFD6AB;
+  color: #FF7424;
   font-weight: bold;
-  text-align: center;
+  padding: 5px 35px;
+  border-radius: 10px;
+  font-size: 14px;
   margin-bottom: 20px;
 }
 
@@ -157,6 +159,7 @@ export default {
   align-items: flex-start;
   gap: 25px;
   margin-bottom: 25px;
+  align-items: center;
 }
 
 .card-content li .text {
@@ -175,13 +178,26 @@ export default {
 }
 
 .card-content a {
-  color: #f68b45;
   text-decoration: none;
   font-size: 20px;
+  font-weight: bold;
+  color: black;
+  position: relative;
 }
 
-.card-content a:hover {
-  text-decoration: underline;
+.card-content a::after {
+  content: ""; 
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px; 
+  background-color: black;
+  transition: width 0.3s ease-in-out;
+}
+
+.card-content a:hover::after {
+  width: 100%;
 }
 
 .icon {
@@ -198,8 +214,8 @@ export default {
 
 .retour-button {
   background-color: #fff;
-  color: #f68b45;
-  border: 3px solid #f68b45;
+  color: #FF7424;
+  border: 3px solid #FF7424;
   border-radius: 25px;
   padding: 20px 40px;
   font-size: 22px;
@@ -211,7 +227,7 @@ export default {
 }
 
 .retour-button:hover {
-  background-color: #f68b45;
+  background-color: #FF7424;
   color: #fff;
 }
 </style>

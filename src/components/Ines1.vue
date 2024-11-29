@@ -38,7 +38,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #ffeef5;
+  background-color: #FFEDF8;
   font-family: Arial, sans-serif;
   height: 100vh; 
   padding: 30px;
@@ -53,8 +53,9 @@ export default {
 
 .info-badge {
   display: inline-block;
-  background-color: #fbcce0;
-  color: #333;
+  background-color:  #FFC9EA;
+  color: #AC0266;
+  font-weight: bold;
   padding: 5px 10px;
   border-radius: 10px;
   font-size: 14px;
@@ -82,7 +83,7 @@ h1 {
 
 
 .card {
-  background-color: #c53982;
+  background-color:  #AC0266;
   color: white;
   padding: 20px 30px;
   border-radius: 15px;
@@ -95,6 +96,7 @@ h1 {
 .card h2 {
   font-size: 2rem;
   margin-bottom: 10px;
+  color: #FFC9EA;
 }
 
 .card p {
