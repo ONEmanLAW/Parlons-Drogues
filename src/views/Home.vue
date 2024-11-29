@@ -11,7 +11,7 @@
           :src="chapter.imageSource"
           :alt="chapter.title"
           class="chapter-image"
-          @click="goToChapter(index)"
+          @click="handleImageClick(index)"
           :class="{ clickable: isClickable(index), disabled: !isClickable(index) }"
         />
         
@@ -57,9 +57,11 @@ const totalChapters = chapters.length;
 
 const chapterSound = new Audio(new URL('../assets/sounds/sound.wav', import.meta.url).href);
 
+const isAnimating = ref(false);
+
 const getIndicatorStyle = (index) => {
-  const indicatorColors = ['#6FA8DC', '#66C266', '#D87A9C'];
-  const indicatorActiveColors = ['#2C6BB7', '#4B8C44', '#9C4178'];
+  const indicatorColors = ['#E6F5FF', '#ECFFF4', '#FFEDF8'];
+  const indicatorActiveColors = ['#3135B7', '#167540', '#AC0266'];
 
   return {
     backgroundColor: index - 1 === currentIndex.value ? indicatorActiveColors[currentIndex.value] : indicatorColors[currentIndex.value],
@@ -107,19 +109,29 @@ const previousChapter = () => {
 };
 
 const goToChapter = (index) => {
-  if (index === currentIndex.value) {
-    const chapterPath = `/chapter${index + 1}`;
-    router.push(chapterPath);
-    chapterSound.play();
-  }
+  const chapterPath = `/chapter${index + 1}`;
+  router.push(chapterPath);
+  chapterSound.play();
 };
 
 const isClickable = (index) => {
   return index === currentIndex.value;
 };
+
+const handleImageClick = (index) => {
+  if (index === currentIndex.value && !isAnimating.value) {
+    isAnimating.value = true;
+    const imageElement = document.querySelector(`.chapter-slide:nth-child(${index + 1}) .chapter-image`);
+    imageElement.classList.add('clicked');
+
+    setTimeout(() => {
+      goToChapter(index); 
+      imageElement.classList.remove('clicked'); 
+      isAnimating.value = false;
+    }, 600);
+  }
+};
 </script>
-
-
 
 <style scoped>
 .home {
@@ -135,18 +147,18 @@ const isClickable = (index) => {
 }
 
 .home.chapter-1 {
-  background-color: #ADD8E6;
-  color: #6FA8DC;
+  background-color: #A4E1FF;
+  color:  #3135B7;
 }
 
 .home.chapter-2 {
-  background-color: #90EE90;
-  color: #66C266;
+  background-color: #BCFFC8;
+  color:  #167540;
 }
 
 .home.chapter-3 {
-  background-color: #FFB6C1;
-  color: #D87A9C;
+  background-color: #FFC9EA;
+  color: #AC0266;
 }
 
 .chapter-container {
@@ -177,6 +189,13 @@ const isClickable = (index) => {
   object-fit: cover;
   border-radius: 10px;
   cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.chapter-image.clicked {
+  transform: scale(0.8);
+  opacity: 0.5;
+  transition: transform 0.6s ease, opacity 0.6s ease;
 }
 
 .chapter-info {
@@ -229,18 +248,18 @@ button {
 }
 
 .navigation-buttons button.chapter-1 {
-  background-color: #6FA8DC;
-  color: #ffffff;
+  background-color: #3135B7;
+  color: #E6F5FF;
 }
 
 .navigation-buttons button.chapter-2 {
-  background-color: #66C266;
-  color: #ffffff;
+  background-color: #167540;
+  color:  #ECFFF4;
 }
 
 .navigation-buttons button.chapter-3 {
-  background-color: #D87A9C;
-  color: #ffffff;
+  background-color: #AC0266;
+  color: #FFEDF8;
 }
 
 .chapter-indicators {
@@ -260,5 +279,4 @@ button {
 .indicator.active {
   background-color: #333;
 }
-
 </style>
