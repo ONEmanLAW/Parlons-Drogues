@@ -26,6 +26,7 @@
         class="pause-play-button"
         :style="{ top: mousePosition.y + 'px', left: mousePosition.x + 'px' }"
         @click="toggleAudio(index, 'play')"
+        v-show="isAudioVisible"
       >
         <img :src="isAudioPaused[index] ? buttonImages.play[index] : buttonImages.pause[index]" alt="Play/Pause Button" />
       </div>
@@ -216,19 +217,23 @@ const animateTitleAndImage = () => {
 }
 
 .chapter-1 {
-  background-color: #d8ebff;
+  background-color:  #E6F5FF;
+  color: #3135B7;
 }
 
 .chapter-2 {
-  background-color: #b0e57c;
+  background-color: #ECFFF4;
+  color: #167540;
 }
 
 .chapter-3 {
-  background-color: #f1c4e8;
+  background-color: #FFEDF8;
+  color:  #AC0266;
 }
 
 .chapter-4 {
-  background-color: #ff9f1a;
+  background-color: #FF7424;
+  color: black;
 }
 
 .chapter-title {
@@ -240,9 +245,29 @@ const animateTitleAndImage = () => {
   padding: 5px 10px;
   border-radius: 10px;
   font-size: 14px;
-  margin-bottom: 10px;
-  color: #333;
-  z-index: 10;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+
+.chapter-1 .chapter-title {
+  background-color: #A4E1FF;
+  color: #3135B7;
+}
+
+.chapter-2 .chapter-title {
+  background-color: #BCFFC8;
+  color: #167540;
+}
+
+.chapter-3 .chapter-title {
+  background-color: #FFC9EA;
+  color: #AC0266;
+}
+
+.chapter-4 .chapter-title {
+  background-color: #FFD6AB;
+  color: #FF7424;
 }
 
 .chapter-image-container {
