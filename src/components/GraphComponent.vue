@@ -2,7 +2,6 @@
   <div class="chapter3">
     <h2>Graphique des Effets par Mode de Consommation</h2>
 
-  
     <div class="buttons">
       <button
         v-for="mode in modes"
@@ -14,26 +13,7 @@
       </button>
     </div>
 
-    <div class="switch-container">
-      <label class="switch">
-        <input type="checkbox" v-model="isSurdose" @change="updateChart" />
-        <span class="slider"></span>
-      </label>
-      <span>{{ isSurdose ? 'Surdose' : 'Dose' }}</span>
-    </div>
-
     <div ref="chartContainer" class="chart-container"></div>
-
-    <div class="slider-container">
-      <input
-        type="range"
-        min="1"
-        max="5"
-        v-model="selectedYear"
-        @input="updateChart"
-      />
-      <span>{{ selectedYear }}</span>
-    </div>
   </div>
 </template>
 
@@ -42,84 +22,108 @@ import { ref, onMounted, watch } from 'vue';
 import * as d3 from 'd3';
 import effectsData from '../data/effectsData.json';
 
+// Modes disponibles
 const modes = ['Fumé', 'Ingeré'];
 const selectedModes = ref([]);
-const selectedYear = ref(1);
-const isSurdose = ref(false); 
-
 const chartContainer = ref(null);
-let svg, xScale, yScale;
 
+// Variables D3
+let svg, xScale, yScale;
 
 const initializeChart = () => {
   const margin = { top: 20, right: 20, bottom: 50, left: 50 };
   const width = 600 - margin.left - margin.right;
   const height = 300 - margin.top - margin.bottom;
 
-  svg = d3.select(chartContainer.value)
+  // Initialisation du SVG
+  svg = d3
+    .select(chartContainer.value)
     .append('svg')
     .attr('width', width + margin.left + margin.right)
     .attr('height', height + margin.top + margin.bottom)
     .append('g')
     .attr('transform', `translate(${margin.left},${margin.top})`);
 
-  xScale = d3.scaleLinear().domain([1, 6]).range([0, width]);
-  yScale = d3.scaleLinear().domain([0, 5]).range([height, 0]);
+  // Définir les échelles
+  xScale = d3.scaleLog().domain([1, 720]).range([0, width]); // Logarithmique pour la durée
+  yScale = d3
+    .scalePoint()
+    .domain(['null', 'faible', 'modéré', 'forte', 'très forte'])
+    .range([height, 0]);
 
-  svg.append('g')
+  // Axe X
+  svg
+    .append('g')
     .attr('transform', `translate(0,${height})`)
-    .call(d3.axisBottom(xScale).ticks(4));
+    .call(
+      d3.axisBottom(xScale).tickValues([0, 10, 30, 60, 120, 360, 720])
+        .tickFormat((d) => (d === 0 ? '0' : `${d} min`))
+    );
 
-  svg.append('g')
-    .call(d3.axisLeft(yScale).ticks(5));
+  // Axe Y
+  svg.append('g').call(d3.axisLeft(yScale));
 
+  // Mettre à jour le graphique
   updateChart();
 };
 
-
 const updateChart = () => {
+  // Supprimer les anciens graphiques
   svg.selectAll('.line').remove();
-  svg.selectAll('.emoji').remove();
-  svg.selectAll('.text').remove();
+  svg.selectAll('.point').remove();
 
-  selectedModes.value.forEach(mode => {
+  // Pour chaque mode sélectionné, afficher les données
+  selectedModes.value.forEach((mode) => {
     const modeKey = mode.toLowerCase();
-    const doseKey = isSurdose.value ? 'surdose' : 'dose';
+    const data = effectsData[modeKey].data["1"];
 
-    const data = effectsData[modeKey][doseKey]["data"][selectedYear.value];
-    const emojis = effectsData[modeKey][doseKey]["emojis"][selectedYear.value];
+    if (!data || data.length === 0) {
+      console.warn(`Pas de données pour le mode : ${mode}`);
+      return;
+    }
 
-    const line = d3.line()
-      .x((d, i) => xScale(i + 1))
-      .y(d => yScale(d))
+    // Mapper les données pour correspondre aux axes
+    const scaledData = data.map((d) => ({
+      x: d.durée,
+      y: d.intensité,
+    }));
+
+    // Ajouter une ligne continue
+    const line = d3
+      .line()
+      .x((d) => xScale(d.x))
+      .y((d) => yScale(d.y))
       .curve(d3.curveCardinal);
 
-    svg.append('path')
-      .datum(data)
+    svg
+      .append('path')
+      .datum(scaledData)
       .attr('class', 'line')
       .attr('d', line)
       .attr('fill', 'none')
       .attr('stroke', getColorForMode(mode))
       .attr('stroke-width', 2);
 
-    svg.selectAll(`.emoji-${mode}`)
-      .data(data)
+    // Ajouter des points
+    svg
+      .selectAll(`.point-${mode}`)
+      .data(scaledData)
       .enter()
-      .append('text')
-      .attr('class', 'emoji')
-      .attr('x', (d, i) => xScale(i + 1))
-      .attr('y', d => yScale(d))
-      .attr('text-anchor', 'middle')
-      .attr('font-size', '18px')
-      .text((d, i) => emojis[i]);
+      .append('circle')
+      .attr('class', 'point')
+      .attr('cx', (d) => xScale(d.x))
+      .attr('cy', (d) => yScale(d.y))
+      .attr('r', 5)
+      .attr('fill', getColorForMode(mode))
+      .attr('stroke', '#000')
+      .attr('stroke-width', 1);
   });
 };
 
-
 const getColorForMode = (mode) => {
   const colors = {
-    "Fumé": "rgba(255, 99, 132, 1)",
-    "Ingeré": "rgba(75, 192, 192, 1)"
+    Fumé: 'rgba(255, 99, 132, 1)',
+    Ingeré: 'rgba(75, 192, 192, 1)',
   };
   return colors[mode] || 'black';
 };
@@ -138,8 +142,38 @@ onMounted(() => {
   initializeChart();
 });
 
-watch(selectedYear, updateChart);
 watch(selectedModes, updateChart);
 </script>
 
-<style scoped src="../styles/GraphComponent.css"></style>
+<style scoped>
+.chapter3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.buttons button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background-color: #f5f5f5;
+  transition: background-color 0.3s;
+}
+
+.buttons button.active {
+  background-color: #999;
+  color: #fff;
+}
+
+.chart-container {
+  width: 600px;
+  height: 300px;
+}
+</style>

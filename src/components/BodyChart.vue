@@ -255,7 +255,7 @@ onMounted(() => {
 }
 
 .body-image {
-  width: 230px;
+  width: 195px;
   height: auto;
   object-fit: contain;
 }
