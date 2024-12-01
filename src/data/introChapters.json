@@ -7,7 +7,7 @@
       "description": "Tu vas apprendre tous les effets possibles à court terme.",
       "videoSource": "assets/videos/video1.mp4",
       "imageSource": "assets/images/elena.png",
-      "backgroundImage": "assets/images/fond-chapitre-1.png",
+      "backgroundImage": "assets/images/fond-chapitre-1.gif",
       "backgroundColor": "#3135B7" 
     },
     {
@@ -17,7 +17,7 @@
       "description": "Tu vas apprendre tous les effets de la dépendance.",
       "videoSource": "assets/videos/video1.mp4",
       "imageSource": "assets/images/raph.png",
-      "backgroundImage": "assets/images/fond-chapitre-2.png",
+      "backgroundImage": "assets/images/fond-chapitre-2.gif",
       "backgroundColor": "#167540"  
     },
     {
@@ -27,7 +27,7 @@
       "description": "Tu vas apprendre tous les effets possibles à long terme.",
       "videoSource": "assets/videos/video1.mp4",
       "imageSource": "assets/images/ines.png",
-      "backgroundImage": "assets/images/fond-chapitre-3.png",
+      "backgroundImage": "assets/images/fond-chapitre-3.gif",
       "backgroundColor": "#AC0266"  
     },
     {

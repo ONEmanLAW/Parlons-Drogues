@@ -13,7 +13,9 @@
       </button>
     </div>
 
-    <div ref="chartContainer" class="chart-container"></div>
+    <div class="chart-card">
+      <div ref="chartContainer" class="chart-container"></div>
+    </div>
   </div>
 </template>
 
@@ -31,9 +33,13 @@ const chartContainer = ref(null);
 let svg, xScale, yScale;
 
 const initializeChart = () => {
+  // Dimensions de la carte et du graphique
+  const cardHeight = window.innerHeight * 0.8; // 80% de la hauteur de la fenêtre
+  const chartHeight = cardHeight * 0.65; // 65% de la hauteur de la carte
+  const chartWidth = 1500; // Largeur fixe pour permettre le scroll si nécessaire
   const margin = { top: 20, right: 20, bottom: 50, left: 50 };
-  const width = 600 - margin.left - margin.right;
-  const height = 300 - margin.top - margin.bottom;
+  const width = chartWidth - margin.left - margin.right;
+  const height = chartHeight - margin.top - margin.bottom;
 
   // Initialisation du SVG
   svg = d3
@@ -45,7 +51,11 @@ const initializeChart = () => {
     .attr('transform', `translate(${margin.left},${margin.top})`);
 
   // Définir les échelles
-  xScale = d3.scaleLog().domain([1, 720]).range([0, width]); // Logarithmique pour la durée
+  xScale = d3
+    .scaleLinear()
+    .domain([0, 720])
+    .range([0, width]);
+
   yScale = d3
     .scalePoint()
     .domain(['null', 'faible', 'modéré', 'forte', 'très forte'])
@@ -56,7 +66,8 @@ const initializeChart = () => {
     .append('g')
     .attr('transform', `translate(0,${height})`)
     .call(
-      d3.axisBottom(xScale).tickValues([0, 10, 30, 60, 120, 360, 720])
+      d3.axisBottom(xScale)
+        .tickValues([0, 10, 30, 60, 120, 360, 720])
         .tickFormat((d) => (d === 0 ? '0' : `${d} min`))
     );
 
@@ -150,6 +161,25 @@ watch(selectedModes, updateChart);
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh; /* Prend toute la hauteur de la fenêtre */
+  justify-content: center; /* Centré verticalement */
+}
+
+.chart-card {
+  width: 90%; /* 90% de la largeur de l'écran */
+  height: 80vh; /* 80% de la hauteur de la fenêtre */
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  overflow: hidden; /* Cache les débordements verticaux */
+}
+
+.chart-container {
+  width: 100%; /* Occupe toute la largeur de la carte */
+  height: 65%; /* 65% de la hauteur de la carte */
+  overflow-x: auto; /* Active le défilement horizontal si nécessaire */
+  overflow-y: hidden; /* Pas de défilement vertical */
 }
 
 .buttons {
@@ -170,10 +200,5 @@ watch(selectedModes, updateChart);
 .buttons button.active {
   background-color: #999;
   color: #fff;
-}
-
-.chart-container {
-  width: 600px;
-  height: 300px;
 }
 </style>
