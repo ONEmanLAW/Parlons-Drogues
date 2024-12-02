@@ -6,8 +6,7 @@
       "effects": [
         { "name": "Effet 1", "value": 0 },
         { "name": "Effet 2", "value": 0 },
-        { "name": "Effet 3", "value": 0 },
-        { "name": "Effet 4", "value": 0 }
+        { "name": "Effet 3", "value": 0 }
       ],
       "image": "../assets/images/ines.png"
     },
@@ -36,7 +35,7 @@
       "color": "red",
       "effects": [
         { "name": "De risque d’accidents de travail", "value": 20 },
-        { "name": "De risque d’absences régulières au travail", "value": 287 },
+        { "name": "De risque d’absences régulières au travail", "value": 100 },
         { "name": "De risque de rencontrer une période de chômage à l’âge adulte", "value": 39 }
       ],
       "image": "../assets/images/elena.png"

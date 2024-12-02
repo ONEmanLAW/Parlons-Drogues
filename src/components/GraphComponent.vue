@@ -35,7 +35,7 @@ let svg, xScale, yScale;
 const initializeChart = () => {
   const cardHeight = window.innerHeight * 0.8;
   const chartHeight = cardHeight * 0.65;
-  const chartWidth = 1500;
+  const chartWidth = window.innerWidth * 0.9;  // Utilisation de 90% de la largeur de l'écran
   const margin = { top: 20, right: 20, bottom: 50, left: 50 };
   const width = chartWidth - margin.left - margin.right;
   const height = chartHeight - margin.top - margin.bottom;
@@ -43,15 +43,20 @@ const initializeChart = () => {
   svg = d3
     .select(chartContainer.value)
     .append('svg')
-    .attr('width', width + margin.left + margin.right)
-    .attr('height', height + margin.top + margin.bottom)
+    .attr('width', chartWidth)  // La largeur du graphique est maintenant ajustée
+    .attr('height', chartHeight)  // La hauteur est aussi ajustée
+    .attr('viewBox', `0 0 ${chartWidth} ${chartHeight}`) // Utilisation de viewBox pour une meilleure réactivité
+    .attr('preserveAspectRatio', 'xMidYMid meet')  // Garde l'aspect du graphique
     .append('g')
     .attr('transform', `translate(${margin.left},${margin.top})`);
 
-  const timePoints = [0, 10, 30, 60, 120, 360, 720];
+  const timePoints = [0, 10, 30, 60, 120, 360, 720];  // Points horaires
+  const numPoints = timePoints.length;
+
+  // Créer une échelle linéaire pour une distribution uniforme des points
   xScale = d3
     .scaleLinear()
-    .domain([0, d3.max(timePoints)])
+    .domain([0, numPoints - 1])  // Crée une échelle pour les indices des points
     .range([0, width]);
 
   yScale = d3
@@ -60,7 +65,9 @@ const initializeChart = () => {
     .range([height, 0]);
 
   svg.append('g').attr('transform', `translate(0,${height})`).call(
-    d3.axisBottom(xScale).tickValues(timePoints).tickFormat((d) => (d === 0 ? '0' : `${d} min`))
+    d3.axisBottom(xScale)
+      .tickValues(d3.range(numPoints))  // Affichage des ticks pour les indices
+      .tickFormat((d) => `${timePoints[d]} min`)  // Formatage des ticks avec les valeurs réelles
   );
   svg.append('g').call(d3.axisLeft(yScale));
 
@@ -68,11 +75,15 @@ const initializeChart = () => {
 };
 
 const updateChart = () => {
-  // Supprimer les anciens graphiques (lignes et points) seulement pour les modes non sélectionnés
-  svg.selectAll('.line').remove();
-  svg.selectAll('.point').remove();
+  // Supprimer les éléments uniquement pour les modes qui sont désactivés
+  modes.forEach((mode) => {
+    if (!selectedModes.value.includes(mode)) {
+      svg.selectAll(`.line-${mode}`).remove();
+      svg.selectAll(`.point-${mode}`).remove();
+    }
+  });
 
-  // Pour chaque mode sélectionné, afficher les données
+  // Ajouter des éléments graphiques uniquement pour les modes activés
   selectedModes.value.forEach((mode) => {
     const modeKey = mode.toLowerCase();
     const data = effectsData[modeKey].data["1"];
@@ -82,15 +93,15 @@ const updateChart = () => {
       return;
     }
 
-    const scaledData = data.map((d) => ({
-      x: d.durée,
+    const scaledData = data.map((d, i) => ({
+      x: i,  // Utilisation de l'index pour les points (répartis uniformément)
       y: d.intensité,
     }));
 
     // Vérifier si la ligne existe déjà, sinon l'animer
     if (svg.selectAll(`.line-${mode}`).empty()) {
       const line = d3.line()
-        .x((d) => xScale(d.x))
+        .x((d) => xScale(d.x))  // Utiliser l'échelle linéaire
         .y((d) => yScale(d.y))
         .curve(d3.curveCardinal);
 
@@ -99,8 +110,8 @@ const updateChart = () => {
         .attr('class', `line-${mode}`)
         .attr('d', line)
         .attr('fill', 'none')
-        .attr('stroke', getColorForMode(mode))
-        .attr('stroke-width', 2)
+        .attr('stroke', 'blue')
+        .attr('stroke-width', 4) 
         .attr('stroke-dasharray', function () {
           const length = this.getTotalLength();
           return length;
@@ -120,10 +131,10 @@ const updateChart = () => {
       .enter()
       .append('circle')
       .attr('class', `point-${mode}`)
-      .attr('cx', (d) => xScale(d.x))
+      .attr('cx', (d) => xScale(d.x))  // Utiliser l'échelle linéaire
       .attr('cy', (d) => yScale(d.y))
-      .attr('r', 5)
-      .attr('fill', getColorForMode(mode))
+      .attr('r', 8) 
+      .attr('fill', 'blue')
       .attr('stroke', '#000')
       .attr('stroke-width', 1)
       .attr('opacity', 0) // Les points commencent invisibles
@@ -134,11 +145,8 @@ const updateChart = () => {
 };
 
 const getColorForMode = (mode) => {
-  const colors = {
-    Fumé: 'rgba(255, 99, 132, 1)',
-    Ingeré: 'rgba(75, 192, 192, 1)',
-  };
-  return colors[mode] || 'black';
+  // Nous avons directement assigné la couleur bleue dans updateChart, donc on n'a plus besoin de cette fonction
+  return 'blue';
 };
 
 const toggleMode = (mode) => {
