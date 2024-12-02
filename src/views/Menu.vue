@@ -125,7 +125,7 @@ function getTextColor(index) {
 }
 
 .menu-image img {
-  width: 100%;
+  width: 72%;
   height: 100%;
   object-fit: cover;
   border-radius: 10px;

@@ -276,7 +276,7 @@ const animateTitleAndImage = () => {
 }
 
 .chapter-image {
-  max-width: 150px;
+  max-width: 125px;
   height: auto;
   border-radius: 8px;
 }

@@ -124,10 +124,10 @@ const skipVideo = () => {
 }
 
 .chapter-image {
-  width: 170px;
+  width: 90px;
   height: auto;
   position: absolute;
-  top: 70%;
+  top: 71%;
   left: 50%;
   transform: translate(-50%, -50%);
 }

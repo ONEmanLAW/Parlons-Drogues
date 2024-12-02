@@ -17,7 +17,7 @@
     <Elena2 :currentChapter="3"/>
     <Card :chapterId="3" />
     <ChapterText :currentChapterId="3" />
-    <ChapterTransition :currentChapter="3" chapterText="Allez au advice" />
+    <ChapterTransition :currentChapter="3"/>
   </div>
   <!-- <Footer /> -->
 </template>

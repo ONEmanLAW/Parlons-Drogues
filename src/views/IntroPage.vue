@@ -1,4 +1,9 @@
 <template>
+  <div class="logo-container">
+    <!-- Logo en haut à gauche -->
+    <img src="../assets/images/logo-noir.png" alt="Logo" class="logo" />
+  </div>
+
   <div class="intro-page">
     <!-- Contenu texte et image avant la vidéo -->
     <div class="text-and-image" v-if="!videoStarted">
@@ -33,6 +38,7 @@
     </div>
   </div>
 </template>
+
 
 <script setup>
 import { ref, nextTick } from 'vue';
@@ -113,6 +119,7 @@ const animateAndRedirect = () => {
   color: #333;
   margin-bottom: 20px;
   text-transform: uppercase;
+  font-weight: 800;
 }
 
 /* Paragraphe */
@@ -124,26 +131,25 @@ const animateAndRedirect = () => {
 
 /* Bouton "Découvrir" */
 .start-button {
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  border-radius: 50px;
-  font-size: 20px;
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  border-radius: 15px;
+  font-size: 25px;
   padding: 15px 30px;
   transition: background-color 0.3s, transform 0.3s;
   cursor: pointer;
-  width: 220px; /* ajustement largeur */
-  align-self: center; /* centrer le bouton */
+  width: 220px;
+  align-self: center;
 }
 
 .start-button:hover {
-  background-color: #0056b3;
+  background-color: black;
+  color: white;
   transform: scale(1.05);
 }
 
-.start-button:active {
-  background-color: #004085;
-}
+
 
 /* Image à droite */
 .image-container {
@@ -161,6 +167,19 @@ const animateAndRedirect = () => {
   object-fit: contain; /* Contient l'image sans la découper */
   object-position: center; /* Centrer l'image pour éviter la perte de visibilité */
   position: absolute;
+}
+
+/* Logo en haut à gauche */
+.logo-container {
+  position: absolute;
+  top: 10px; /* Espacement depuis le haut de la page */
+  left: 10px; /* Espacement depuis la gauche */
+  z-index: 100; /* Assurer que le logo soit au-dessus des autres éléments */
+}
+
+.logo {
+  width: 150px; /* Ajuster la taille du logo selon vos besoins */
+  height: auto;
 }
 
 /* Vidéo plein écran */

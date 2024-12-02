@@ -17,7 +17,7 @@
     <Card :chapterId="1" />
 
     <ChapterText :currentChapterId="1" />
-    <ChapterTransition :currentChapter="1" chapterText="Allez au chapitre 2" />
+    <ChapterTransition :currentChapter="1"/>
 
 
 

@@ -5,17 +5,19 @@
     </div>
     <p class="text">{{ chapterText }}</p>
     
-    <button class="next-chapter-button" @click="navigateToChapter">Aller au chapitre suivant</button>
+    <!-- Dynamically add class for button color based on current chapter -->
+    <button class="next-chapter-button" :class="nextChapterButtonClass" @click="navigateToChapter">
+      Aller au chapitre suivant
+    </button>
   </div>
 </template>
 
 <script setup>
 import { useRouter } from 'vue-router';
 
-
-import raphImage from '../assets/images/raph.png';
-import inesImage from '../assets/images/ines.png';
-import elenaImage from '../assets/images/elena.png';
+import raphImage from '../assets/images/raph.gif';
+import inesImage from '../assets/images/ines.gif';
+import elenaImage from '../assets/images/conclusion.png';
 
 const props = defineProps({
   currentChapter: {
@@ -30,26 +32,28 @@ const props = defineProps({
 
 const router = useRouter();
 
-
 const chapterImages = {
   1: raphImage,   
   2: inesImage,   
   3: elenaImage, 
 };
 
-
 const chapterBackgroundColors = {
-  1: 'green',  
-  2: 'pink',
-  3: 'orange',  
+  1: '#ECFFF4',  
+  2: '#FFEDF8',
+  3: '#FF7424',  
 };
 
+// Dynamically determine button color class based on chapter
+const chapterButtonClasses = {
+  1: 'button-green',  
+  2: 'button-pink',    
+  3: 'button-orange',  
+};
 
 const chapterImage = chapterImages[props.currentChapter];
-
-
 const chapterBackgroundColor = chapterBackgroundColors[props.currentChapter];
-
+const nextChapterButtonClass = chapterButtonClasses[props.currentChapter];
 
 const navigateToChapter = () => {
   const nextChapter = props.currentChapter + 1;
@@ -75,20 +79,16 @@ const navigateToChapter = () => {
   justify-content: center;
   align-items: center;
   flex-direction: column; 
-  
-  /* clip-path: ellipse(90% 100% at 50% 100%); */
 }
-
 
 .chapter-transition .background {
   width: 100%;
-  height: 300px; 
+  height: 400px; 
   overflow: hidden;
-  
 }
 
 .chapter-transition .background img {
-  width: 300px;
+  width: 280px;
   height: auto;
 }
 
@@ -102,7 +102,6 @@ const navigateToChapter = () => {
 .next-chapter-button {
   padding: 10px 20px;
   background-color: white;
-  color: black;
   font-size: 1.2rem;
   font-weight: bold;
   border: none;
@@ -114,5 +113,18 @@ const navigateToChapter = () => {
 
 .next-chapter-button:hover {
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Define the button text colors based on chapters */
+.button-green {
+  color: #167540;
+}
+
+.button-pink {
+  color: #AC0266;
+}
+
+.button-orange {
+  color: #FF7424;
 }
 </style>

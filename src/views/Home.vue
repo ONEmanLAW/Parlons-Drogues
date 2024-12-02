@@ -34,8 +34,23 @@
     </div>
 
     <div class="navigation-buttons">
-      <button :class="`chapter-${currentIndex + 1}`" @click="previousChapter">Previous</button>
-      <button :class="`chapter-${currentIndex + 1}`" @click="nextChapter">Next</button>
+      <!-- Flèche Précédente -->
+      <span
+        class="arrow previous"
+        :style="{ color: getArrowColor(currentIndex) }"
+        @click="previousChapter"
+      >
+        &#8592;
+      </span>
+      
+      <!-- Flèche Suivante -->
+      <span
+        class="arrow next"
+        :style="{ color: getArrowColor(currentIndex) }"
+        @click="nextChapter"
+      >
+        &#8594;
+      </span>
     </div>
   </div>
 </template>
@@ -131,6 +146,12 @@ const handleImageClick = (index) => {
     }, 600);
   }
 };
+
+// Nouvelle méthode pour obtenir la couleur des flèches en fonction du chapitre actuel
+const getArrowColor = (index) => {
+  const arrowColors = ['#3135B7', '#167540', '#AC0266']; // Couleurs pour chaque chapitre
+  return arrowColors[index] || '#000'; // Retourne la couleur appropriée ou noir si l'index dépasse
+};
 </script>
 
 <style scoped>
@@ -185,7 +206,7 @@ const handleImageClick = (index) => {
 
 .chapter-image {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
   border-radius: 10px;
   cursor: pointer;
@@ -200,7 +221,7 @@ const handleImageClick = (index) => {
 
 .chapter-info {
   position: absolute;
-  top: calc(100% + 10px);
+  top: calc(100% + 30px);
   max-width: 400px;
   text-align: center;
   white-space: nowrap;
@@ -236,30 +257,13 @@ const handleImageClick = (index) => {
   margin-top: 20px;
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+  gap: 40px;
 }
 
-button {
-  padding: 10px 20px;
-  font-size: 16px;
+.arrow {
+  font-size: 50px;
   cursor: pointer;
-  border: none;
-  outline: none;
-}
-
-.navigation-buttons button.chapter-1 {
-  background-color: #3135B7;
-  color: #E6F5FF;
-}
-
-.navigation-buttons button.chapter-2 {
-  background-color: #167540;
-  color:  #ECFFF4;
-}
-
-.navigation-buttons button.chapter-3 {
-  background-color: #AC0266;
-  color: #FFEDF8;
+  transition: color 0.3s ease;
 }
 
 .chapter-indicators {
