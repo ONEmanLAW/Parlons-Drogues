@@ -299,6 +299,7 @@ const animateTitleAndImage = () => {
   max-width: 800px;
   font-family: Montserrat;
   font-size: 24px;
+  font-weight: bold;
   line-height: 1.6;
   text-align: center;
   opacity: 0;

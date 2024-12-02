@@ -2,6 +2,7 @@
   "fumé": {
     "data": {
       "1": [
+        {"durée": 0, "intensité": "null"},
         {"durée": 10, "intensité": "forte"},
         {"durée": 30, "intensité": "très forte"},
         {"durée": 240, "intensité": "modéré"},
@@ -12,9 +13,10 @@
   "ingeré": {
     "data": {
       "1": [
-        {"durée": 10, "intensité": "modéré"},
-        {"durée": 30, "intensité": "forte"},
-        {"durée": 120, "intensité": "faible"},
+        {"durée": 0, "intensité": "null"},
+        {"durée": 60, "intensité": "fort"},
+        {"durée": 180, "intensité": "très forte"},
+        {"durée": 600, "intensité": "modéré"},
         {"durée": 720, "intensité": "null"}
       ]
     }

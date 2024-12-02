@@ -19,7 +19,7 @@
     <ChapterTransition :currentChapter="2" chapterText="Allez au chapitre 3" />
 
   </div>
-  <Footer />
+  <!-- <Footer /> -->
 </template>
 
 <script setup>
