@@ -12,12 +12,12 @@
       "image": "../assets/images/ines.png"
     },
     {
-      "name": "Famille",
+      "name": "École",
       "color": "yellow",
       "effects": [
-        { "name": "Baisse des performances", "value": 30 },
-        { "name": "Difficultés de concentration", "value": 40 },
-        { "name": "Absences répétées", "value": 25 }
+        { "name": "De chances de ne pas obtenir leur BAC (ou équivalent)", "value": 79 },
+        { "name": "De risque de ne pas poursuivre leurs études à l’université", "value": 70 },
+        { "name": "De risques de ne pas terminer le lycée", "value": 60 }
       ],
       "image": "../assets/images/elena.png"
     },
@@ -25,10 +25,9 @@
       "name": "Social",
       "color": "green",
       "effects": [
-        { "name": "Baisse des performances", "value": 50 },
-        { "name": "Difficultés de concentration", "value": 30 },
-        { "name": "Absences répétées", "value": 40 },
-        { "name": "Risques d'abandon scolaire", "value": 70 }
+        { "name": "De conflits familiaux liés à la consommation", "value": 40 },
+        { "name": "De cas de violence verbale et physique dans des familles", "value": 50 },
+        { "name": "De réduction des interactions sociales", "value": 35 }
       ],
       "image": "../assets/images/ines.png"
     },
@@ -36,10 +35,9 @@
       "name": "Travail",
       "color": "red",
       "effects": [
-        { "name": "AUAHZAHD", "value": 80 },
-        { "name": "Difficultés de concentration", "value": 70 },
-        { "name": "Absences répétées", "value": 50 },
-        { "name": "Risques d'abandon scolaire", "value": 90 }
+        { "name": "De risque d’accidents de travail", "value": 20 },
+        { "name": "De risque d’absences régulières au travail", "value": 287 },
+        { "name": "De risque de rencontrer une période de chômage à l’âge adulte", "value": 39 }
       ],
       "image": "../assets/images/elena.png"
     }

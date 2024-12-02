@@ -1,54 +1,57 @@
 <template>
   <div class="interactive-character">
-    <div class="card">
-      <div class="title-container">
-        <h2>Jeu de risques cumulés</h2>
-        <p class="description">Découvrez les effets cumulés des différentes substances sur le personnage.</p>
-      </div>
+    <div class="title-container">
+      <h2>Les conséquences de la dépendance au cannabis</h2>
+      <p class="description">Être accro, ça peut détruire tes études, semer la pagaille en famille, t'éloigner de tes amis et ruiner ton boulot. Au final, c’est toute ta vie qui part en vrille.</p>
+    </div>
 
-      <div class="character-container">
-        <div class="character">
-          <img v-if="!activeSubstance" :src="currentImage" alt="Image de base" />
-          <img v-if="activeSubstance" :src="currentImage" alt="Substance Image" />
+    <div class="card-container">
+      <div class="card">
+        <div class="character-container">
+          <div class="character">
+            <img v-if="!activeSubstance" :src="currentImage" alt="Image de base" />
+            <img v-if="activeSubstance" :src="currentImage" alt="Substance Image" />
+          </div>
+
+          <div class="buttons-container">
+            <button
+              v-for="substance in substancesToDisplay"
+              :key="substance.name"
+              :class="{ active: activeSubstance === substance }"
+              @click="selectSubstance(substance)"
+            >
+              {{ substance.name }}
+            </button>
+          </div>
         </div>
 
-        <div class="buttons-container">
-          <button
-            v-for="substance in substancesToDisplay"
-            :key="substance.name"
-            :class="{ active: activeSubstance === substance }"
-            @click="selectSubstance(substance)"
-          >
-            {{ substance.name }}
-          </button>
-        </div>
-      </div>
+        <div class="data-display">
+          <div v-for="(effect, index) in currentEffects" :key="index" class="data-item">
+            <svg class="circle-chart" width="70" height="70" :data-value="effect.value">
+              <circle class="circle-background" cx="35" cy="35" r="30"></circle>
+              <circle
+                class="circle-foreground"
+                cx="35"
+                cy="35" r="30"
+                :style="{
+                  strokeDasharray: circleCircumference,
+                  strokeDashoffset: calculateOffset(effect.value),
+                  stroke: getSolidGreen(effect.value)
+                }"
+              ></circle>
+              <text x="50%" y="50%" text-anchor="middle" alignment-baseline="middle" font-size="18" fill="#167540" font-weight="bold">
+                {{ effect.value }}%
+              </text>
+            </svg>
 
-      <div class="data-display">
-        <div v-for="(effect, index) in currentEffects" :key="index" class="data-item">
-          <svg class="circle-chart" width="70" height="70" :data-value="effect.value">
-            <circle class="circle-background" cx="35" cy="35" r="30"></circle>
-            <circle
-              class="circle-foreground"
-              cx="35"
-              cy="35" r="30"
-              :style="{
-                strokeDasharray: circleCircumference,
-                strokeDashoffset: calculateOffset(effect.value),
-                stroke: getSolidGreen(effect.value)
-              }"
-            ></circle>
-            <text x="50%" y="50%" text-anchor="middle" alignment-baseline="middle" font-size="18" fill="#167540" font-weight="bold">
-              {{ effect.value }}%
-            </text>
-          </svg>
-
-          <p class="data-title">{{ effect.name }}</p>
+            <p class="data-title">{{ effect.name }}</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 
 <script setup>
 import { ref, computed } from "vue";
@@ -100,12 +103,42 @@ function getSolidGreen(value) {
 <style scoped>
 .interactive-character {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
   background-color: #f4f4f4;
   padding: 20px;
   box-sizing: border-box;
+}
+
+.title-container {
+  text-align: center;
+  margin-bottom: 20px; /* Ajoute un petit espace entre le titre et la carte */
+  max-width: 90%; /* Optionnel : Limiter la largeur du titre */
+}
+
+h2 {
+  font-size: 2rem;
+  color: #167540;
+  font-weight: bold;
+  margin: 0;
+}
+
+.description {
+  font-size: 1.2rem;
+  color: #555;
+  margin-top: 5px;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1100px;
+  overflow: hidden; /* Evite que le contenu dépasse */
+  flex-grow: 1;
 }
 
 .card {
@@ -121,23 +154,6 @@ function getSolidGreen(value) {
   justify-content: center;
   align-items: center;
   gap: 40px;
-}
-
-.title-container {
-  text-align: center;
-}
-
-h2 {
-  font-size: 2rem;
-  color: #167540;
-  font-weight: bold;
-  margin: 0;
-}
-
-.description {
-  font-size: 1.2rem;
-  color: #555;
-  margin-top: 5px;
 }
 
 .character-container {
@@ -159,7 +175,7 @@ h2 {
 .character img {
   width: 100%;
   height: auto;
-  max-width: 400px;
+  max-width: 300px;
   border-radius: 10px;
 }
 
@@ -232,7 +248,7 @@ h2 {
   margin: 10px 0 0 0;
   word-wrap: break-word;
   white-space: normal;
-  max-width: 140px;
+  max-width: 200px;
   line-height: 1.3;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -254,6 +270,7 @@ h2 {
   transition: stroke-dashoffset 0.3s ease;
 }
 
+/* Responsive Design Adjustments */
 @media (max-width: 1024px) {
   .data-item {
     width: 48%;
@@ -292,7 +309,7 @@ h2 {
 
   .character img {
     width: 100%;
-    max-width: 350px;
+    max-width: 250px;
   }
 }
 
@@ -303,7 +320,7 @@ h2 {
 
   .character img {
     width: 100%;
-    max-width: 300px;
+    max-width: 200px;
   }
 
   .data-title {
@@ -315,6 +332,5 @@ h2 {
     font-size: 0.9rem;
   }
 }
+
 </style>
-
-

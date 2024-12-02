@@ -16,6 +16,7 @@
         :ref="el => setCard(el, index)"
       >
         <div :class="['card-inner', { flipped: flippedStates[index] }]">
+          <!-- Face avant -->
           <div class="card-front">
             <div class="icon-container">
               <img :src="card.icon" alt="Icon" class="card-icon" />
@@ -24,8 +25,9 @@
             <p>{{ card.description }}</p>
           </div>
 
+          <!-- Face arrière -->
           <div class="card-back">
-            <h3 :class="cardTitleClass">{{ card.title }}</h3>
+            <h3 :class="cardTitleClass">Réponse</h3>
             <div class="donut-chart-container" :ref="el => setDonutContainer(el, index)"></div>
             <div class="data-container">
               <p>{{ card.backDescription }}</p>
@@ -162,7 +164,7 @@ const animateElements = () => {
 
 const observeScroll = () => {
   const options = {
-    root: null, 
+    root: null,
     rootMargin: '0px',
     threshold: 0.4,
   };

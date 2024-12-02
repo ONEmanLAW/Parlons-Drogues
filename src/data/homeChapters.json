@@ -3,21 +3,21 @@
     {
       "id": 1,
       "name": "Chapitre 1",
-      "title": "Élena et ses premières bouffées",
+      "title": "ÉLENA ET SES PREMIÈRES BOUFFÉES",
       "description": "Tu vas apprendre tous les effets possible à courts termes.",
       "imageSource": "assets/images/elena.png"
     },
     {
       "id": 2,
       "name": "Chapitre 2",
-      "title": "Raph face à l’addiction",
+      "title": "RAPH FACE À L'ADDICTION",
       "description": "Tu vas apprendre tous les effets de la dépendance.",
       "imageSource": "assets/images/raph.png"
     },
     {
       "id": 3,
       "name": "Chapitre 3",
-      "title": "La santé d’Inès en péril",
+      "title": "LA SANTÉ D'INÈS EN PÉRIL",
       "description": "Tu vas apprendre tous les effets possible à longs termes.",
       "imageSource": "assets/images/ines.png"
     }
