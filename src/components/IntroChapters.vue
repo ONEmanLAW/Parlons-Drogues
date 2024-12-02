@@ -2,9 +2,11 @@
   <div class="intro-chapter">
     <div class="background-container" :style="{ backgroundImage: 'url(' + backgroundImage + ')' }">
       <img :src="imageSource" alt="Chapter Image" class="chapter-image" />
-      <h2>{{ title }}</h2>
-      <h3>{{ subtitle }}</h3>
-      <p>{{ description }}</p>
+      <div class="text-content">
+        <h2>{{ title }}</h2>
+        <h3>{{ subtitle }}</h3>
+        <p>{{ description }}</p>
+      </div>
     </div>
 
     <div class="video-container" :style="{ backgroundColor: chapterBackgroundColor }">
@@ -27,7 +29,6 @@
     </button>
   </div>
 </template>
-
 
 <script setup>
 import { defineProps, ref, onMounted } from 'vue';
@@ -116,19 +117,32 @@ const skipVideo = () => {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 20px;
+  position: relative;
 }
 
 .chapter-image {
-  width: 300px;
+  width: 170px;
   height: auto;
-  margin-bottom: 20px;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.text-content {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  text-align: center;
 }
 
 h2, h3, p {
-  margin: 10px 0;
+  margin: 25px;
+  color: white;
 }
 
 .video-container {
@@ -153,7 +167,6 @@ h2, h3, p {
   padding: 0; 
   box-sizing: border-box;
 }
-
 
 .full-screen-video {
   width: 100%;
@@ -187,10 +200,3 @@ h2, h3, p {
   background-color: rgba(0, 0, 0, 0.8);
 }
 </style>
-
-
-
-
-
-
-

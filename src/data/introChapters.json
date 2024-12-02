@@ -3,8 +3,8 @@
     {
       "id": 1,
       "title": "Chapitre 1",
-      "subtitle": "Élena et ses premières bouffées",
-      "description": "Tu vas apprendre tous les effets possibles à court terme.",
+      "subtitle": "",
+      "description": "",
       "videoSource": "assets/videos/video1.mp4",
       "imageSource": "assets/images/elena.png",
       "backgroundImage": "assets/images/fond-chapitre-1.gif",
@@ -13,8 +13,8 @@
     {
       "id": 2,
       "title": "Chapitre 2",
-      "subtitle": "Raph face à l’addiction",
-      "description": "Tu vas apprendre tous les effets de la dépendance.",
+      "subtitle": "",
+      "description": "",
       "videoSource": "assets/videos/video1.mp4",
       "imageSource": "assets/images/raph.png",
       "backgroundImage": "assets/images/fond-chapitre-2.gif",
@@ -23,8 +23,8 @@
     {
       "id": 3,
       "title": "Chapitre 3",
-      "subtitle": "La santé d’Inès en péril",
-      "description": "Tu vas apprendre tous les effets possibles à long terme.",
+      "subtitle": "",
+      "description": "",
       "videoSource": "assets/videos/video1.mp4",
       "imageSource": "assets/images/ines.png",
       "backgroundImage": "assets/images/fond-chapitre-3.gif",
