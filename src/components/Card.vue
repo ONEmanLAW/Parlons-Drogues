@@ -1,6 +1,6 @@
 <template>
   <div :class="`chapter-${props.chapterId}`" class="chapter" ref="chapterContainer">
-    <div class="question-label">Question</div>
+    <div :class="`question-label chapter-${props.chapterId}-label`">Question</div>
 
     <div class="chapter-header" ref="chapterHeader">
       <h2 :class="chapterTitleClass">{{ chapter.title }}</h2>
@@ -22,7 +22,7 @@
               <img :src="card.icon" alt="Icon" class="card-icon" />
             </div>
             <h3 :class="cardTitleClass">{{ card.title }}</h3>
-            <p>{{ card.description }}</p>
+            <p class="card-text">{{ card.description }}</p>
           </div>
 
           <!-- Face arrière -->
@@ -31,7 +31,7 @@
               <h3 :class="cardTitleClass">Réponse</h3>
               <div class="donut-chart-container" :ref="el => setDonutContainer(el, index)"></div>
               <div class="data-container">
-                <p>{{ card.backDescription }}</p>
+                <p class="card-text">{{ card.backDescription }}</p>
               </div>
             </div>
           </div>
@@ -230,12 +230,12 @@ const cardTitleClass = computed(() => {
 }
 
 .chapter-header h2 {
-  font-size: 24px;
+  font-size: 32px;
   font-weight: bold;
 }
 
 .chapter-header p {
-  font-size: 16px;
+  font-size: 18px;
   color: #555;
 }
 
@@ -247,6 +247,21 @@ const cardTitleClass = computed(() => {
   margin-bottom: 10px;
   text-align: center;
   display: inline-block;
+}
+
+.chapter-1-label {
+  background-color: #A4E1FF; 
+  color: #3135B7;
+}
+
+.chapter-2-label {
+  background-color: #BCFFC8; 
+  color: #167540;
+}
+
+.chapter-3-label {
+  background-color: #FFC9EA; 
+  color: #AC0266;
 }
 
 .card-container {
@@ -293,8 +308,10 @@ const cardTitleClass = computed(() => {
   justify-content: center;
   align-items: center;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px; /* Ajoute de l'espace entre les bords et le contenu */
+  box-sizing: border-box;
 }
 
 .card-front {
@@ -325,26 +342,20 @@ const cardTitleClass = computed(() => {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 40px 10px 10px; /* Assure qu'il y a suffisamment d'espace pour les éléments */
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  justify-content: space-between;
 }
 
 .card-back h3 {
-  position: absolute;
-  top: 20px;
-  width: 100%;
+  margin-top: 20px;
   text-align: center;
 }
 
-.donut-chart-container {
-  margin: 20px 0;
-}
-
-.data-container {
-  margin-top: 20px;
+.card-text {
+  font-size: 18px;
+  color: #000; /* Noir pour le texte */
+  padding: 10px;
 }
 
 .chapter-title-blue {
@@ -361,13 +372,17 @@ const cardTitleClass = computed(() => {
 
 .card-title-blue {
   color: #3135B7;
+  font-weight: 800;
 }
 
 .card-title-green {
   color: #167540;
+  font-weight: 800;
 }
 
 .card-title-pink {
   color: #AC0266;
+  font-weight: 800;
 }
+
 </style>
