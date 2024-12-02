@@ -1,6 +1,8 @@
 <template>
   <header>
-    <img src="../assets/images/logo-noir.png" alt="Logo" class="logo" />
+    <router-link to="/home" class="logo-link">
+      <img src="../assets/images/logo-noir.png" alt="Logo" class="logo" />
+    </router-link>
     <router-link to="/menu" class="menu-button" @click="toggleMenu">
       <div :class="['bar', { 'open': menuOpen }]"></div>
       <div :class="['bar', { 'open': menuOpen }]"></div>
@@ -30,6 +32,10 @@ header {
   right: 0;
   padding: 10px 20px;
   z-index: 10;
+}
+
+.logo-link {
+  display: inline-block;
 }
 
 .menu-button {
