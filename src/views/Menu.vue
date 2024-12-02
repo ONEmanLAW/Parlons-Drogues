@@ -1,17 +1,17 @@
 <template>
   <div ref="menuPage" class="menu-page">
     <button @click="goBack" class="close-button">X</button>
-    <h1>Menu</h1>
     
     <div class="menu-images">
       <div
-        v-for="chapter in chapters"
+        v-for="(chapter, index) in chapters"
         :key="chapter.id"
         class="menu-image"
         @click="goToChapter(chapter.id)"
       >
         <img :src="getImageSource(chapter.imageSource)" :alt="chapter.title" />
-        <p>{{ chapter.title }}</p>
+        <p :style="getTextColor(index)">{{ chapter.title }}</p>
+        <p :style="getTextColor(index)">{{ chapter.subtitle }}</p>
       </div>
     </div>
   </div>
@@ -65,6 +65,12 @@ function goToChapter(chapterId) {
 function getImageSource(imagePath) {
   return new URL(`../${imagePath}`, import.meta.url).href;
 }
+
+// Function to return color for each chapter title based on index
+function getTextColor(index) {
+  const colors = ["blue", "green", "#AC0266", "orange"];
+  return { color: colors[index] || "black" }; // Default to black if out of range
+}
 </script>
 
 <style scoped>
@@ -74,8 +80,8 @@ function getImageSource(imagePath) {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #2b2e2c;
-  color: white;
+  background-color: white;
+  color: black;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -88,8 +94,8 @@ function getImageSource(imagePath) {
   position: absolute;
   top: 20px;
   right: 20px;
-  background-color: white;
-  color: #adb6b1;
+  background-color: black;
+  color: white;
   border: none;
   border-radius: 50%;
   width: 40px;
@@ -100,22 +106,22 @@ function getImageSource(imagePath) {
 }
 
 .close-button:hover {
-  background-color: #f0f0f0;
+  background-color: gray;
 }
 
 .menu-images {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
+  gap: 30px;
   margin-top: 40px;
 }
 
 .menu-image {
   text-align: center;
   cursor: pointer;
-  width: 150px;
-  height: 150px;
+  width: 250px;
+  height: 250px;
 }
 
 .menu-image img {
@@ -128,7 +134,7 @@ function getImageSource(imagePath) {
 .menu-image p {
   margin-top: 10px;
   font-size: 16px;
-  color: white;
+  color: black;
   font-weight: bold;
 }
 </style>

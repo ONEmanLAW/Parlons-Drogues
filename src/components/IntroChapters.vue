@@ -4,8 +4,8 @@
       <img :src="imageSource" alt="Chapter Image" class="chapter-image" />
       <div class="text-content">
         <h2>{{ title }}</h2>
-        <h3>{{ subtitle }}</h3>
-        <p>{{ description }}</p>
+        <!-- <h3>{{ subtitle }}</h3>
+        <p>{{ description }}</p> -->
       </div>
     </div>
 
