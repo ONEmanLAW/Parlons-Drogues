@@ -179,8 +179,8 @@ h1 {
 }
 
 .image-icon {
-  width: 220px; 
-  height: 220px;
+  width: 145px; 
+  height: 170px;
   position: absolute;
   top: -30px; 
   left: 50%; 

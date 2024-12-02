@@ -6,7 +6,7 @@
     <AideComponent @retour="handleRetour" />
     
   </div>
-  <!-- <Footer /> -->
+  <Footer />
 </template>
 
 

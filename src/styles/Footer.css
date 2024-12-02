@@ -1,5 +1,25 @@
 footer {
-  text-align: center; 
-  padding: 10px; 
-  background-color: #f1f1f1; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #FFF2E5;
+}
+
+footer p {
+  margin: 0;
+}
+
+.source-button {
+  background-color: #FF7424; /* Couleur bleue */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.source-button:hover {
+  opacity: 0.8;
 }
