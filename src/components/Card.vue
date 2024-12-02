@@ -27,10 +27,12 @@
 
           <!-- Face arrière -->
           <div class="card-back">
-            <h3 :class="cardTitleClass">Réponse</h3>
-            <div class="donut-chart-container" :ref="el => setDonutContainer(el, index)"></div>
-            <div class="data-container">
-              <p>{{ card.backDescription }}</p>
+            <div class="back-content">
+              <h3 :class="cardTitleClass">Réponse</h3>
+              <div class="donut-chart-container" :ref="el => setDonutContainer(el, index)"></div>
+              <div class="data-container">
+                <p>{{ card.backDescription }}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -317,24 +319,32 @@ const cardTitleClass = computed(() => {
   text-align: center;
 }
 
+.card-back .back-content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px 10px 10px; /* Assure qu'il y a suffisamment d'espace pour les éléments */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.card-back h3 {
+  position: absolute;
+  top: 20px;
+  width: 100%;
+  text-align: center;
+}
+
 .donut-chart-container {
   margin: 20px 0;
 }
 
 .data-container {
-  margin: 20px 0;
-}
-
-.card-front h3,
-.card-back h3 {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.card-front p,
-.card-back p {
-  font-size: 18px;
-  color: #666;
+  margin-top: 20px;
 }
 
 .chapter-title-blue {
