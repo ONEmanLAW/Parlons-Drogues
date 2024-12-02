@@ -7,20 +7,20 @@
       "image": "cerveau.gif",
       "data": {
         "data1": {
-          "title": "Fonctionnement du cerveau",
-          "text": ["Paranoïa", "Mémoire"]
+          "title": "Il y a des risques d'effets, plus ou moins graves :",
+          "text": ["Baisse de motivation 😔", "Trouble de l’humeur 😕", "Anxiété 😰", "Dépression 😞", "Schizophrénie 🧠"]
         },
         "data2": {
-          "title": "Activité cérébrale",
+          "title": "Le cannabis pourrait être à l’origine d’environ 15 % des nouveaux cas de schizophrénie.",
           "data": [
             { "label": "Concentration", "value": 70 },
             { "label": "Stress", "value": 30 }
           ]
         },
         "data3": {
-          "smallTextTop": "Santé mentale",
-          "largeText": "Le cerveau joue un rôle clé dans la cognition et les émotions.",
-          "smallTextBottom": "Gardez un équilibre sain entre travail et détente."
+          "smallTextTop": "L’impact des produits toxiques est",
+          "largeText": "10 X",
+          "smallTextBottom": "plus fort selon comment tu fumes : si tu inspires à fond ou si tu gardes la fumée dans les poumons."
         }
       }
     },
@@ -31,54 +31,54 @@
       "image": "poumon.gif",
       "data": {
         "data1": {
-          "title": "Fonctionnement des poumons",
-          "text": ["Irritation", "Toux"]
+          "title": "Il y a des risques d'effets, plus ou moins graves :",
+          "text": ["Toux 🤧", "Voix enrouée 🗣️", "Irritation de la gorge 😖", "Sifflement 🔊", "Augmentation des infections 📈", "Bronchite chronique 🌬️", "Emphysème 😮‍💨"]
         },
         "data2": {
-          "title": "Santé pulmonaire",
+          "title": "de risque d’avoir une bronchite chronique et d’autres troubles respiratoires. 🤒",
           "data": [
-            { "label": "Bronchite", "value": 65 },
-            { "label": "Essoufflement", "value": 35 }
+            { "label": "Concentration", "value": 70 },
+            { "label": "Stress", "value": 30 }
           ]
         },
         "data3": {
-          "smallTextTop": "Respiration",
-          "largeText": "Les poumons assurent une bonne oxygénation du corps.",
-          "smallTextBottom": "Évitez la fumée et pratiquez des exercices respiratoires."
+          "smallTextTop": "Chez les utilisateurs réguliers de cannabis, environ",
+          "largeText": "20%",
+          "smallTextBottom": "de personnes souffrent de troubles anxieux."
         }
       }
     },
     {
       "id": 3,
-      "name": "Foie",
-      "color": "#3357FF",
-      "image": "foie.png",
-      "data": {
-        "text": "Le foie est responsable de la détoxification du corps et du métabolisme des nutriments. Un foie sain est essentiel pour le bien-être global."
-      }
-    },
-    {
-      "id": 4,
       "name": "Cœur",
       "color": "#FF33A1",
       "image": "coeur.gif",
       "data": {
         "data1": {
-          "title": "Fonctionnement du cœur",
-          "text": ["Fréquence cardiaque", "Palpitations"]
+          "title": "Il y a des risques d'effets, plus ou moins graves :",
+          "text": ["Augmentation de la fréquence cardiaque ❤️‍🔥", "Hypertension artérielle 🩺", "Infarctus du myocarde 💔"]
         },
         "data2": {
-          "title": "Santé cardiaque",
+          "title": "des 35 cas de complications cardio-vasculaires ou neuro-vasculaires ont été mortels en France de 2006 à 2010",
           "data": [
             { "label": "Tension artérielle", "value": 75 },
             { "label": "Stress", "value": 25 }
           ]
         },
         "data3": {
-          "smallTextTop": "Rythme cardiaque",
-          "largeText": "Un cœur en bonne santé améliore votre qualité de vie.",
-          "smallTextBottom": "Mangez équilibré et restez actif."
+          "smallTextTop": "Les risques d’accidents vasculaires et d’infarctus sont multipliés par",
+          "largeText": "5",
+          "smallTextBottom": "lors d’une forte consommation."
         }
+      }
+    },
+    {
+      "id": 4,
+      "name": "Foie",
+      "color": "#3357FF",
+      "image": "foie.png",
+      "data": {
+        "text": "Des doses trop élevées peuvent provoquer des nausées et des vomissements répétés. 🤢 Certaines études récentes montrent qu'une consommation excessive pourrait réduire les chances de fécondation et d'implantation d’un embryon. 🔬 Une utilisation prolongée est associée à un risque accru de maladies des gencives. 🦷"
       }
     }
   ]
