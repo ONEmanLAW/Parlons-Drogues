@@ -3,10 +3,10 @@
     {
       "id": 1,
       "title": "Faisons un récap !",
-      "description": "Vérifie si t'as vraiment saisi les effets à court terme du cannabis.",
+      "description": "Vérifie si t'as vraiment saisi les effets à court terme du cannabis et regarde la réponse en cliquant sur les cartes",
       "cards": [
         {
-          "title": "Détection",
+          "title": "DÉTECTION",
           "description": "Pendant combien de temps le cannabis peut-il être détecté dans ta salive ?",
           "icon": "/assets/images/icone1bleu.png",
           "backDescription": "Le cannabis peut rester détectable dans ta salive jusqu’à 24 heures. ⚠️ Mais attention, si tu fumes beaucoup et souvent, ça peut monter jusqu'à 8 jours.",
@@ -14,7 +14,7 @@
           "centerText": "24H"
         },
         {
-          "title": "Effet principal",
+          "title": "EFFET PRINCIPALE",
           "description": "C’est quoi l’effet principal quand tu fumes du cannabis en dose normale ?",
           "icon": "/assets/images/icone2bleu.png",
           "backDescription": "L’effet principale quand on fume du cannabis en dose normale est l’euphorie. 60% des personnes ont rapportées une sensation d’euphorie quand il en consomme",
@@ -22,7 +22,7 @@
           "centerText": "🤩"
         },
         {
-          "title": "Durée des effets",
+          "title": "DURÉE DES EFFETS",
           "description": "Les effets du cannabis quand tu l’ingère en surdose, ça dure combien de temps en moyenne ?",
           "icon": "/assets/images/icone3bleu.png",
           "backDescription": "Les effets du cannabis peuvent durer jusqu’à 12h de temps lorsqu’il est ingéré en surdose.",
@@ -37,28 +37,28 @@
       "description": "Vérifie si t'as vraiment saisi ce qu’est la dépendance.",
       "cards": [
         {
-          "title": "Card 4",
-          "description": "Description for card 4",
+          "title": "IMPACT SUR LA VIE",
+          "description": "Comment le cannabis peut-il influencer tes résultats à l’école ?",
           "icon": "/assets/images/icone1vert.png",
-          "backDescription": "Details for card 4",
-          "donutPercentage": 40,
-          "centerText": "🎯"
+          "backDescription": "60 % des jeunes consommateurs réguliers signalent des difficultés de concentration. De plus, 55 % rapportent une diminution de leur motivation, ce qui peut affecter leurs résultats scolaires et leur assiduité.",
+          "donutPercentage": 60,
+          "centerText": "60%"
         },
         {
-          "title": "Card 5",
-          "description": "Description for card 5",
+          "title": "RISQUES",
+          "description": "Pourquoi les jeunes sont-ils plus à risque de devenir dépendants du cannabis ?",
           "icon": "/assets/images/icone2vert.png",
-          "backDescription": "Details for card 5",
-          "donutPercentage": 65,
-          "centerText": "📊"
+          "backDescription": "Car le développement de leur cerveau est encore incomplet, surtout dans les zones liées au contrôle des impulsions. Environ 17 % des adolescents qui consomment du cannabis régulièrement développent une dépendance, contre 9 % chez les adultes.",
+          "donutPercentage": 17,
+          "centerText": "17%"
         },
         {
-          "title": "Card 6",
-          "description": "Description for card 6",
+          "title": "ADDICTION",
+          "description": "À partir de quand on peut vraiment dire qu’on est dépendant du cannabis ?",
           "icon": "/assets/images/icone3vert.png",
-          "backDescription": "Details for card 6",
-          "donutPercentage": 85,
-          "centerText": "⚡"
+          "backDescription": "Lorsque tu ressens une envie incontrôlable et quotidienne de consommer.",
+          "donutPercentage": 100,
+          "centerText": "😩"
         }
       ]
     },
@@ -68,28 +68,28 @@
       "description": "Vérifie si t'as vraiment saisi les effets à long terme du cannabis.",
       "cards": [
         {
-          "title": "Card 7",
-          "description": "Description for card 7",
+          "title": "SANTÉ MENTALE",
+          "description": "Comment le cannabis peut-il impacter ta mémoire et ta concentration sur le long terme ?",
           "icon": "/assets/images/icone1rose.png",
-          "backDescription": "Details for card 7",
-          "donutPercentage": 30,
-          "centerText": "🔥"
+          "backDescription": "Une baisse de 8 % en moyenne des performances dans les tests cognitifs chez les utilisateurs à long terme",
+          "donutPercentage": 8,
+          "centerText": "8%"
         },
         {
-          "title": "Card 8",
-          "description": "Description for card 8",
+          "title": "SANTÉ PHYSIQUE",
+          "description": "Quels sont les risques pour tes poumons si tu consommes du cannabis régulièrement ?",
           "icon": "/assets/images/icone2rose.png",
-          "backDescription": "Details for card 8",
-          "donutPercentage": 50,
-          "centerText": "🌟"
+          "backDescription": "Augmentation de 20 % le risque de développer des maladies respiratoires, comme la bronchite chronique, en raison de l'inhalation de fumée irritante pour les poumons. 🫁",
+          "donutPercentage": 20,
+          "centerText": "20%"
         },
         {
-          "title": "Card 9",
-          "description": "Description for card 9",
+          "title": "RISQUES SPÉCIFIQUE",
+          "description": "Quel risque le cannabis peut-il poser spécifiquement pour les hommes ?",
           "icon": "/assets/images/icone3rose.png",
-          "backDescription": "Details for card 9",
+          "backDescription": "Les hommes risquent de contracter un cancer des testicules s’ils consomment régulièrement du cannabis.",
           "donutPercentage": 100,
-          "centerText": "💯"
+          "centerText": "🤕"
         }
       ]
     }

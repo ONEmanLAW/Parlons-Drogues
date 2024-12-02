@@ -1,13 +1,9 @@
 <template>
   <div :class="`chapter-${props.chapterId}`" class="chapter" ref="chapterContainer">
-    <div 
-      class="question-label" 
-    >
-      Question
-    </div>
+    <div class="question-label">Question</div>
 
     <div class="chapter-header" ref="chapterHeader">
-      <h2>{{ chapter.title }}</h2>
+      <h2 :class="chapterTitleClass">{{ chapter.title }}</h2>
       <p>{{ chapter.description }}</p>
     </div>
 
@@ -24,12 +20,12 @@
             <div class="icon-container">
               <img :src="card.icon" alt="Icon" class="card-icon" />
             </div>
-            <h3>{{ card.title }}</h3>
+            <h3 :class="cardTitleClass">{{ card.title }}</h3>
             <p>{{ card.description }}</p>
           </div>
 
           <div class="card-back">
-            <h3>{{ card.title }}</h3>
+            <h3 :class="cardTitleClass">{{ card.title }}</h3>
             <div class="donut-chart-container" :ref="el => setDonutContainer(el, index)"></div>
             <div class="data-container">
               <p>{{ card.backDescription }}</p>
@@ -90,6 +86,19 @@ const toggleFlip = (index) => {
   });
 };
 
+const getChapterColor = () => {
+  switch (props.chapterId) {
+    case 1:
+      return '#3135B7'; // Bleu
+    case 2:
+      return '#167540'; // Vert
+    case 3:
+      return '#AC0266'; // Rose
+    default:
+      return '#000'; // Noir par défaut
+  }
+};
+
 const drawDonutCharts = () => {
   chapter.value.cards.forEach((card, index) => {
     const container = donutChartContainers.value[index];
@@ -120,7 +129,7 @@ const drawDonutCharts = () => {
       .enter()
       .append('path')
       .attr('d', arc)
-      .attr('fill', (d, i) => (i === 0 ? '#4caf50' : '#ddd'));
+      .attr('fill', (d, i) => (i === 0 ? getChapterColor() : '#ddd'));
 
     svg.append('text')
       .attr('text-anchor', 'middle')
@@ -171,6 +180,32 @@ const observeScroll = () => {
     observer.observe(chapterContainer.value);
   }
 };
+
+const chapterTitleClass = computed(() => {
+  switch (props.chapterId) {
+    case 1:
+      return 'chapter-title-blue';
+    case 2:
+      return 'chapter-title-green';
+    case 3:
+      return 'chapter-title-pink';
+    default:
+      return '';
+  }
+});
+
+const cardTitleClass = computed(() => {
+  switch (props.chapterId) {
+    case 1:
+      return 'card-title-blue';
+    case 2:
+      return 'card-title-green';
+    case 3:
+      return 'card-title-pink';
+    default:
+      return '';
+  }
+});
 </script>
 
 <style scoped>
@@ -209,8 +244,6 @@ const observeScroll = () => {
   text-align: center;
   display: inline-block;
 }
-
-
 
 .card-container {
   display: flex;
@@ -302,43 +335,27 @@ const observeScroll = () => {
   color: #666;
 }
 
-@media (max-width: 1200px) {
-  .card-container {
-    justify-content: center;
-    gap: 20px;
-  }
-}
-
-@media (max-width: 800px) {
-  .card-container {
-    justify-content: center;
-  }
-}
-
-@media (max-width: 600px) {
-  .card-container {
-    justify-content: center;
-  }
-}
-
-@media (max-width: 400px) {
-  .card-container {
-    justify-content: center;
-  }
-}
-
-.chapter-1 .question-label {
-  background-color: #A4E1FF;
+.chapter-title-blue {
   color: #3135B7;
 }
 
-.chapter-2 .question-label {
-  background-color: #BCFFC8;
+.chapter-title-green {
   color: #167540;
 }
 
-.chapter-3 .question-label {
-  background-color: #FFC9EA;
+.chapter-title-pink {
+  color: #AC0266;
+}
+
+.card-title-blue {
+  color: #3135B7;
+}
+
+.card-title-green {
+  color: #167540;
+}
+
+.card-title-pink {
   color: #AC0266;
 }
 </style>
