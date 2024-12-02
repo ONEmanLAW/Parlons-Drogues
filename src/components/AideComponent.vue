@@ -93,20 +93,19 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between; 
-  height: 100vh;
+  justify-content: flex-start; /* Alignement au haut */
+  min-height: 100vh; /* Couvrir la hauteur de l'écran */
   padding: 20px;
   background-color: #FFF2E5;
-  font-family: Montserrat;
+  font-family: Montserrat, sans-serif;
   color: #333;
   box-sizing: border-box;
+  overflow-x: hidden; /* Empêche le débordement horizontal */
 }
-
-
 
 .aide-label {
   display: inline-block;
-  background-color:  #FFD6AB;
+  background-color: #FFD6AB; /* Fond coloré sous "Aide" */
   color: #FF7424;
   font-weight: bold;
   padding: 5px 35px;
@@ -117,15 +116,14 @@ export default {
 
 .cards-container {
   display: flex;
-  gap: 40px;
-  justify-content: center;
-  align-items: center; 
   flex-wrap: wrap;
+  gap: 40px;
   width: 100%;
-  max-width: 1100px;
+  max-width: 1100px; /* Limite la largeur maximale */
+  justify-content: space-between;
+  align-items: flex-start; /* Alignement des cartes en haut */
   margin-bottom: 20px;
-  flex-grow: 1; 
-  height: 100%; 
+  margin-top: 20px;
 }
 
 .info-card {
@@ -133,8 +131,9 @@ export default {
   border-radius: 15px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
   padding: 30px;
-  width: 460px;
+  width: calc(50% - 20px); /* Deux cartes côte à côte sur grands écrans */
   min-height: 500px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -146,6 +145,7 @@ export default {
   margin-bottom: 20px;
   color: #000;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .card-content {
@@ -156,42 +156,43 @@ export default {
 
 .card-content li {
   display: flex;
-  align-items: flex-start;
-  gap: 25px;
-  margin-bottom: 25px;
+  flex-direction: row;
   align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
 }
 
 .card-content li .text {
-  font-size: 22px;
+  font-size: 18px;
+  word-wrap: break-word; /* Gère les longs textes */
 }
 
 .card-content li .text strong {
-  font-size: 22px;
+  font-size: 18px;
   display: block;
   margin-bottom: 10px;
 }
 
 .card-content li .text p {
-  font-size: 20px;
+  font-size: 16px;
   margin: 0;
 }
 
 .card-content a {
   text-decoration: none;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
   color: black;
   position: relative;
 }
 
 .card-content a::after {
-  content: ""; 
+  content: "";
   position: absolute;
   left: 0;
   bottom: -2px;
   width: 0;
-  height: 2px; 
+  height: 2px;
   background-color: black;
   transition: width 0.3s ease-in-out;
 }
@@ -206,28 +207,94 @@ export default {
   flex-shrink: 0;
 }
 
-.retour-container {
-  width: 100%;
-  text-align: center;
-  padding: 10px 0;
-}
-
 .retour-button {
   background-color: #fff;
   color: #FF7424;
   border: 3px solid #FF7424;
   border-radius: 25px;
   padding: 20px 40px;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s ease;
-  width: auto;
-  margin: 0 auto;
+  margin-top: 20px;
 }
 
 .retour-button:hover {
   background-color: #FF7424;
   color: #fff;
 }
+
+/* MEDIA QUERIES */
+@media (max-width: 1024px) {
+  .info-card {
+    width: 100%; /* Les cartes s'étendent sur toute la largeur */
+  }
+}
+
+@media (max-width: 768px) {
+  .cards-container {
+    flex-direction: column; /* Les cartes s'empilent verticalement */
+    gap: 20px;
+    align-items: center; /* Centrer les cartes */
+  }
+
+  .info-card {
+    width: 90%; /* Adapte la largeur des cartes */
+    min-height: auto; /* Pas de hauteur minimale */
+  }
+
+  .card-title {
+    font-size: 20px;
+  }
+
+  .card-content li .text {
+    font-size: 16px;
+  }
+
+  .card-content li .text strong {
+    font-size: 16px;
+  }
+
+  .card-content a {
+    font-size: 16px;
+  }
+
+  .retour-button {
+    font-size: 16px;
+    padding: 15px 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .aide-container {
+    padding: 10px;
+  }
+
+  .aide-label {
+    font-size: 12px;
+    padding: 5px 20px;
+  }
+
+  .card-title {
+    font-size: 18px;
+  }
+
+  .card-content li {
+    flex-direction: column; /* Empile les éléments de chaque ligne */
+    gap: 10px;
+    align-items: flex-start; /* Texte aligné à gauche */
+  }
+
+  .icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .retour-button {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+}
+
 </style>
