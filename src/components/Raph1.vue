@@ -2,7 +2,7 @@
   <div class="page-container">
     <div class="info-header">
       <span class="info-badge">Informations</span>
-      <h1>RAPH FACE À L'ADDICTION</h1>
+      <h1>Les trucs à savoir...</h1>
     </div>
 
     <div class="info-sections">

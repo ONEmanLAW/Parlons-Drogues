@@ -2,7 +2,7 @@
   <div class="page-container">
     <div class="info-header">
       <span class="info-badge">Informations</span>
-      <h1>LA SANTÉ D’INÈS EN PÉRIL</h1>
+      <h1>Les infos à connaître...</h1>
     </div>
 
     <div class="info-content">

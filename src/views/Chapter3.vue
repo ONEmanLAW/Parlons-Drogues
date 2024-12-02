@@ -11,11 +11,11 @@
       :backgroundImage="chapter.backgroundImage"
       :backgroundColor="chapter.backgroundColor"
     />
-
     
-
+    <Ines1 />
+    <BodyChart />
+    <Elena2 :currentChapter="3"/>
     <Card :chapterId="3" />
-
     <ChapterText :currentChapterId="3" />
     <ChapterTransition :currentChapter="3" chapterText="Allez au advice" />
   </div>
@@ -28,6 +28,10 @@ import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
 import Card from '../components/Card.vue';
 import ChapterText from '../components/ChapterText.vue';
+import BodyChart from '../components/BodyChart.vue';
+
+import Ines1 from '../components/Ines1.vue';
+import Elena2 from '../components/Elena2.vue';
 
 import ChapterTransition from '../components/ChapterTransition.vue';
 

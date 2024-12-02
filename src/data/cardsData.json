@@ -6,28 +6,28 @@
       "description": "Vérifie si t'as vraiment saisi les effets à court terme du cannabis.",
       "cards": [
         {
-          "title": "Card 1",
-          "description": "Description for card 1",
+          "title": "Détection",
+          "description": "Pendant combien de temps le cannabis peut-il être détecté dans ta salive ?",
           "icon": "/assets/images/icone1bleu.png",
-          "backDescription": "Details for card 1",
-          "donutPercentage": 60,
-          "centerText": "💡"
+          "backDescription": "Le cannabis peut rester détectable dans ta salive jusqu’à 24 heures. ⚠️ Mais attention, si tu fumes beaucoup et souvent, ça peut monter jusqu'à 8 jours.",
+          "donutPercentage": 100,
+          "centerText": "24H"
         },
         {
-          "title": "Card 2",
-          "description": "Description for card 2",
+          "title": "Effet principal",
+          "description": "C’est quoi l’effet principal quand tu fumes du cannabis en dose normale ?",
           "icon": "/assets/images/icone2bleu.png",
-          "backDescription": "Details for card 2",
-          "donutPercentage": 75,
-          "centerText": "📈"
+          "backDescription": "L’effet principale quand on fume du cannabis en dose normale est l’euphorie. 60% des personnes ont rapportées une sensation d’euphorie quand il en consomme",
+          "donutPercentage": 60,
+          "centerText": "🤩"
         },
         {
-          "title": "Card 3",
-          "description": "Description for card 3",
+          "title": "Durée des effets",
+          "description": "Les effets du cannabis quand tu l’ingère en surdose, ça dure combien de temps en moyenne ?",
           "icon": "/assets/images/icone3bleu.png",
-          "backDescription": "Details for card 3",
-          "donutPercentage": 90,
-          "centerText": "🚀"
+          "backDescription": "Les effets du cannabis peuvent durer jusqu’à 12h de temps lorsqu’il est ingéré en surdose.",
+          "donutPercentage": 50,
+          "centerText": "15H"
         }
       ]
     },

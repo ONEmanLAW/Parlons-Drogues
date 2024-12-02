@@ -2,7 +2,7 @@
   <div class="page-container">
     <div class="info-header">
       <span class="info-badge">Informations</span>
-      <h1>ÉLENA ET SES PREMIÈRES BOUFFÉES</h1>
+      <h1>Ce qu'il faut que tu saches…</h1>
     </div>
     <div class="info-cards">
       <div class="card card-left">

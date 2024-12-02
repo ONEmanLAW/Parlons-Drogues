@@ -11,9 +11,10 @@
       :backgroundColor="chapter.backgroundColor"
     />
 
-    <Card :chapterId="2" />
+    <Raph1 />
+    <InteractiveCharacter />
     <Elena2 :currentChapter="2"/>
-
+    <Card :chapterId="2" />
     <ChapterText :currentChapterId="2" />
     <ChapterTransition :currentChapter="2" chapterText="Allez au chapitre 3" />
 
@@ -28,6 +29,7 @@ import ChapterText from '../components/ChapterText.vue';
 import Card from '../components/Card.vue';
 import Header from '../components/Header.vue'; 
 import Footer from '../components/Footer.vue';
+import InteractiveCharacter from '../components/InteractiveCharacter.vue';
 
 import ChapterTransition from '../components/ChapterTransition.vue';
 
@@ -35,6 +37,7 @@ import introChaptersData from '../data/introChapters.json';
 import cardsData from '../data/cardsData.json';
 
 import Elena2 from '../components/Elena2.vue';
+import Raph1 from '../components/Raph1.vue';
 
 // Récupération des données du chapitre 2
 const chapterData = introChaptersData.chapters.find(ch => ch.id === 2);

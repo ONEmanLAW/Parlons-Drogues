@@ -33,15 +33,13 @@ const chartContainer = ref(null);
 let svg, xScale, yScale;
 
 const initializeChart = () => {
-  // Dimensions de la carte et du graphique
-  const cardHeight = window.innerHeight * 0.8; // 80% de la hauteur de la fenêtre
-  const chartHeight = cardHeight * 0.65; // 65% de la hauteur de la carte
-  const chartWidth = 1500; // Largeur fixe pour permettre le scroll si nécessaire
+  const cardHeight = window.innerHeight * 0.8;
+  const chartHeight = cardHeight * 0.65;
+  const chartWidth = 1500;
   const margin = { top: 20, right: 20, bottom: 50, left: 50 };
   const width = chartWidth - margin.left - margin.right;
   const height = chartHeight - margin.top - margin.bottom;
 
-  // Initialisation du SVG
   svg = d3
     .select(chartContainer.value)
     .append('svg')
@@ -50,10 +48,10 @@ const initializeChart = () => {
     .append('g')
     .attr('transform', `translate(${margin.left},${margin.top})`);
 
-  // Définir les échelles
+  const timePoints = [0, 10, 30, 60, 120, 360, 720];
   xScale = d3
     .scaleLinear()
-    .domain([0, 720])
+    .domain([0, d3.max(timePoints)])
     .range([0, width]);
 
   yScale = d3
@@ -61,25 +59,16 @@ const initializeChart = () => {
     .domain(['null', 'faible', 'modéré', 'forte', 'très forte'])
     .range([height, 0]);
 
-  // Axe X
-  svg
-    .append('g')
-    .attr('transform', `translate(0,${height})`)
-    .call(
-      d3.axisBottom(xScale)
-        .tickValues([0, 10, 30, 60, 120, 360, 720])
-        .tickFormat((d) => (d === 0 ? '0' : `${d} min`))
-    );
-
-  // Axe Y
+  svg.append('g').attr('transform', `translate(0,${height})`).call(
+    d3.axisBottom(xScale).tickValues(timePoints).tickFormat((d) => (d === 0 ? '0' : `${d} min`))
+  );
   svg.append('g').call(d3.axisLeft(yScale));
 
-  // Mettre à jour le graphique
   updateChart();
 };
 
 const updateChart = () => {
-  // Supprimer les anciens graphiques
+  // Supprimer les anciens graphiques (lignes et points) seulement pour les modes non sélectionnés
   svg.selectAll('.line').remove();
   svg.selectAll('.point').remove();
 
@@ -93,41 +82,54 @@ const updateChart = () => {
       return;
     }
 
-    // Mapper les données pour correspondre aux axes
     const scaledData = data.map((d) => ({
       x: d.durée,
       y: d.intensité,
     }));
 
-    // Ajouter une ligne continue
-    const line = d3
-      .line()
-      .x((d) => xScale(d.x))
-      .y((d) => yScale(d.y))
-      .curve(d3.curveCardinal);
+    // Vérifier si la ligne existe déjà, sinon l'animer
+    if (svg.selectAll(`.line-${mode}`).empty()) {
+      const line = d3.line()
+        .x((d) => xScale(d.x))
+        .y((d) => yScale(d.y))
+        .curve(d3.curveCardinal);
 
-    svg
-      .append('path')
-      .datum(scaledData)
-      .attr('class', 'line')
-      .attr('d', line)
-      .attr('fill', 'none')
-      .attr('stroke', getColorForMode(mode))
-      .attr('stroke-width', 2);
+      const path = svg.append('path')
+        .datum(scaledData)
+        .attr('class', `line-${mode}`)
+        .attr('d', line)
+        .attr('fill', 'none')
+        .attr('stroke', getColorForMode(mode))
+        .attr('stroke-width', 2)
+        .attr('stroke-dasharray', function () {
+          const length = this.getTotalLength();
+          return length;
+        })
+        .attr('stroke-dashoffset', function () {
+          return this.getTotalLength();
+        })
+        .transition()
+        .duration(1500)
+        .attr('stroke-dashoffset', 0); // Fait apparaître la ligne
+    }
 
-    // Ajouter des points
+    // Ajouter des points avec animation
     svg
       .selectAll(`.point-${mode}`)
       .data(scaledData)
       .enter()
       .append('circle')
-      .attr('class', 'point')
+      .attr('class', `point-${mode}`)
       .attr('cx', (d) => xScale(d.x))
       .attr('cy', (d) => yScale(d.y))
       .attr('r', 5)
       .attr('fill', getColorForMode(mode))
       .attr('stroke', '#000')
-      .attr('stroke-width', 1);
+      .attr('stroke-width', 1)
+      .attr('opacity', 0) // Les points commencent invisibles
+      .transition() // Applique l'animation
+      .duration(1500) // Durée de l'animation
+      .attr('opacity', 1); // Rendre les points visibles progressivement
   });
 };
 
@@ -142,11 +144,13 @@ const getColorForMode = (mode) => {
 const toggleMode = (mode) => {
   const index = selectedModes.value.indexOf(mode);
   if (index === -1) {
+    // Si le mode est activé, l'ajouter à la liste des modes sélectionnés
     selectedModes.value.push(mode);
   } else {
+    // Si le mode est désactivé, le retirer de la liste des modes sélectionnés
     selectedModes.value.splice(index, 1);
   }
-  updateChart();
+  updateChart(); // Met à jour le graphique après avoir modifié l'état des modes sélectionnés
 };
 
 onMounted(() => {
@@ -161,25 +165,25 @@ watch(selectedModes, updateChart);
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh; /* Prend toute la hauteur de la fenêtre */
-  justify-content: center; /* Centré verticalement */
+  height: 100vh;
+  justify-content: center;
 }
 
 .chart-card {
-  width: 90%; /* 90% de la largeur de l'écran */
-  height: 80vh; /* 80% de la hauteur de la fenêtre */
+  width: 90%;
+  height: 80vh;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  overflow: hidden; /* Cache les débordements verticaux */
+  overflow: hidden;
 }
 
 .chart-container {
-  width: 100%; /* Occupe toute la largeur de la carte */
-  height: 65%; /* 65% de la hauteur de la carte */
-  overflow-x: auto; /* Active le défilement horizontal si nécessaire */
-  overflow-y: hidden; /* Pas de défilement vertical */
+  width: 100%;
+  height: 65%;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .buttons {
