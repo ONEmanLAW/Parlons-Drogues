@@ -17,7 +17,7 @@ import { useRouter } from 'vue-router';
 
 import raphImage from '../assets/images/raph.gif';
 import inesImage from '../assets/images/ines.gif';
-import elenaImage from '../assets/images/conclusion.png';
+import elenaImage from '../assets/images/conclusion.gif';
 
 const props = defineProps({
   currentChapter: {

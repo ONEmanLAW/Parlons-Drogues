@@ -13,7 +13,6 @@
       </button>
     </div>
 
-    <!-- Curseur avec 5 phases -->
     <div class="cursor-controls">
       <label for="cursor-select">Choisir un mode de phase :</label>
       <select id="cursor-select" v-model="selectedPhase" @change="updatePhase">
@@ -36,13 +35,11 @@ import { ref, onMounted, watch } from 'vue';
 import * as d3 from 'd3';
 import effectsData from '../data/effectsData.json';
 
-// Modes disponibles
 const modes = ['Fumé', 'Ingeré'];
 const selectedModes = ref([]);
-const selectedPhase = ref('default'); // Phase par défaut
+const selectedPhase = ref('default');
 const chartContainer = ref(null);
 
-// Variables D3
 let svg, xScale, yScale;
 
 const initializeChart = () => {
@@ -102,7 +99,6 @@ const updateChart = () => {
 
     const filteredData = filterDataByPhase(cleanedData);
 
-    // Tracer la ligne si les données sont présentes
     const line = d3.line()
       .x((d) => xScale(d.x))
       .y((d) => yScale(d.y))
@@ -128,7 +124,6 @@ const updateChart = () => {
         .attr('stroke-dashoffset', 0);
     }
 
-    // Tracer les points
     svg
       .selectAll(`.point-${mode}`)
       .data(filteredData)
@@ -156,19 +151,18 @@ const getColorForMode = (mode) => {
   return colors[mode] || 'black';
 };
 
-// Fonction de filtrage des données selon la phase
 const filterDataByPhase = (data) => {
   switch (selectedPhase.value) {
     case 'default':
-      return data; // Affiche tous les points
+      return data;
     case 'phase1':
-      return data.slice(0, 2); // Affiche les points 1 et 2
+      return data.slice(0, 2);
     case 'phase2':
-      return data.slice(1, 3); // Affiche les points 2 et 3
+      return data.slice(1, 3);
     case 'phase3':
-      return data.slice(2, 4); // Affiche les points 3 et 4
+      return data.slice(2, 4); 
     case 'phase4':
-      return data.slice(3, 5); // Affiche les points 4 et 5
+      return data.slice(3, 5); 
     default:
       return data;
   }
