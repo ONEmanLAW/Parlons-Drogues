@@ -4,8 +4,6 @@
       <img :src="imageSource" alt="Chapter Image" class="chapter-image" />
       <div class="text-content">
         <h2>{{ title }}</h2>
-        <!-- <h3>{{ subtitle }}</h3>
-        <p>{{ description }}</p> -->
       </div>
     </div>
 
@@ -16,11 +14,19 @@
           :src="videoSource"
           ref="videoElement"
           class="full-screen-video"
+          :class="{ blurred: !videoPlaying && videoHasPlayed }"
           @play="onPlay"
           @pause="onPause"
           @ended="onVideoEnded"
           @canplay="onCanPlay"
         ></video>
+        <div 
+          v-if="!videoPlaying && videoHasPlayed"
+          class="restart-icon"
+          @click="restartVideo"
+        >
+          🔄
+        </div>
       </div>
     </div>
 
@@ -87,10 +93,12 @@ onMounted(() => {
 
 const onPlay = () => {
   document.body.style.overflow = 'hidden';
+  videoPlaying.value = true;
 };
 
 const onPause = () => {
   document.body.style.overflow = '';
+  videoPlaying.value = false;
 };
 
 const onVideoEnded = () => {
@@ -104,17 +112,27 @@ const skipVideo = () => {
   videoPlaying.value = false;
   document.body.style.overflow = '';
 };
+
+const restartVideo = () => {
+  const video = videoElement.value;
+  video.currentTime = 0; // Rewind the video to the beginning
+  video.play(); // Start the video
+  videoPlaying.value = true;
+  scrollToVideo(); // Center the camera on the video
+};
 </script>
 
 <style scoped>
 .intro-chapter {
   text-align: center;
+  overflow: hidden; /* Empêche le débordement horizontal */
 }
 
 .background-container {
   background-size: cover;
   background-position: center;
   height: 100vh;
+  width: 100vw; /* S'assure que le conteneur remplit toute la largeur */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -148,36 +166,34 @@ h2, h3, p {
 .video-container {
   position: relative;
   height: 100vh;
-  padding: 0 60px 60px 60px; 
-  background-color: var(--chapter-bg-color); 
-  box-sizing: border-box; 
+  width: 100vw; /* S'assure que la vidéo prend toute la largeur */
+  padding: 0;
+  background-color: var(--chapter-bg-color);
+  box-sizing: border-box;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start; 
+  justify-content: center;
   align-items: center;
 }
 
 .video-wrapper {
   width: 100%;
-  height: 100%; 
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 0; 
-  box-sizing: border-box;
+  height: 100%;
+  position: relative;
 }
 
 .full-screen-video {
-  width: 100%;
-  height: calc(100% - 30px); 
-  object-fit: contain;
+  width: 100vw; /* Utilise 100vw pour éviter les débordements */
+  height: 100vh;
+  object-fit: cover;
   display: block;
   outline: none;
   border: none;
-  margin: 0; 
-  padding: 0;
   transition: opacity 0.3s ease;
+}
+
+.full-screen-video.blurred {
+  filter: blur(10px);
+  transition: filter 0.5s ease;
 }
 
 .skip-button {
@@ -197,6 +213,27 @@ h2, h3, p {
 }
 
 .skip-button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.restart-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 50px;
+  color: white;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 20px;
+}
+
+.restart-icon:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
 </style>
