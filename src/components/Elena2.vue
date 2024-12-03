@@ -208,13 +208,17 @@ export default {
   line-height: 1.4;
   margin: 0;
   font-weight: bold;
+  font-size: 48px;
+  max-width: 500px;
 }
 
 .text-section p {
   margin-top: 20px;
   line-height: 1.6;
   font-size: clamp(0.9rem, 1.2vw, 1.1rem);
-  color: #333333;
+  color: black;
+  font-size: 20px;
+  max-width: 500px;
 }
 
 .text-section p .highlight {
