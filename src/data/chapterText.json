@@ -27,7 +27,7 @@
     {
       "id": 4,
       "text": "C'est toi qui décides. Ne laisse pas une substance prendre le contrôle de ta vie. Si tu te sens concerné ou que tu t'inquiètes pour quelqu'un, il n’est jamais trop tard pour en parler. Que ce soit à un pote, un adulte de confiance ou même un pro, discuter et chercher de l’aide, c’est déjà un grand pas. Ta santé et ton bien-être valent bien plus qu’un petit trip passager. Prends soin de toi, et fais gaffe à ceux autour de toi.",
-      "audio": "concluRaph.wav",
+      "audio": "conclusion.wav",
       "titleType": "Conclusion",
       "image": "../assets/images/conclusion.png",
       "characterName": "Elena, Raph, Inès"

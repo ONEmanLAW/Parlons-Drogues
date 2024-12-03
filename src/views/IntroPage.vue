@@ -103,30 +103,33 @@ const animateAndRedirect = () => {
 
 /* Conteneur texte */
 .text-container {
-  flex: 0 0 40%; /* 40% pour le texte */
+  flex: 0 0 40%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 40px;
   text-align: left;
   z-index: 10;
+  align-items: flex-start;
 }
 
 /* Titre */
 .intro-title {
-  font-size: 32px;
+  font-size: 48px;
   font-weight: 700;
-  color: #333;
+  color: black;
   margin-bottom: 20px;
   text-transform: uppercase;
   font-weight: 800;
+  max-width: 400px;
 }
 
 /* Paragraphe */
 .text-container p {
-  font-size: 18px;
-  color: #666;
-  margin-bottom: 20px;
+  font-size: 24px;
+  color: black;
+  font-weight: 500;
+  max-width: 550px;
 }
 
 /* Bouton "Découvrir" */
@@ -134,13 +137,14 @@ const animateAndRedirect = () => {
   background-color: white;
   color: black;
   border: 2px solid black;
-  border-radius: 15px;
-  font-size: 25px;
-  padding: 15px 30px;
+  border-radius: 8px;
+  font-size: 24px;
+  padding: 8px;
   transition: background-color 0.3s, transform 0.3s;
   cursor: pointer;
-  width: 220px;
-  align-self: center;
+  width: 170px;
+  align-self: flex-start;
+  margin-bottom: 8px;
 }
 
 .start-button:hover {
