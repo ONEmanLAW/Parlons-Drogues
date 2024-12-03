@@ -13,6 +13,18 @@
       </button>
     </div>
 
+    <!-- Curseur avec 5 phases -->
+    <div class="cursor-controls">
+      <label for="cursor-select">Choisir un mode de phase :</label>
+      <select id="cursor-select" v-model="selectedPhase" @change="updatePhase">
+        <option value="default">Défaut</option>
+        <option value="phase1">Phase 1</option>
+        <option value="phase2">Phase 2</option>
+        <option value="phase3">Phase 3</option>
+        <option value="phase4">Phase 4</option>
+      </select>
+    </div>
+
     <div class="chart-card">
       <div ref="chartContainer" class="chart-container"></div>
     </div>
@@ -27,15 +39,15 @@ import effectsData from '../data/effectsData.json';
 // Modes disponibles
 const modes = ['Fumé', 'Ingeré'];
 const selectedModes = ref([]);
+const selectedPhase = ref('default'); // Phase par défaut
 const chartContainer = ref(null);
 
 // Variables D3
 let svg, xScale, yScale;
 
 const initializeChart = () => {
-  const cardHeight = window.innerHeight * 0.8;
-  const chartHeight = cardHeight * 0.65;
-  const chartWidth = 1500;
+  const chartWidth = window.innerWidth * 0.7;
+  const chartHeight = window.innerHeight * 0.7;
   const margin = { top: 20, right: 20, bottom: 50, left: 50 };
   const width = chartWidth - margin.left - margin.right;
   const height = chartHeight - margin.top - margin.bottom;
@@ -48,10 +60,11 @@ const initializeChart = () => {
     .append('g')
     .attr('transform', `translate(${margin.left},${margin.top})`);
 
-  const timePoints = [0, 10, 30, 60, 120, 360, 720];
+  const timePoints = [0, 10, 30, 120, 240, 360, 600, 720];
+
   xScale = d3
-    .scaleLinear()
-    .domain([0, d3.max(timePoints)])
+    .scalePoint()
+    .domain(timePoints)
     .range([0, width]);
 
   yScale = d3
@@ -68,11 +81,9 @@ const initializeChart = () => {
 };
 
 const updateChart = () => {
-  // Supprimer les anciens graphiques (lignes et points) seulement pour les modes non sélectionnés
-  svg.selectAll('.line').remove();
   svg.selectAll('.point').remove();
+  svg.selectAll('.line').remove();
 
-  // Pour chaque mode sélectionné, afficher les données
   selectedModes.value.forEach((mode) => {
     const modeKey = mode.toLowerCase();
     const data = effectsData[modeKey].data["1"];
@@ -82,21 +93,25 @@ const updateChart = () => {
       return;
     }
 
-    const scaledData = data.map((d) => ({
-      x: d.durée,
-      y: d.intensité,
-    }));
+    const cleanedData = data
+      .map((d) => ({
+        x: d.durée,
+        y: d.intensité === "null" ? "faible" : d.intensité,
+      }))
+      .filter(d => !isNaN(xScale(d.x)) && yScale(d.y) !== undefined);
 
-    // Vérifier si la ligne existe déjà, sinon l'animer
-    if (svg.selectAll(`.line-${mode}`).empty()) {
-      const line = d3.line()
-        .x((d) => xScale(d.x))
-        .y((d) => yScale(d.y))
-        .curve(d3.curveCardinal);
+    const filteredData = filterDataByPhase(cleanedData);
 
-      const path = svg.append('path')
-        .datum(scaledData)
-        .attr('class', `line-${mode}`)
+    // Tracer la ligne si les données sont présentes
+    const line = d3.line()
+      .x((d) => xScale(d.x))
+      .y((d) => yScale(d.y))
+      .curve(d3.curveCardinal);
+
+    if (filteredData.length > 1) {
+      svg.append('path')
+        .datum(filteredData)
+        .attr('class', `line-${mode} line`)
         .attr('d', line)
         .attr('fill', 'none')
         .attr('stroke', getColorForMode(mode))
@@ -110,26 +125,26 @@ const updateChart = () => {
         })
         .transition()
         .duration(1500)
-        .attr('stroke-dashoffset', 0); // Fait apparaître la ligne
+        .attr('stroke-dashoffset', 0);
     }
 
-    // Ajouter des points avec animation
+    // Tracer les points
     svg
       .selectAll(`.point-${mode}`)
-      .data(scaledData)
+      .data(filteredData)
       .enter()
       .append('circle')
-      .attr('class', `point-${mode}`)
+      .attr('class', `point point-${mode}`)
       .attr('cx', (d) => xScale(d.x))
       .attr('cy', (d) => yScale(d.y))
       .attr('r', 5)
       .attr('fill', getColorForMode(mode))
       .attr('stroke', '#000')
       .attr('stroke-width', 1)
-      .attr('opacity', 0) // Les points commencent invisibles
-      .transition() // Applique l'animation
-      .duration(1500) // Durée de l'animation
-      .attr('opacity', 1); // Rendre les points visibles progressivement
+      .attr('opacity', 0)
+      .transition()
+      .duration(1500)
+      .attr('opacity', 1);
   });
 };
 
@@ -141,16 +156,36 @@ const getColorForMode = (mode) => {
   return colors[mode] || 'black';
 };
 
+// Fonction de filtrage des données selon la phase
+const filterDataByPhase = (data) => {
+  switch (selectedPhase.value) {
+    case 'default':
+      return data; // Affiche tous les points
+    case 'phase1':
+      return data.slice(0, 2); // Affiche les points 1 et 2
+    case 'phase2':
+      return data.slice(1, 3); // Affiche les points 2 et 3
+    case 'phase3':
+      return data.slice(2, 4); // Affiche les points 3 et 4
+    case 'phase4':
+      return data.slice(3, 5); // Affiche les points 4 et 5
+    default:
+      return data;
+  }
+};
+
 const toggleMode = (mode) => {
   const index = selectedModes.value.indexOf(mode);
   if (index === -1) {
-    // Si le mode est activé, l'ajouter à la liste des modes sélectionnés
     selectedModes.value.push(mode);
   } else {
-    // Si le mode est désactivé, le retirer de la liste des modes sélectionnés
     selectedModes.value.splice(index, 1);
   }
-  updateChart(); // Met à jour le graphique après avoir modifié l'état des modes sélectionnés
+  updateChart();
+};
+
+const updatePhase = () => {
+  updateChart(); // Redessine le graphique à chaque changement de phase
 };
 
 onMounted(() => {
@@ -204,5 +239,16 @@ watch(selectedModes, updateChart);
 .buttons button.active {
   background-color: #999;
   color: #fff;
+}
+
+.cursor-controls {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.cursor-controls select {
+  padding: 5px;
+  font-size: 14px;
+  cursor: pointer;
 }
 </style>
