@@ -1,13 +1,10 @@
 <template>
   <div class="logo-container">
-    <!-- Logo en haut à gauche -->
     <img src="../assets/images/logo-noir.png" alt="Logo" class="logo" />
   </div>
 
   <div class="intro-page">
-    <!-- Contenu texte et image avant la vidéo -->
     <div class="text-and-image" v-if="!videoStarted">
-      <!-- Texte à gauche -->
       <div class="text-container">
         <h1 class="intro-title">Les Dangers du Cannabis</h1>
         <p>
@@ -17,13 +14,11 @@
         <button @click="startVideo" class="start-button">Découvrir</button>
       </div>
 
-      <!-- Image à droite -->
       <div class="image-container">
         <img src="../assets/images/persosaccueil.gif" alt="Dangers du Cannabis" />
       </div>
     </div>
 
-    <!-- Vidéo en plein écran -->
     <div v-if="videoStarted" ref="videoContainer" class="video-container">
       <video 
         ref="introVideo"
@@ -83,7 +78,6 @@ const animateAndRedirect = () => {
 </script>
 
 <style scoped>
-/* Page principale */
 .intro-page {
   display: flex;
   height: 100vh;
@@ -93,7 +87,6 @@ const animateAndRedirect = () => {
   flex-wrap: wrap;
 }
 
-/* Conteneur texte + image (avant la vidéo) */
 .text-and-image {
   display: flex;
   width: 100%;
@@ -101,7 +94,6 @@ const animateAndRedirect = () => {
   flex-direction: row;
 }
 
-/* Conteneur texte */
 .text-container {
   flex: 0 0 40%;
   display: flex;
@@ -113,7 +105,6 @@ const animateAndRedirect = () => {
   align-items: flex-start;
 }
 
-/* Titre */
 .intro-title {
   font-size: 48px;
   font-weight: 700;
@@ -124,7 +115,6 @@ const animateAndRedirect = () => {
   max-width: 400px;
 }
 
-/* Paragraphe */
 .text-container p {
   font-size: 24px;
   color: black;
@@ -132,7 +122,6 @@ const animateAndRedirect = () => {
   max-width: 550px;
 }
 
-/* Bouton "Découvrir" */
 .start-button {
   background-color: white;
   color: black;
@@ -155,10 +144,9 @@ const animateAndRedirect = () => {
 
 
 
-/* Image à droite */
 .image-container {
-  flex: 0 0 60%; /* 60% pour l'image */
-  height: 100%; /* Prend toute la hauteur */
+  flex: 0 0 60%;
+  height: 100%; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -166,27 +154,27 @@ const animateAndRedirect = () => {
 }
 
 .image-container img {
-  width: 100%; /* Prend toute la largeur disponible */
-  height: 100%; /* Prend toute la hauteur disponible */
-  object-fit: contain; /* Contient l'image sans la découper */
-  object-position: center; /* Centrer l'image pour éviter la perte de visibilité */
+  width: 100%;
+  height: 100%; 
+  object-fit: contain; 
+  object-position: center;
   position: absolute;
 }
 
-/* Logo en haut à gauche */
+
 .logo-container {
   position: absolute;
-  top: 10px; /* Espacement depuis le haut de la page */
-  left: 10px; /* Espacement depuis la gauche */
-  z-index: 100; /* Assurer que le logo soit au-dessus des autres éléments */
+  top: 10px; 
+  left: 10px; 
+  z-index: 100; 
 }
 
 .logo {
-  width: 150px; /* Ajuster la taille du logo selon vos besoins */
+  width: 150px;
   height: auto;
 }
 
-/* Vidéo plein écran */
+
 .video-container {
   position: relative;
   width: 100vw;
@@ -200,23 +188,25 @@ const animateAndRedirect = () => {
 .video-fullscreen {
   width: 100vw;
   height: 100vh;
-  object-fit: cover; /* Remplir tout l'écran */
+  object-fit: cover; 
 }
 
-/* Bouton Skip */
 .skip-button {
   position: absolute;
   bottom: 50px;
   left: 30px;
-  padding: 10px 20px;
-  background-color: rgba(0, 0, 0, 0.6);
-  color: white;
-  border: none;
+  padding: 12px 24px;
+  background: #333;
+  color: #fff; 
+  border: 1px solid #555; 
   cursor: pointer;
   font-size: 16px;
-  border-radius: 5px;
+  font-weight: 500; 
+  border-radius: 6px;
   z-index: 10;
   text-transform: uppercase;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
 .skip-button::after {
@@ -226,10 +216,16 @@ const animateAndRedirect = () => {
   bottom: 0;
   width: 100%;
   height: 2px;
-  background-color: white;
+  background: #fff; 
   transform: scaleX(0);
   transform-origin: bottom right;
-  transition: transform 1s ease;
+  transition: transform 0.4s ease-out;
+}
+
+.skip-button:hover {
+  background: #444;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .skip-button:hover::after {
@@ -237,35 +233,38 @@ const animateAndRedirect = () => {
   transform-origin: bottom left;
 }
 
-/* Media Query pour les petits écrans (responsive) */
+.skip-button:active {
+  background: #222;
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+
+
 @media (max-width: 768px) {
-  /* Sur les petits écrans, les éléments sont empilés verticalement */
   .text-and-image {
     flex-direction: column;
   }
 
-  /* Ajuster la taille du texte et de l'image */
   .text-container {
-    flex: 0 0 40%; /* 40% pour le texte */
-    height: 40vh; /* Texte prend 40% de la hauteur */
+    flex: 0 0 40%;
+    height: 40vh; 
     padding: 20px;
     justify-content: center;
     text-align: center;
   }
 
   .image-container {
-    flex: 0 0 60%; /* 60% pour l'image */
-    height: 60vh; /* Image prend 60% de la hauteur */
+    flex: 0 0 60%;
+    height: 60vh;
   }
 
-  /* Centrer l'image et ne pas la zoomer */
   .image-container img {
-    object-fit: contain; /* Assurer que l'image est contenue sans être coupée */
+    object-fit: contain; 
     width: 100%;
     height: 100%;
   }
 
-  /* Bouton "Découvrir" : ajustement de taille pour les petits écrans */
   .start-button {
     font-size: 18px;
     padding: 12px 24px;
