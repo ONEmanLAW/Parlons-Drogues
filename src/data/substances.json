@@ -14,8 +14,8 @@
       "name": "École",
       "color": "yellow",
       "effects": [
-        { "name": "De chances de ne pas obtenir leur BAC (ou équivalent)", "value": 79 },
-        { "name": "De risque de ne pas poursuivre leurs études à l’université", "value": 70 },
+        { "name": "De chances de ne pas obtenir leur BAC (ou équivalent)", "value": -78 },
+        { "name": "De risque de ne pas poursuivre leurs études à l’université", "value": -70 },
         { "name": "De risques de ne pas terminer le lycée", "value": 60 }
       ],
       "image": "../assets/images/raphecole.gif"
@@ -25,8 +25,8 @@
       "color": "green",
       "effects": [
         { "name": "De conflits familiaux liés à la consommation", "value": 40 },
-        { "name": "De cas de violence verbale et physique dans des familles", "value": 50 },
-        { "name": "De réduction des interactions sociales", "value": 35 }
+        { "name": "De cas de violence verbale et physique dans des familles", "value": 60 },
+        { "name": "De réduction des interactions sociales", "value": -35 }
       ],
       "image": "../assets/images/raphsociale.gif"
     },
@@ -35,7 +35,7 @@
       "color": "red",
       "effects": [
         { "name": "De risque d’accidents de travail", "value": 20 },
-        { "name": "De risque d’absences régulières au travail", "value": 100 },
+        { "name": "De risque d’absences régulières au travail", "value": 287 },
         { "name": "De risque de rencontrer une période de chômage à l’âge adulte", "value": 39 }
       ],
       "image": "../assets/images/raphtravail.gif"

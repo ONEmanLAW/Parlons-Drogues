@@ -1,8 +1,13 @@
 <template>
   <div class="interactive-character">
     <div class="title-container">
+      <div class="info-badge">Info importante</div>
+      
       <h2>Les conséquences de la dépendance au cannabis</h2>
-      <p class="description">Être accro, ça peut détruire tes études, semer la pagaille en famille, t'éloigner de tes amis et ruiner ton boulot. Au final, c’est toute ta vie qui part en vrille.</p>
+      
+      <p class="description">
+        Être accro, ça peut détruire tes études, semer la pagaille en famille, t'éloigner de tes amis et ruiner ton boulot. Au final, c’est toute ta vie qui part en vrille.
+      </p>
     </div>
 
     <div class="card-container">
@@ -27,22 +32,12 @@
 
         <div class="data-display">
           <div v-for="(effect, index) in currentEffects" :key="index" class="data-item">
-            <svg class="circle-chart" width="70" height="70" :data-value="effect.value">
-              <circle class="circle-background" cx="35" cy="35" r="30"></circle>
-              <circle
-                class="circle-foreground"
-                cx="35"
-                cy="35" r="30"
-                :style="{
-                  strokeDasharray: circleCircumference,
-                  strokeDashoffset: calculateOffset(effect.value),
-                  stroke: getSolidGreen(effect.value)
-                }"
-              ></circle>
-              <text x="50%" y="50%" text-anchor="middle" alignment-baseline="middle" font-size="18" fill="#167540" font-weight="bold">
-                {{ effect.value }}%
-              </text>
-            </svg>
+            <div class="circle-container">
+              <div class="outer-circle" :style="{ width: calculateOuterSize(effect.value), height: calculateOuterSize(effect.value) }"></div>
+              <div class="inner-circle">
+                <span class="percentage">{{ effect.value }}%</span>
+              </div>
+            </div>
 
             <p class="data-title">{{ effect.name }}</p>
           </div>
@@ -52,17 +47,17 @@
   </div>
 </template>
 
-
 <script setup>
 import { ref, computed } from "vue";
-import "../styles/InteractiveCharacter.css";
 import substancesData from "../data/substances.json";
 
 const substances = ref(substancesData.substances);
 const activeSubstance = ref(null);
-const baseSubstance = computed(() => substances.value.find(substance => substance.name === "Image de base"));
+const baseSubstance = computed(() =>
+  substances.value.find((substance) => substance.name === "Image de base")
+);
 const substancesToDisplay = computed(() => {
-  return substances.value.filter(substance => substance.name !== "Image de base");
+  return substances.value.filter((substance) => substance.name !== "Image de base");
 });
 
 const baseImage = baseSubstance.value.image;
@@ -82,21 +77,12 @@ function selectSubstance(substance) {
   activeSubstance.value = activeSubstance.value === substance ? null : substance;
 }
 
-const circleRadius = 30;
-const circleCircumference = 2 * Math.PI * circleRadius;
-
-function calculateOffset(value) {
-  const percentage = Math.min(value, 100) / 100;
-  return circleCircumference * (1 - percentage);
-}
-
-function getSolidGreen(value) {
-  const percentage = Math.min(value, 100);
-  return `rgb(
-    ${Math.floor(50 + (percentage * (255 - 50)) / 100)},
-    ${Math.floor(200 + (percentage * (255 - 200)) / 100)},
-    ${Math.floor(50 + (percentage * (100 - 50)) / 100)}
-  )`;
+function calculateOuterSize(value) {
+  const baseSize = 100; 
+  const scalingFactor = 0.5;
+  const maxSize = 100;
+  
+  return `${Math.min(baseSize + value * scalingFactor, baseSize + maxSize * scalingFactor)}px`;
 }
 </script>
 
@@ -114,8 +100,18 @@ function getSolidGreen(value) {
 
 .title-container {
   text-align: center;
-  margin-bottom: 20px; /* Ajoute un petit espace entre le titre et la carte */
-  max-width: 90%; /* Optionnel : Limiter la largeur du titre */
+  margin-bottom: 20px;
+}
+
+.info-badge {
+  display: inline-block;
+  background-color: #BCFFC8;
+  color: #167540;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 
 h2 {
@@ -123,6 +119,10 @@ h2 {
   color: #167540;
   font-weight: bold;
   margin: 0;
+  max-width: 100%;
+  word-wrap: break-word;
+  white-space: normal; 
+  text-align: center;  
 }
 
 .description {
@@ -137,7 +137,7 @@ h2 {
   align-items: center;
   width: 100%;
   max-width: 1100px;
-  overflow: hidden; /* Evite que le contenu dépasse */
+  overflow: hidden;
   flex-grow: 1;
 }
 
@@ -175,7 +175,7 @@ h2 {
 .character img {
   width: 100%;
   height: auto;
-  max-width: 280px;
+  max-width: 265px;
   border-radius: 10px;
 }
 
@@ -183,7 +183,6 @@ h2 {
   display: flex;
   justify-content: center;
   gap: 20px;
-  margin-top: 20px;
 }
 
 .buttons-container button {
@@ -210,7 +209,7 @@ h2 {
   justify-content: center;
   gap: 20px;
   margin-top: 20px;
-  max-height: 200px;
+  max-height: 220px;
   width: 100%;
   box-sizing: border-box;
   padding-right: 10px;
@@ -238,100 +237,65 @@ h2 {
   flex-direction: column;
   align-items: center;
   width: 23%;
-  height: 200px;
-  padding: 10px;
+  height: 230px;
+  padding: 18px;
   box-sizing: border-box;
-  margin-bottom: 20px;
 }
 
 .data-title {
   font-size: 1.1rem;
-  margin: 10px 0 0 0;
+  margin: 20px 0 0 0;
   word-wrap: break-word;
   white-space: normal;
   max-width: 200px;
-  line-height: 1.3;
+  line-height: 1;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 15px;
 }
 
-.circle-chart {
-  transform: rotate(0deg);
+
+.circle-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px; 
+  height: 120px;
+  
 }
 
-.circle-background {
-  fill: none;
-  stroke: #e0e0e0;
-  stroke-width: 6;
+.outer-circle {
+  position: absolute;
+  border: 8px solid #BCFFC8; 
+  border-radius: 50%;
+  box-sizing: border-box;
+  transition: width 0.3s ease, height 0.3s ease;
+  z-index: 1; 
+ 
 }
 
-.circle-foreground {
-  fill: none;
-  stroke-width: 6;
-  transition: stroke-dashoffset 0.3s ease;
+.inner-circle {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background-color: #ECFFF4;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
 }
 
-/* Responsive Design Adjustments */
-@media (max-width: 1024px) {
-  .data-item {
-    width: 48%;
-  }
-
-  .data-display {
-    overflow-y: auto;
-  }
+.percentage {
+  position: absolute;
+  top: -40px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #167540;
+  text-align: center;
+  width: 100%;
+  z-index: 2; 
 }
-
-@media (max-width: 768px) {
-  .data-item {
-    width: 100%;
-  }
-
-  .card {
-    padding: 20px;
-    width: 100%;
-    max-width: none;
-  }
-
-  .character-container {
-    flex-direction: column;
-    gap: 30px;
-  }
-
-  .buttons-container {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .buttons-container button {
-    padding: 12px 20px;
-    font-size: 1rem;
-  }
-
-  .character img {
-    width: 100%;
-    max-width: 250px;
-  }
-}
-
-@media (max-width: 480px) {
-  .data-item {
-    width: 100%;
-  }
-
-  .character img {
-    width: 100%;
-    max-width: 200px;
-  }
-
-  .data-title {
-    font-size: 0.9rem;
-  }
-
-  .buttons-container button {
-    padding: 10px 15px;
-    font-size: 0.9rem;
-  }
-}
-
 </style>

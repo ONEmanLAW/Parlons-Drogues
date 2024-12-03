@@ -12,7 +12,7 @@
     />
 
     <Raph1 />
-    <InteractiveCharacter />
+    <!-- <InteractiveCharacter /> -->
     <Elena2 :currentChapter="2"/>
     <Card :chapterId="2" />
     <ChapterText :currentChapterId="2" />
