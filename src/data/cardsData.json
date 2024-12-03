@@ -7,27 +7,27 @@
       "cards": [
         {
           "title": "DÉTECTION",
-          "description": "Pendant combien de temps le cannabis peut-il être détecté dans ta salive ?",
+          "description": "Combien de temps le cannabis reste détectable dans ta salive ?",
           "icon": "/assets/images/icone1bleu.png",
-          "backDescription": "Le cannabis peut rester détectable dans ta salive jusqu’à 24 heures. ⚠️ Mais attention, si tu fumes beaucoup et souvent, ça peut monter jusqu'à 8 jours.",
+          "backDescription": " En général, ça reste traçable jusqu’à 24h après avoir fumé.⚠️ Mais fais gaffe ! Si t’es un gros consommateur ou si tu fumes souvent, ça peut grimper jusqu’à 8 jours.",
           "donutPercentage": 100,
           "centerText": "24H"
         },
         {
-          "title": "EFFET PRINCIPALE",
-          "description": "C’est quoi l’effet principal quand tu fumes du cannabis en dose normale ?",
+          "title": "SURCONSOMMATION",
+          "description": "À partir de combien de mg de cannabis peut-on faire une surdose ?",
           "icon": "/assets/images/icone2bleu.png",
-          "backDescription": "L’effet principale quand on fume du cannabis en dose normale est l’euphorie. 60% des personnes ont rapportées une sensation d’euphorie quand il en consomme",
-          "donutPercentage": 60,
-          "centerText": "🤩"
+          "backDescription": "Au-delà de cette dose, tu risques d’avoir des effets comme de l'anxiété aiguë, de la parano, des nausées, et dans de rares cas, une psychose temporaire. Ces effets peuvent durer jusqu’à 12 heures.",
+          "donutPercentage": 20,
+          "centerText": "> 20mg"
         },
         {
-          "title": "DURÉE DES EFFETS",
-          "description": "Les effets du cannabis quand tu l’ingère en surdose, ça dure combien de temps en moyenne ?",
+          "title": "DURÉE DES ÉFFETS",
+          "description": "Les effets du cannabis quand tu l’ingères, ça dure combien de temps en moyenne ?",
           "icon": "/assets/images/icone3bleu.png",
-          "backDescription": "Les effets du cannabis peuvent durer jusqu’à 12h de temps lorsqu’il est ingéré en surdose.",
-          "donutPercentage": 50,
-          "centerText": "15H"
+          "backDescription": "Quand tu consommes du cannabis par ingestion, les effets peuvent durer jusqu’à 12 heures. C’est bien plus long que par inhalation",
+          "donutPercentage": 100,
+          "centerText": "12h"
         }
       ]
     },
@@ -38,9 +38,9 @@
       "cards": [
         {
           "title": "IMPACT SUR LA VIE",
-          "description": "Comment le cannabis peut-il influencer tes résultats à l’école ?",
+          "description": "C'est quoi tes chances (en pourcentage) de pas finir le lycée si t’es accro ?",
           "icon": "/assets/images/icone1vert.png",
-          "backDescription": "60 % des jeunes consommateurs réguliers signalent des difficultés de concentration. De plus, 55 % rapportent une diminution de leur motivation, ce qui peut affecter leurs résultats scolaires et leur assiduité.",
+          "backDescription": "60 % des jeunes qui consomment souvent ont de forte chances de pas finir le lycée.",
           "donutPercentage": 60,
           "centerText": "60%"
         },
@@ -48,7 +48,7 @@
           "title": "RISQUES",
           "description": "Pourquoi les jeunes sont-ils plus à risque de devenir dépendants du cannabis ?",
           "icon": "/assets/images/icone2vert.png",
-          "backDescription": "Car le développement de leur cerveau est encore incomplet, surtout dans les zones liées au contrôle des impulsions. Environ 17 % des adolescents qui consomment du cannabis régulièrement développent une dépendance, contre 9 % chez les adultes.",
+          "backDescription": "Le cerveau des jeunes est encore en développement, notamment dans les zones qui contrôlent les impulsions. C’est pour ça qu’environ 17 % des adolescents qui consomment régulièrement du cannabis finissent par devenir dépendants, contre seulement 9 % chez les adultes.",
           "donutPercentage": 17,
           "centerText": "17%"
         },
@@ -56,9 +56,9 @@
           "title": "ADDICTION",
           "description": "À partir de quand on peut vraiment dire qu’on est dépendant du cannabis ?",
           "icon": "/assets/images/icone3vert.png",
-          "backDescription": "Lorsque tu ressens une envie incontrôlable et quotidienne de consommer.",
-          "donutPercentage": 100,
-          "centerText": "😩"
+          "backDescription": "Il faut au moins 2 critères parmi les 11 définis, sur une période de 12 mois. Parmi ces critères, on retrouve des signes comme l'incapacité à réduire ou arrêter la consommation, passer un temps excessif à en obtenir, l'augmentation de la tolérance ou encore des symptômes de sevrage quand on arrête.",
+          "donutPercentage": 20,
+          "centerText": "2/11"
         }
       ]
     },
@@ -69,27 +69,27 @@
       "cards": [
         {
           "title": "SANTÉ MENTALE",
-          "description": "Comment le cannabis peut-il impacter ta mémoire et ta concentration sur le long terme ?",
+          "description": "Combien de personnes souffrent de troubles anxieux dû à la consommation régulière de cannabis ?",
           "icon": "/assets/images/icone1rose.png",
-          "backDescription": "Une baisse de 8 % en moyenne des performances dans les tests cognitifs chez les utilisateurs à long terme",
-          "donutPercentage": 8,
-          "centerText": "8%"
+          "backDescription": "Chez les utilisateurs réguliers de cannabis, la proportion de personnes souffrant de troubles anxieux varie entre 18 % et 22 %.",
+          "donutPercentage": 18,
+          "centerText": "18% / 20%"
         },
         {
           "title": "SANTÉ PHYSIQUE",
-          "description": "Quels sont les risques pour tes poumons si tu consommes du cannabis régulièrement ?",
+          "description": "Quel est le risque pour tes poumons si tu consommes du cannabis régulièrement ?",
           "icon": "/assets/images/icone2rose.png",
-          "backDescription": "Augmentation de 20 % le risque de développer des maladies respiratoires, comme la bronchite chronique, en raison de l'inhalation de fumée irritante pour les poumons. 🫁",
-          "donutPercentage": 20,
-          "centerText": "20%"
+          "backDescription": "À long terme, t’as 50 % de chances d’avoir une bronchite chronique et d’autres gros problèmes respiratoires.",
+          "donutPercentage": 50,
+          "centerText": "50%"
         },
         {
           "title": "RISQUES SPÉCIFIQUE",
           "description": "Quel risque le cannabis peut-il poser spécifiquement pour les hommes ?",
           "icon": "/assets/images/icone3rose.png",
-          "backDescription": "Les hommes risquent de contracter un cancer des testicules s’ils consomment régulièrement du cannabis.",
-          "donutPercentage": 100,
-          "centerText": "🤕"
+          "backDescription": "Les hommes ont 36% de risquent de contracter un cancer des testicules s’ils consomment régulièrement du cannabis. ",
+          "donutPercentage": 36,
+          "centerText": "36%"
         }
       ]
     }
