@@ -237,6 +237,7 @@ const cardTitleClass = computed(() => {
 .chapter-header p {
   font-size: 18px;
   color: #555;
+  font-weight: 500;
 }
 
 .question-label {
@@ -334,6 +335,7 @@ const cardTitleClass = computed(() => {
   transform: rotateY(180deg);
   flex-direction: column;
   text-align: center;
+  font-weight: 800;
 }
 
 .card-back .back-content {
@@ -345,6 +347,7 @@ const cardTitleClass = computed(() => {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  
 }
 
 .card-back h3 {
@@ -356,6 +359,7 @@ const cardTitleClass = computed(() => {
   font-size: 18px;
   color: #000; /* Noir pour le texte */
   padding: 10px;
+  font-weight: 600;
 }
 
 .chapter-title-blue {
