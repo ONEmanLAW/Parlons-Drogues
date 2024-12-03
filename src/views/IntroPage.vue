@@ -46,7 +46,7 @@ import { useRouter } from 'vue-router';
 import gsap from 'gsap';
 
 // Vidéo de début
-const videoSource = new URL('../assets/videos/video2.mp4', import.meta.url).href;
+const videoSource = new URL('../assets/videos/intro.mp4', import.meta.url).href;
 const router = useRouter();
 const videoStarted = ref(false);
 

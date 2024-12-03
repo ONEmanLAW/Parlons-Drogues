@@ -175,7 +175,7 @@ h2 {
 .character img {
   width: 100%;
   height: auto;
-  max-width: 265px;
+  max-width: 250px;
   border-radius: 10px;
 }
 
