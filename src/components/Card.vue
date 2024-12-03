@@ -230,14 +230,15 @@ const cardTitleClass = computed(() => {
 }
 
 .chapter-header h2 {
-  font-size: 32px;
-  font-weight: bold;
+  font-size: 48px;
+  font-weight: 800;
 }
 
 .chapter-header p {
-  font-size: 18px;
+  font-size: 24px;
   color: #555;
-  font-weight: 500;
+  font-weight: 550;
+  max-width: 770px;
 }
 
 .question-label {
@@ -270,7 +271,6 @@ const cardTitleClass = computed(() => {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
   flex-grow: 1;
   overflow-y: auto;
   max-height: 100vh;
@@ -377,11 +377,13 @@ const cardTitleClass = computed(() => {
 .card-title-blue {
   color: #3135B7;
   font-weight: 800;
+  font-size: 24px;
 }
 
 .card-title-green {
   color: #167540;
   font-weight: 800;
+  font-size: 24px;
 }
 
 .card-title-pink {
