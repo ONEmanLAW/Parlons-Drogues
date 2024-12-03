@@ -94,7 +94,7 @@ h1 {
 }
 
 .card h2 {
-  font-size: 2rem;
+  font-size: 35px;
   margin-bottom: 10px;
   color: #FFC9EA;
 }
@@ -124,8 +124,8 @@ h1 {
 
 .cannabis-leaf {
   position: absolute;
-  width: 750px; 
-  height: 750px;
+  width: 100%; 
+  height: 90%;
   background: url('../assets/images/canabis.png') no-repeat center;
   background-size: contain;
   top: 0%; 

@@ -1,7 +1,7 @@
 <template>
   <div class="interactive-character">
     <div class="title-container">
-      <div class="info-badge">Info importante</div>
+      <div class="info-badge">Graphique</div>
       
       <h2>Les conséquences de la dépendance au cannabis</h2>
       

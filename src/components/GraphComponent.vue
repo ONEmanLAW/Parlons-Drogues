@@ -185,7 +185,7 @@ const toggleMode = (mode) => {
 };
 
 const updatePhase = () => {
-  updateChart(); // Redessine le graphique à chaque changement de phase
+  updateChart();
 };
 
 onMounted(() => {
@@ -216,7 +216,7 @@ watch(selectedModes, updateChart);
 
 .chart-container {
   width: 100%;
-  height: 65%;
+  height: 100%;
   overflow-x: auto;
   overflow-y: hidden;
 }

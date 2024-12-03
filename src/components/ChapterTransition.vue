@@ -102,7 +102,7 @@ const navigateToChapter = () => {
 .next-chapter-button {
   padding: 10px 20px;
   background-color: white;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   border: none;
   border-radius: 5px;
