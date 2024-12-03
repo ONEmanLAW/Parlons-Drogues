@@ -34,7 +34,6 @@
     </div>
 
     <div class="navigation-buttons">
-      <!-- Flèche Précédente -->
       <span
         class="arrow previous"
         :style="{ color: getArrowColor(currentIndex) }"
@@ -43,7 +42,6 @@
         &#8592;
       </span>
       
-      <!-- Flèche Suivante -->
       <span
         class="arrow next"
         :style="{ color: getArrowColor(currentIndex) }"
@@ -56,7 +54,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import homeChaptersData from '../data/homeChapters.json';
 
@@ -71,6 +69,23 @@ const currentIndex = ref(0);
 const totalChapters = chapters.length;
 
 const chapterSound = new Audio(new URL('../assets/sounds/sound.wav', import.meta.url).href);
+const backgroundMusic = new Audio(new URL('../assets/sounds/musiqueDeFondHome.mp3', import.meta.url).href);
+
+backgroundMusic.loop = true;
+backgroundMusic.volume = 0.1;
+
+onMounted(() => {
+  backgroundMusic.play().catch((error) => {
+    console.error('La musique de fond ne peut pas être jouée automatiquement.', error);
+  });
+
+  router.beforeEach((to, from, next) => {
+    if (to.path !== from.path) {
+      backgroundMusic.pause();
+    }
+    next();
+  });
+});
 
 const isAnimating = ref(false);
 
@@ -147,11 +162,16 @@ const handleImageClick = (index) => {
   }
 };
 
-// Nouvelle méthode pour obtenir la couleur des flèches en fonction du chapitre actuel
 const getArrowColor = (index) => {
-  const arrowColors = ['#3135B7', '#167540', '#AC0266']; // Couleurs pour chaque chapitre
-  return arrowColors[index] || '#000'; // Retourne la couleur appropriée ou noir si l'index dépasse
+  const arrowColors = ['#3135B7', '#167540', '#AC0266']; 
+  return arrowColors[index] || '#000'; 
 };
+
+onMounted(() => {
+  backgroundMusic.play().catch((error) => {
+    console.error('La musique de fond ne peut pas être jouée automatiquement.', error);
+  });
+});
 </script>
 
 <style scoped>
@@ -230,17 +250,17 @@ const getArrowColor = (index) => {
 }
 
 .chapter-number {
-  font-size: 12px;
+  font-size: 18px;
   font-weight: bold;
   white-space: nowrap;
 }
 
 .chapter-info h2 {
-  font-size: 16px;
+  font-size: 20px;
 }
 
 .chapter-info p {
-  font-size: 8px;
+  font-size: 12px;
   color: inherit;
 }
 
@@ -269,7 +289,7 @@ const getArrowColor = (index) => {
 .chapter-indicators {
   display: flex;
   gap: 8px;
-  margin-top: 15px;
+  margin-top: 70px;
 }
 
 .indicator {
