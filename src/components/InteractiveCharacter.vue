@@ -175,7 +175,7 @@ h2 {
 .character img {
   width: 100%;
   height: auto;
-  max-width: 300px;
+  max-width: 280px;
   border-radius: 10px;
 }
 
@@ -196,6 +196,7 @@ h2 {
   border: 2px solid #167540;
   border-radius: 5px;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .buttons-container button.active {

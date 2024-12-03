@@ -8,7 +8,7 @@
         { "name": "Effet 2", "value": 0 },
         { "name": "Effet 3", "value": 0 }
       ],
-      "image": "../assets/images/ines.png"
+      "image": "../assets/images/raphdata.gif"
     },
     {
       "name": "École",
@@ -18,7 +18,7 @@
         { "name": "De risque de ne pas poursuivre leurs études à l’université", "value": 70 },
         { "name": "De risques de ne pas terminer le lycée", "value": 60 }
       ],
-      "image": "../assets/images/elena.png"
+      "image": "../assets/images/raphecole.gif"
     },
     {
       "name": "Social",
@@ -28,7 +28,7 @@
         { "name": "De cas de violence verbale et physique dans des familles", "value": 50 },
         { "name": "De réduction des interactions sociales", "value": 35 }
       ],
-      "image": "../assets/images/ines.png"
+      "image": "../assets/images/raphsociale.gif"
     },
     {
       "name": "Travail",
@@ -38,7 +38,7 @@
         { "name": "De risque d’absences régulières au travail", "value": 100 },
         { "name": "De risque de rencontrer une période de chômage à l’âge adulte", "value": 39 }
       ],
-      "image": "../assets/images/elena.png"
+      "image": "../assets/images/raphtravail.gif"
     }
   ]
 }

@@ -122,12 +122,13 @@ h1 {
   font-size: 1rem;
   line-height: 1.6;
   margin: 0;
+  min-height: 110%;
 }
 
 
 .main-card-image {
-  width: 200px;
-  height: 200px;
+  width: 370px;
+  height: 270px;
   background: url('../assets/images/raph-boulet.png') no-repeat center;
   background-size: contain;
   flex-shrink: 0; 
