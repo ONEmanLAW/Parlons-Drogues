@@ -356,7 +356,7 @@ const cardTitleClass = computed(() => {
 }
 
 .card-text {
-  font-size: 17px;
+  font-size: 16px;
   color: #000; /* Noir pour le texte */
   padding: 10px;
   font-weight: 600;

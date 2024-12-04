@@ -114,7 +114,6 @@ function getTextColor(index) {
   flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
-  margin-top: 40px;
 }
 
 .menu-image {
@@ -133,7 +132,7 @@ function getTextColor(index) {
 
 .menu-image p {
   margin-top: 10px;
-  font-size: 16px;
+  font-size: 24px;
   color: black;
   font-weight: bold;
 }

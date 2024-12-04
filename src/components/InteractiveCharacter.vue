@@ -93,14 +93,16 @@ function calculateOuterSize(value) {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f4f4f4;
+  background-color: white;
   padding: 20px;
   box-sizing: border-box;
 }
 
 .title-container {
   text-align: center;
-  margin-bottom: 20px;
+  max-width: 750px; /* Définir une largeur maximale */
+  margin-left: auto; /* Centrer horizontalement */
+  margin-right: auto; /* Centrer horizontalement */
 }
 
 .info-badge {
@@ -143,17 +145,23 @@ h2 {
 
 .card {
   background-color: #ffffff;
-  padding: 40px;
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-  width: 100%;
-  max-width: 1100px;
-  min-height: 80vh;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 50px; /* Coins arrondis */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre douce */
+  width: 90%;
+  height: 70vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 40px;
+  gap: 20px;
+  transition: box-shadow 0.3s ease; /* Transition pour rendre l'ombre plus fluide */
+}
+
+/* Ajout d'une interaction au survol (optionnel) */
+.card:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3), 0 6px 12px rgba(0, 0, 0, 0.15); /* Ombre plus prononcée au survol */
 }
 
 .character-container {
@@ -161,7 +169,7 @@ h2 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 70px;
+  gap: 20px;
 }
 
 .character {
@@ -175,7 +183,7 @@ h2 {
 .character img {
   width: 100%;
   height: auto;
-  max-width: 250px;
+  max-width: 258px;
   border-radius: 10px;
 }
 
@@ -236,9 +244,9 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 23%;
+  width: 22%;
   height: 230px;
-  padding: 18px;
+  padding: 16px;
   box-sizing: border-box;
 }
 
