@@ -93,19 +93,19 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Alignement au haut */
-  min-height: 100vh; /* Couvrir la hauteur de l'écran */
+  justify-content: flex-start; 
+  min-height: 100vh; 
   padding: 20px;
   background-color: #FFF2E5;
   font-family: Montserrat, sans-serif;
   color: #333;
   box-sizing: border-box;
-  overflow-x: hidden; /* Empêche le débordement horizontal */
+  overflow-x: hidden; 
 }
 
 .aide-label {
   display: inline-block;
-  background-color: #FFD6AB; /* Fond coloré sous "Aide" */
+  background-color: #FFD6AB;
   color: #FF7424;
   font-weight: bold;
   padding: 5px 35px;
@@ -119,9 +119,9 @@ export default {
   flex-wrap: wrap;
   gap: 40px;
   width: 100%;
-  max-width: 1100px; /* Limite la largeur maximale */
+  max-width: 1100px;
   justify-content: space-between;
-  align-items: flex-start; /* Alignement des cartes en haut */
+  align-items: flex-start; 
   margin-bottom: 20px;
   margin-top: 20px;
 }
@@ -131,7 +131,7 @@ export default {
   border-radius: 15px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
   padding: 30px;
-  width: calc(50% - 20px); /* Deux cartes côte à côte sur grands écrans */
+  width: calc(50% - 20px); 
   min-height: 500px;
   box-sizing: border-box;
   display: flex;
@@ -164,7 +164,7 @@ export default {
 
 .card-content li .text {
   font-size: 18px;
-  word-wrap: break-word; /* Gère les longs textes */
+  word-wrap: break-word; 
 }
 
 .card-content li .text strong {
@@ -225,23 +225,22 @@ export default {
   color: #fff;
 }
 
-/* MEDIA QUERIES */
 @media (max-width: 1024px) {
   .info-card {
-    width: 100%; /* Les cartes s'étendent sur toute la largeur */
+    width: 100%; 
   }
 }
 
 @media (max-width: 768px) {
   .cards-container {
-    flex-direction: column; /* Les cartes s'empilent verticalement */
+    flex-direction: column; 
     gap: 20px;
-    align-items: center; /* Centrer les cartes */
+    align-items: center; 
   }
 
   .info-card {
-    width: 90%; /* Adapte la largeur des cartes */
-    min-height: auto; /* Pas de hauteur minimale */
+    width: 90%;
+    min-height: auto; 
   }
 
   .card-title {
@@ -281,9 +280,9 @@ export default {
   }
 
   .card-content li {
-    flex-direction: column; /* Empile les éléments de chaque ligne */
+    flex-direction: column;
     gap: 10px;
-    align-items: flex-start; /* Texte aligné à gauche */
+    align-items: flex-start;
   }
 
   .icon {

@@ -66,10 +66,10 @@ function getImageSource(imagePath) {
   return new URL(`${imagePath}`, import.meta.url).href;
 }
 
-// Function to return color for each chapter title based on index
+
 function getTextColor(index) {
   const colors = ["blue", "green", "#AC0266", "orange"];
-  return { color: colors[index] || "black" }; // Default to black if out of range
+  return { color: colors[index] || "black" };
 }
 </script>
 

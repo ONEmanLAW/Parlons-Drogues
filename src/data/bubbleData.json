@@ -1,8 +1,0 @@
-{
-  "bubbles": [
-    { "label": "Cannabis", "value": 40 },
-    { "label": "Alcool", "value": 30 },
-    { "label": "Ecstasy", "value": 20 },
-    { "label": "Drogue Dure", "value": 15 }
-  ]
-}

@@ -26,7 +26,6 @@ export default router;
 
 
 
-// Quand le site sera Finit
 
 // import { createRouter, createWebHistory } from 'vue-router';
 // import Home from '../views/Home.vue';

@@ -32,11 +32,11 @@ header {
   right: 0;
   padding: 10px 20px;
   z-index: 10;
-  pointer-events: none; /* Empêche l'interaction avec tout le header */
+  pointer-events: none; 
 }
 
 .logo-link, .menu-button {
-  pointer-events: auto; /* Permet d'interagir avec le logo et le menu */
+  pointer-events: auto; 
 }
 
 .logo-link {

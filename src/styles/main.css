@@ -7,10 +7,10 @@ body,html {
   -ms-overflow-style: none; */
 }
 
-html::-webkit-scrollbar,
-body::-webkit-scrollbar {
+/* html::-webkit-scrollbar,
+body::-webkit-scrollbar { */
   /* display: none;  */
-}
+
 
 * {
   user-select: none;

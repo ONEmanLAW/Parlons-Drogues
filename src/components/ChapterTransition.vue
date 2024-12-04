@@ -5,7 +5,6 @@
     </div>
     <p class="text">{{ chapterText }}</p>
     
-    <!-- Dynamically add class for button color based on current chapter -->
     <button class="next-chapter-button" :class="nextChapterButtonClass" @click="navigateToChapter">
       Aller au chapitre suivant
     </button>
@@ -28,7 +27,7 @@ const props = defineProps({
 
 const router = useRouter();
 
-// Update paths to point to images in the public folder
+
 const chapterImages = {
   1: '/assets/images/raph.gif',  
   2: '/assets/images/ines.gif',  
@@ -41,7 +40,7 @@ const chapterBackgroundColors = {
   3: '#FF7424',  
 };
 
-// Dynamically determine button color class based on chapter
+
 const chapterButtonClasses = {
   1: 'button-green',  
   2: 'button-pink',    
@@ -112,7 +111,7 @@ const navigateToChapter = () => {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-/* Define the button text colors based on chapters */
+
 .button-green {
   color: #167540;
 }
