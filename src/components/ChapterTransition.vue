@@ -15,10 +15,6 @@
 <script setup>
 import { useRouter } from 'vue-router';
 
-import raphImage from '../assets/images/raph.gif';
-import inesImage from '../assets/images/ines.gif';
-import elenaImage from '../assets/images/conclusion.gif';
-
 const props = defineProps({
   currentChapter: {
     type: Number,
@@ -32,10 +28,11 @@ const props = defineProps({
 
 const router = useRouter();
 
+// Update paths to point to images in the public folder
 const chapterImages = {
-  1: raphImage,   
-  2: inesImage,   
-  3: elenaImage, 
+  1: '/assets/images/raph.gif',  
+  2: '/assets/images/ines.gif',  
+  3: '/assets/images/conclusion.gif',  
 };
 
 const chapterBackgroundColors = {
