@@ -1,7 +1,17 @@
 <template>
   <div class="chapter3">
+    <!-- Texte au-dessus du titre -->
+    <div class="info-badge">Graphique</div>
+    
+    <!-- Titre principal -->
     <h2>Les effets du cannabis à court terme</h2>
 
+    <!-- Texte explicatif -->
+    <p class="description">
+      Les effets du cannabis, c’est pas toujours pareil, ça change selon les moments. Quand tu consommes, il y a plusieurs phases par lesquelles tu passes. Ce schéma te montre comment l’intensité évolue avec le temps, pour mieux comprendre ce qui se passe dans ton corps.
+    </p>
+
+    <!-- Section des boutons -->
     <div class="buttons">
       <button
         v-for="mode in modes"
@@ -25,11 +35,13 @@
       </select>
     </div>
 
+    <!-- Graphique -->
     <div class="chart-card">
       <div ref="chartContainer" class="chart-container"></div>
     </div>
   </div>
 </template>
+
 
 <script setup>
 import { ref, onMounted, watch } from 'vue';
@@ -371,5 +383,25 @@ select:hover {
   background-color: #f1f1f1; /* Changement de couleur au survol */
 }
 
+
+.info-badge {
+  display: inline-block;
+  background-color: #A4E1FF;
+  color: #3135B7;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  margin: 15px 0 20px;
+  text-align: center; /* Centrer le texte */
+  max-width: 80%; /* Limiter la largeur du paragraphe */
+}
 
 </style>
