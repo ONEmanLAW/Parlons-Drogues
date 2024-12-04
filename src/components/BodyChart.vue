@@ -249,7 +249,7 @@ onMounted(() => {
 }
 
 .body-image {
-  width: 195px;
+  width: 165px;
   height: auto;
   object-fit: contain;
 }
@@ -330,7 +330,6 @@ onMounted(() => {
   border-color: #FF33A1; 
 }
 
-/* Contenu dynamique */
 .chart-container {
   display: flex;
   flex-direction: column;
