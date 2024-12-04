@@ -47,8 +47,8 @@ let svg, xScale, yScale;
 
 const initializeChart = () => {
   // Réduire la taille du graphique
-  const chartWidth = 1000; // Largeur du graphique réduite
-  const chartHeight = 600; // Hauteur du graphique réduite
+  const chartWidth = 900; // Largeur du graphique réduite
+  const chartHeight = 500; // Hauteur du graphique réduite
   const margin = { top: 20, right: 30, bottom: 80, left: 100 }; // Marges plus larges pour l'espace
   const width = chartWidth - margin.left - margin.right;
   const height = chartHeight - margin.top - margin.bottom;
@@ -222,10 +222,10 @@ const addImageForPhase = () => {
   if (imageUrl) {
     svg.append('image')
       .attr('class', 'image')
-      .attr('x', 500) // Position X de l'image (ajuste selon tes besoins)
-      .attr('y', -150) // Position Y de l'image (ajuste selon tes besoins)
-      .attr('width', 400) // Ajuste la taille de l'image ici
-      .attr('height', 400) // Ajuste la taille de l'image ici
+      .attr('x', 400) // Position X de l'image (ajuste selon tes besoins)
+      .attr('y', -100) // Position Y de l'image (ajuste selon tes besoins)
+      .attr('width', 375) // Ajuste la taille de l'image ici
+      .attr('height', 375) // Ajuste la taille de l'image ici
       .attr('xlink:href', imageUrl); // Lien vers l'image
   }
 };
