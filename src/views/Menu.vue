@@ -63,7 +63,7 @@ function goToChapter(chapterId) {
 
 
 function getImageSource(imagePath) {
-  return new URL(`../${imagePath}`, import.meta.url).href;
+  return new URL(`${imagePath}`, import.meta.url).href;
 }
 
 // Function to return color for each chapter title based on index
