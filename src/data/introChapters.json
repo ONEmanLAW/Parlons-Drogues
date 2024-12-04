@@ -6,7 +6,7 @@
       "subtitle": "Élena et ses premières bouffées",
       "description": "Tu vas apprendre tous les effets possibles à court terme.",
       "videoSource": "assets/videos/temoignage1.mp4",
-      "imageSource": "assets/images/elena.gif",
+      "imageSource": "/assets/images/elena.gif",
       "backgroundImage": "assets/images/fond-chapitre-1.gif",
       "backgroundColor": "#3135B7" 
     },
@@ -16,7 +16,7 @@
       "subtitle": "Raph face à l’addiction",
       "description": "Tu vas apprendre tous les effets de la dépendance.",
       "videoSource": "assets/videos/temoignage2.mp4",
-      "imageSource": "assets/images/raph.gif",
+      "imageSource": "/assets/images/raph.gif",
       "backgroundImage": "assets/images/fond-chapitre-2.gif",
       "backgroundColor": "#167540"  
     },
@@ -26,7 +26,7 @@
       "subtitle": "LA SANTÉ D'INÈS EN PÉRIL",
       "description": "Tu vas apprendre tous les effets possibles à long terme.",
       "videoSource": "assets/videos/temoignage3.mp4",
-      "imageSource": "assets/images/ines.gif",
+      "imageSource": "/assets/images/ines.gif",
       "backgroundImage": "assets/images/fond-chapitre-3.gif",
       "backgroundColor": "#AC0266"  
     },
@@ -35,7 +35,7 @@
       "title": "Conclusion",
       "subtitle": "",
       "description": "Des trucs supplémentaires.",
-      "imageSource": "assets/images/conclusion.gif",
+      "imageSource": "/assets/images/conclusion.gif",
       "backgroundColor": "#FF7424" 
     }
   ]

@@ -47,7 +47,7 @@ const chapterCards = cardsData.chapters.find(ch => ch.id === 2)?.cards || [];
 const chapter = {
   ...chapterData,
   videoSource: new URL(`../${chapterData.videoSource}`, import.meta.url).href,
-  imageSource: new URL(`../${chapterData.imageSource}`, import.meta.url).href,
+  imageSource: new URL(`${chapterData.imageSource}`, import.meta.url).href,
   backgroundImage: new URL(`../${chapterData.backgroundImage}`, import.meta.url).href,
   cards: chapterCards
 };
