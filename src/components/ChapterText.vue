@@ -56,7 +56,7 @@ const chapterInfo = computed(() => {
 const chapterText = computed(() => chapterInfo.value.text || '');
 const chapterTitleType = computed(() => chapterInfo.value.titleType || '');
 const chapterImage = computed(() => {
-  return chapterInfo.value.image ? new URL(chapterInfo.value.image, import.meta.url).href : '';
+  return chapterInfo.value.image ? chapterInfo.value.image : '';
 });
 const chapterCharacterName = computed(() => chapterInfo.value.characterName || '');
 
@@ -69,16 +69,16 @@ const audioFile = computed(() => {
 
 const buttonImages = {
   play: [
-    new URL('../assets/images/playElena.png', import.meta.url).href,
-    new URL('../assets/images/playRaph.png', import.meta.url).href,
-    new URL('../assets/images/playInes.png', import.meta.url).href, 
-    new URL('../assets/images/playConclu.png', import.meta.url).href,
+    '/images/playElena.png',
+    '/images/playRaph.png',
+    '/images/playInes.png', 
+    '/images/playConclu.png',
   ],
   pause: [
-    new URL('../assets/images/pauseElena.png', import.meta.url).href,
-    new URL('../assets/images/pauseRaph.png', import.meta.url).href,
-    new URL('../assets/images/pauseInes.png', import.meta.url).href,
-    new URL('../assets/images/pauseConclu.png', import.meta.url).href,
+    '/images/pauseElena.png',
+    '/images/pauseRaph.png',
+    '/images/pauseInes.png',
+    '/images/pauseConclu.png',
   ]
 };
 

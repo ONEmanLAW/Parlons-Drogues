@@ -5,7 +5,7 @@
       "text": "Franchement, j'ai capté que ce que je pensais fun et stylé, c'était en vrai super dangereux. J'ai voulu faire comme tout le monde, mais sérieux ça valait pas le coup. Si j'avais su les risques, j'aurais jamais tenté. J'ai flippé comme jamais et je veux que personne ne vive ça.",
       "audio": "concluElena.wav",
       "titleType": "Réflexion",
-      "image": "../assets/images/elena.gif",
+      "image": "/assets/images/elena.gif",
       "characterName": "Elena"
     },
     {
@@ -13,7 +13,7 @@
       "text": "J'ai capté qu'à vouloir trop être cool, tu risques de tout perdre. Ce qui commence par une simple blague, peut vite se transformer en dépendance, sans que tu t'en rendre compte. Faut pas laisser ses mauvaises habitudes prendre le dessus. Apprends à prendre du recul et à garder le contrôle, même quand c'est pas facile et surtout si tu sens que ça part en vrille demande de l'aide avant que ça soit trop tard.",
       "audio": "concluRaph.wav",
       "titleType": "Réflexion",
-      "image": "../assets/images/raph.gif",
+      "image": "/assets/images/raph.gif",
       "characterName": "Raph"
     },
     {
@@ -21,7 +21,7 @@
       "text": "Quand j'ai perdu le contrôle, j'ai compris que je faisais du mal à me santé sur le long terme. Au début, tu penses que ça n'a pas d'impact, mais avec le temps, tu te rends compte que ça te touche vraiment. C'était super dur d'accepter ça et d'en parler, mais aujourd'hui, je vois bien les dégâts et je regrette vraiment d'avoir commencé. Si je peux te donner un conseil, ne commence pas ou arrête avant que ça commence à détruire ta vie.",
       "audio": "concluInes.wav",
       "titleType": "Réflexion",
-      "image": "../assets/images/ines.gif",
+      "image": "/assets/images/ines.gif",
       "characterName": "Inès"
     },
     {
@@ -29,7 +29,7 @@
       "text": "C’est toi qui gères. Ne laisse pas le cannabis prendre le contrôle de ta vie. Si tu te sens concerné ou que tu t’inquiètes pour quelqu’un, sache qu’il n’est jamais trop tard pour en parler. Que ce soit avec un pote, un adulte de confiance ou même un pro, parler et demander de l’aide, c’est déjà un super premier pas. Ta santé et ton bien-être valent bien plus qu’un trip éphémère. Prends soin de toi et sois là pour ceux autour de toi.",
       "audio": "conclusion.wav",
       "titleType": "Conclusion",
-      "image": "../assets/images/conclusion.gif",
+      "image": "/assets/images/conclusion.gif",
       "characterName": "Elena, Raph, Inès"
     }
   ]
