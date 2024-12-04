@@ -62,7 +62,7 @@ const substancesToDisplay = computed(() => {
 
 const baseImage = baseSubstance.value.image;
 function resolveImagePath(path) {
-  return new URL(path, import.meta.url).href;
+  return path;  // Chemin relatif du dossier public
 }
 
 const currentImage = computed(() => {
@@ -85,6 +85,7 @@ function calculateOuterSize(value) {
   return `${Math.min(baseSize + value * scalingFactor, baseSize + maxSize * scalingFactor)}px`;
 }
 </script>
+
 
 <style scoped>
 .interactive-character {
