@@ -60,14 +60,13 @@ import homeChaptersData from '../data/homeChapters.json';
 
 const router = useRouter();
 
-// Les chemins d'image sont directement utilisables depuis le fichier JSON
 const chapters = homeChaptersData.chapters;
 
 const currentIndex = ref(0);
 const totalChapters = chapters.length;
 
-const chapterSound = new Audio('/sounds/sound.wav'); // Chemin relatif au dossier public
-const backgroundMusic = new Audio('/sounds/musiqueDeFondHome.mp3'); // Chemin relatif au dossier public
+const chapterSound = new Audio('/assets/sounds/sound.wav');
+const backgroundMusic = new Audio('/assets/sounds/musiqueDeFondHome.mp3');
 
 backgroundMusic.loop = true;
 backgroundMusic.volume = 0.1;

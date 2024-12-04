@@ -69,16 +69,16 @@ const audioFile = computed(() => {
 
 const buttonImages = {
   play: [
-    '/images/playElena.png',
-    '/images/playRaph.png',
-    '/images/playInes.png', 
-    '/images/playConclu.png',
+    '/assets/images/playElena.png',
+    '/assets/images/playRaph.png',
+    '/assets/images/playInes.png', 
+    '/assets/images/playConclu.png',
   ],
   pause: [
-    '/images/pauseElena.png',
-    '/images/pauseRaph.png',
-    '/images/pauseInes.png',
-    '/images/pauseConclu.png',
+    '/assets/images/pauseElena.png',
+    '/assets/images/pauseRaph.png',
+    '/assets/images/pauseInes.png',
+    '/assets/images/pauseConclu.png',
   ]
 };
 

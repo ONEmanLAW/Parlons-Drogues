@@ -399,7 +399,7 @@ select:hover {
   font-size: 16px;
   line-height: 1.5;
   color: #333;
-  margin: 15px 0 20px;
+  margin: 0 0 0px;
   text-align: center; /* Centrer le texte */
   max-width: 80%; /* Limiter la largeur du paragraphe */
 }
