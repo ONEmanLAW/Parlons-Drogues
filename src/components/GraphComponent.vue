@@ -1,6 +1,6 @@
 <template>
   <div class="chapter3">
-    <h2>Graphique des Effets par Mode de Consommation</h2>
+    <h2>Les effets du cannabis à court terme</h2>
 
     <div class="buttons">
       <button
@@ -13,6 +13,7 @@
       </button>
     </div>
 
+    <!-- Curseur avec 5 phases -->
     <div class="cursor-controls">
       <label for="cursor-select">Choisir un mode de phase :</label>
       <select id="cursor-select" v-model="selectedPhase" @change="updatePhase">
@@ -35,25 +36,28 @@ import { ref, onMounted, watch } from 'vue';
 import * as d3 from 'd3';
 import effectsData from '../data/effectsData.json';
 
+// Modes disponibles
 const modes = ['Fumé', 'Ingeré'];
 const selectedModes = ref([]);
-const selectedPhase = ref('default');
+const selectedPhase = ref('default'); // Phase par défaut
 const chartContainer = ref(null);
 
+// Variables D3
 let svg, xScale, yScale;
 
 const initializeChart = () => {
-  const chartWidth = window.innerWidth * 0.7;
-  const chartHeight = window.innerHeight * 0.7;
-  const margin = { top: 20, right: 20, bottom: 50, left: 50 };
+  // Réduire la taille du graphique
+  const chartWidth = 1000; // Largeur du graphique réduite
+  const chartHeight = 600; // Hauteur du graphique réduite
+  const margin = { top: 20, right: 30, bottom: 80, left: 100 }; // Marges plus larges pour l'espace
   const width = chartWidth - margin.left - margin.right;
   const height = chartHeight - margin.top - margin.bottom;
 
   svg = d3
     .select(chartContainer.value)
     .append('svg')
-    .attr('width', width + margin.left + margin.right)
-    .attr('height', height + margin.top + margin.bottom)
+    .attr('width', chartWidth)
+    .attr('height', chartHeight)
     .append('g')
     .attr('transform', `translate(${margin.left},${margin.top})`);
 
@@ -66,20 +70,66 @@ const initializeChart = () => {
 
   yScale = d3
     .scalePoint()
-    .domain(['null', 'faible', 'modéré', 'forte', 'très forte'])
+    .domain(['absent', 'faible', 'modéré', 'forte', 'très forte'])
     .range([height, 0]);
 
-  svg.append('g').attr('transform', `translate(0,${height})`).call(
-    d3.axisBottom(xScale).tickValues(timePoints).tickFormat((d) => (d === 0 ? '0' : `${d} min`))
-  );
-  svg.append('g').call(d3.axisLeft(yScale));
+  // Ajouter les axes avec les labels
+  svg.append('g')
+    .attr('transform', `translate(0,${height})`)
+    .call(d3.axisBottom(xScale).tickValues(timePoints).tickFormat((d) => (d === 0 ? '0' : `${d} min`)))
+    .selectAll('text')
+    .style('fill', 'blue') // Couleur bleue pour le texte de l'axe des x
+    .style('font-size', '14px') // Taille du texte
+    .style('font-weight', 'bold'); // Texte en gras
+
+  svg.append('g')
+    .call(d3.axisLeft(yScale))
+    .selectAll('text')
+    .style('fill', 'blue')
+    .style('font-size', '14px') 
+    .style('font-weight', 'bold');
+
+  svg.selectAll('.domain') 
+    .style('stroke', 'blue') 
+    .style('stroke-width', 3); 
+
+  svg.selectAll('.tick line') 
+    .style('stroke', 'blue')
+    .style('stroke-width', 2); 
+
+  svg.selectAll('.tick text') 
+    .style('fill', 'blue')
+    .style('font-size', '14px') 
+    .style('font-weight', 'bold');
+
+  svg.append('text')
+    .attr('x', width / 2)
+    .attr('y', height + margin.bottom - 10)
+    .attr('text-anchor', 'middle')
+    .style('fill', 'blue')
+    .style('font-size', '16px')
+    .style('font-weight', 'bold')
+    .text('Durée (en min)');
+
+  svg.append('text')
+    .attr('x', -height / 2) 
+    .attr('y', -margin.left + 10) 
+    .attr('transform', 'rotate(-90)')
+    .attr('text-anchor', 'middle')
+    .style('fill', 'blue')
+    .style('font-size', '16px')
+    .style('font-weight', 'bold')
+    .text('Intensité');
 
   updateChart();
 };
 
+
+
 const updateChart = () => {
   svg.selectAll('.point').remove();
   svg.selectAll('.line').remove();
+  svg.selectAll('.image').remove(); // Ajouter cette ligne pour supprimer les anciennes images
 
   selectedModes.value.forEach((mode) => {
     const modeKey = mode.toLowerCase();
@@ -93,12 +143,13 @@ const updateChart = () => {
     const cleanedData = data
       .map((d) => ({
         x: d.durée,
-        y: d.intensité === "null" ? "faible" : d.intensité,
+        y: d.intensité
       }))
       .filter(d => !isNaN(xScale(d.x)) && yScale(d.y) !== undefined);
 
     const filteredData = filterDataByPhase(cleanedData);
 
+    // Tracer la ligne si les données sont présentes
     const line = d3.line()
       .x((d) => xScale(d.x))
       .y((d) => yScale(d.y))
@@ -111,7 +162,7 @@ const updateChart = () => {
         .attr('d', line)
         .attr('fill', 'none')
         .attr('stroke', getColorForMode(mode))
-        .attr('stroke-width', 2)
+        .attr('stroke-width', 4) // Augmenter l'épaisseur de la ligne du graphique
         .attr('stroke-dasharray', function () {
           const length = this.getTotalLength();
           return length;
@@ -124,6 +175,7 @@ const updateChart = () => {
         .attr('stroke-dashoffset', 0);
     }
 
+    // Tracer les points
     svg
       .selectAll(`.point-${mode}`)
       .data(filteredData)
@@ -141,28 +193,64 @@ const updateChart = () => {
       .duration(1500)
       .attr('opacity', 1);
   });
+
+  // Ajouter l'image en fonction de la phase sélectionnée
+  addImageForPhase();
+};
+
+const addImageForPhase = () => {
+  let imageUrl = '';
+  
+  switch (selectedPhase.value) {
+    case 'phase1':
+      imageUrl = '/assets/images/phase1.png';
+      break;
+    case 'phase2':
+      imageUrl = '/assets/images/phase2.png';
+      break;
+    case 'phase3':
+      imageUrl = '/assets/images/phase3.png';
+      break;
+    case 'phase4':
+      imageUrl = '/assets/images/phase4.png';
+      break;
+    default:
+      imageUrl = ''; // Pas d'image en phase "default"
+      break;
+  }
+
+  if (imageUrl) {
+    svg.append('image')
+      .attr('class', 'image')
+      .attr('x', 500) // Position X de l'image (ajuste selon tes besoins)
+      .attr('y', -150) // Position Y de l'image (ajuste selon tes besoins)
+      .attr('width', 400) // Ajuste la taille de l'image ici
+      .attr('height', 400) // Ajuste la taille de l'image ici
+      .attr('xlink:href', imageUrl); // Lien vers l'image
+  }
 };
 
 const getColorForMode = (mode) => {
   const colors = {
-    Fumé: 'rgba(255, 99, 132, 1)',
+    Fumé: 'rgba(0, 0, 255, 1)',
     Ingeré: 'rgba(75, 192, 192, 1)',
   };
   return colors[mode] || 'black';
 };
 
+// Fonction de filtrage des données selon la phase
 const filterDataByPhase = (data) => {
   switch (selectedPhase.value) {
     case 'default':
-      return data;
+      return data; // Affiche tous les points
     case 'phase1':
-      return data.slice(0, 2);
+      return data.slice(0, 2); // Affiche les points 1 et 2
     case 'phase2':
-      return data.slice(1, 3);
+      return data.slice(1, 3); // Affiche les points 2 et 3
     case 'phase3':
-      return data.slice(2, 4); 
+      return data.slice(2, 4); // Affiche les points 3 et 4
     case 'phase4':
-      return data.slice(3, 5); 
+      return data.slice(3, 5); // Affiche les points 4 et 5
     default:
       return data;
   }
@@ -179,7 +267,7 @@ const toggleMode = (mode) => {
 };
 
 const updatePhase = () => {
-  updateChart();
+  updateChart(); // Redessine le graphique à chaque changement de phase
 };
 
 onMounted(() => {
@@ -199,8 +287,11 @@ watch(selectedModes, updateChart);
 }
 
 .chart-card {
-  width: 90%;
-  height: 80vh;
+  display: flex;
+  justify-content: center;  /* Centre horizontalement */
+  align-items: center;  /* Centre verticalement */
+  width: 70%;  /* Réduit la taille du conteneur pour plus de visibilité */
+  height: 60vh;  /* Réduit la hauteur du conteneur */
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -209,40 +300,76 @@ watch(selectedModes, updateChart);
 }
 
 .chart-container {
+  display: flex;
+  justify-content: center;  /* Centre le contenu horizontalement */
+  align-items: center;  /* Centre le contenu verticalement */
   width: 100%;
   height: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
 }
 
-.buttons {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.buttons button {
-  padding: 10px 20px;
-  font-size: 16px;
+button {
+  padding: 12px 24px;
+  margin: 5px;
+  background-color: #3f51b5; /* Couleur bleue par défaut */
+  color: white;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
-  border: 1px solid #ccc;
-  background-color: #f5f5f5;
-  transition: background-color 0.3s;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.3s ease; /* Transition pour un effet fluide */
 }
 
-.buttons button.active {
-  background-color: #999;
-  color: #fff;
+/* Style lorsque le bouton est actif */
+button.active {
+  background-color: #1e3d8e; /* Couleur bleue plus foncée */
+  box-shadow: 0 4px 8px rgba(30, 61, 142, 0.6); /* Ombre pour indiquer que le bouton est enfoncé */
+  transform: translateY(2px); /* Légère translation pour simuler l'enfoncement */
 }
+
+/* Effet au survol */
+button:hover {
+  background-color: #2c478d; /* Un bleu intermédiaire quand on survole */
+}
+
+/* Effet au focus (quand le bouton reçoit le focus avec le clavier) */
+button:focus {
+  outline: none; /* Supprimer le contour par défaut */
+  box-shadow: 0 0 8px rgba(30, 61, 142, 0.7); /* Ombre plus intense au focus */
+}
+
+
 
 .cursor-controls {
-  margin: 10px 0;
-  font-size: 16px;
+  margin-bottom: 30px; /* Augmenter l'espacement en bas */
+  font-size: 18px; /* Taille du texte légèrement plus grande pour plus de lisibilité */
+  font-weight: bold;
+  color: blue;
+  display: flex;
+  flex-direction: column; /* Pour empiler le texte et le select */
+  gap: 10px; /* Espacement entre le texte et le select */
 }
 
-.cursor-controls select {
-  padding: 5px;
-  font-size: 14px;
+select {
+  padding: 12px 20px;  /* Augmenter le padding pour plus d'espace à l'intérieur */
+  font-size: 16px;
+  border: 2px solid #3f51b5; /* Bordure bleue */
+  border-radius: 6px;  /* Bordure légèrement plus arrondie */
+  background-color: #fff; /* Fond blanc */
+  color: #3f51b5; /* Couleur du texte */
   cursor: pointer;
+  transition: all 0.3s ease; /* Effet de transition */
 }
+
+select:focus {
+  outline: none; /* Supprime le contour par défaut */
+  border-color: #1e3d8e; /* Bordure bleue plus foncée au focus */
+  box-shadow: 0 0 5px rgba(30, 61, 142, 0.5); /* Ombre autour au focus */
+}
+
+select:hover {
+  background-color: #f1f1f1; /* Changement de couleur au survol */
+}
+
+
 </style>

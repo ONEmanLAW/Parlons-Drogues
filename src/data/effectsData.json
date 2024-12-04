@@ -2,25 +2,22 @@
   "fumé": {
     "data": {
       "1": [
-        { "durée": 0, "intensité": "null" },
+        { "durée": 0, "intensité": "absent" },
         { "durée": 10, "intensité": "forte" },
         { "durée": 30, "intensité": "très forte" },
-        { "durée": 120, "intensité": "modéré" },
         { "durée": 240, "intensité": "modéré" },
-        { "durée": 360, "intensité": "null" }
+        { "durée": 360, "intensité": "faible" }
       ]
     }
   },
   "ingeré": {
     "data": {
       "1": [
-        { "durée": 0, "intensité": "null" },
-        { "durée": 10, "intensité": "faible" },
+        { "durée": 0, "intensité": "absent" },
         { "durée": 30, "intensité": "forte" },
-        { "durée": 120, "intensité": "très forte" },
-        { "durée": 180, "intensité": "très forte" },
+        { "durée": 240, "intensité": "très forte" },
         { "durée": 600, "intensité": "modéré" },
-        { "durée": 720, "intensité": "null" }
+        { "durée": 720, "intensité": "faible" }
       ]
     }
   }
