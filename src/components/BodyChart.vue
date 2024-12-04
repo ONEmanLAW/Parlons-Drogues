@@ -1,7 +1,7 @@
 <template>
   <div class="body-chart">
     <div class="main-title">
-      <h2>Graphiques</h2>
+      <h2>Graphique</h2>
       <h1>Les effets du cannabis à long terme</h1>
       <p>Sur le long terme, le cannabis peut avoir un impact sur ton cerveau et ton corps. Ce diagramme te montre les différents effets qu'il peut provoquer, que ce soit sur ta santé mentale ou physique.</p>
     </div>
@@ -10,7 +10,8 @@
       <div class="left-container">
         <div class="image-container">
           <img
-            :src="`../assets/images/persoInes.png`"
+            v-if="selectedBodyPart && selectedBodyPart.bodyImage" 
+            :src="`/assets/images/${selectedBodyPart.bodyImage}`" 
             alt="Image du corps humain"
             class="body-image"
           />
@@ -56,18 +57,19 @@
         </div>
 
         <div class="chart-container">
-          <div v-if="selectedBodyPart.image && selectedBodyPart.name !== 'Foie'" class="image-container">
+          <div v-if="selectedBodyPart.image && selectedBodyPart.name !== 'Autre Risques'" class="image-container">
             <div class="body-title" :style="{ color: selectedBodyPart.color }">
               {{ selectedBodyPart.name }}
             </div>
             <img
+              v-if="selectedBodyPart.image"  
               :src="`/assets/images/${selectedBodyPart.image}`"
               alt="Image of {{ selectedBodyPart.name }}"
               class="body-image"
             />
           </div>
 
-          <div v-if="selectedBodyPart.name === 'Foie'" class="body-description">
+          <div v-if="selectedBodyPart.name === 'Autre Risques'" class="body-description">
             <div class="body-title" :style="{ color: selectedBodyPart.color }">
               {{ selectedBodyPart.name }}
             </div>
@@ -77,7 +79,6 @@
           <div v-else>
             <div v-if="selectedData === 'data1'" class="data1-container">
               <h3>{{ selectedBodyPart.data.data1.title }}</h3>
-              <p>{{ selectedBodyPart.data.data1.textIntro }}</p> 
               <ul>
                 <li v-for="(item, index) in selectedBodyPart.data.data1.text" :key="index">
                   {{ item }}
@@ -86,13 +87,8 @@
             </div>
 
             <div v-if="selectedData === 'data2'" class="data2-container">
-              <h3 class="graph2-text">{{ selectedBodyPart.data.data2.title }}</h3>
-              <div class="pie-chart-container">
-                <div ref="pieChart" class="pie-chart"></div>
-              </div>
-              <div class="data-text-right">
-                <p>{{ selectedBodyPart.data.data2.text }}</p> 
-              </div>
+              <h3>{{ selectedBodyPart.data.data2.title }}</h3>
+              <div class="pie-chart-container" ref="pieChart"></div>
             </div>
 
             <div v-if="selectedData === 'data3'" class="data3-container">
@@ -103,7 +99,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>
@@ -114,15 +109,17 @@ import * as d3 from 'd3';
 import bodyData from '../data/bodyData.json';
 
 const bodyParts = bodyData.bodyParts;
-const selectedBodyPart = ref(null);
-const selectedData = ref("data1");
-const pieChart = ref(null);
+const selectedBodyPart = ref(null); 
+const selectedData = ref("data1"); 
+const pieChart = ref(null); 
+
 
 const selectBodyPart = (part) => {
   selectedBodyPart.value = part;
-  selectedData.value = "data1";
-  if (!selectedBodyPart.value.data.text) updatePieChart();
+  selectedData.value = "data1"; 
+  if (!selectedBodyPart.value.data.text) updatePieChart(); 
 };
+
 
 const selectData = (dataType) => {
   selectedData.value = dataType;
@@ -134,8 +131,8 @@ const updatePieChart = () => {
     const pieContainer = d3.select(pieChart.value);
     pieContainer.selectAll("*").remove();
 
-    const data = selectedBodyPart.value.data[selectedData.value].data;
-    if (!data) return;
+    const percentage = selectedBodyPart.value.data[selectedData.value].percentage;
+    if (percentage === undefined) return;
 
     const width = 200;
     const height = 200;
@@ -147,49 +144,44 @@ const updatePieChart = () => {
       .append("g")
       .attr("transform", `translate(${width / 2}, ${height / 2})`);
 
-    const pie = d3.pie().value((d) => d.value);
-    const arc = d3.arc().innerRadius(0).outerRadius(radius);
+    const arc = d3.arc()
+      .innerRadius(0)
+      .outerRadius(radius)
+      .startAngle(0) 
+      .endAngle((percentage / 100) * 2 * Math.PI); 
 
-    const data_ready = pie(data);
+    svg.append("circle")
+      .attr("r", radius)
+      .attr("fill", "#e0e0e0");
 
-    svg
-      .selectAll("path")
-      .data(data_ready)
-      .enter()
-      .append("path")
-      .attr("d", arc)
-      .attr("fill", (d, i) => d3.schemeCategory10[i % 10])
-      .attr("stroke", "white")
-      .style("stroke-width", "2px")
-      .transition()
-      .duration(1000)
-      .attrTween("d", function(d) {
-        const i = d3.interpolate(
-          { startAngle: 0, endAngle: 0 },
-          d
-        );
-        return function(t) {
-          return arc(i(t));
-        };
-      });
+    svg.append("path")
+      .datum({}) 
+      .attr("d", arc) 
+      .attr("fill", "#AC0266"); 
 
-    svg
-      .selectAll("text")
-      .data(data_ready)
-      .enter()
-      .append("text")
-      .attr("transform", (d) => `translate(${arc.centroid(d)})`)
+    svg.append("circle")
+      .attr("r", radius - 20)
+      .attr("fill", "white");
+
+    svg.append("text")
       .attr("text-anchor", "middle")
-      .text((d) => d.data.label);
+      .attr("dy", ".35em")
+      .style("font-size", "24px")
+      .style("font-weight", "bold")
+      .text(`${Math.round(percentage)}%`);
   });
 };
 
 onMounted(() => {
+  selectedBodyPart.value = bodyParts.find(part => part.name === "Cerveau");
+
   if (selectedBodyPart.value) updatePieChart();
 });
 </script>
 
+
 <style scoped>
+
 .body-chart {
   display: flex;
   flex-direction: column;
@@ -210,23 +202,24 @@ onMounted(() => {
 }
 
 .main-title h2 {
-  font-size: 20px;
-  background-color: #ff5a5f;
+  font-size: 14px;
+  background-color: #FFC9EA;
   display: inline-block;
   padding: 5px 10px;
   margin: 0;
-  color: white;
+  color:  #AC0266;
   border-radius: 5px;
+  margin-top: 5px;
 }
 
 .main-title h1 {
-  font-size: 28px;
+  font-size: 35px;
   margin: 10px 0;
 }
 
 .main-title p {
-  font-size: 16px;
-  color: #555;
+  font-size: 22px;
+  color: black;
   margin-top: 10px;
   width: 80%;
   margin-left: auto;
@@ -234,12 +227,13 @@ onMounted(() => {
   text-align: center;
 }
 
+
 .container {
   display: flex;
   justify-content: space-between;
   width: 100%;
   max-width: 1000px;
-  height: 80vh;
+  height: 70vh;
   border: none;  
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
   border-radius: 10px; 
@@ -260,24 +254,36 @@ onMounted(() => {
   object-fit: contain;
 }
 
+
 .buttons-container {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  align-items: center; 
 }
 
 .body-button {
-  padding: 10px 20px;
-  background-color: #f0f0f0;
-  color: #333;
+  padding: 12px 24px; 
+  background-color: #FFC9EA;
+  color: #AC0266;
   border-radius: 5px;
-  font-size: 14px;
+  font-size: 16px; 
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box; 
 }
 
 .body-button:hover {
-  background-color: #ddd;
+  background-color: #FF5A5F;
+  color: white;
+  border: 2px solid #FF33A1;
+  transform: scale(1.05);
+}
+
+.body-button:active {
+  transform: scale(0.98);
 }
 
 .right-container {
@@ -297,59 +303,82 @@ onMounted(() => {
   justify-content: space-evenly;
   margin-bottom: 20px;
   gap: 20px;
+  margin-top: 40px;
 }
 
 .tab {
-  padding: 10px 20px;
+  padding: 12px 24px;
   background-color: #f0f0f0;
   color: #333;
   border-radius: 5px;
+  font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease; 
+  border: 2px solid transparent;
 }
 
 .tab:hover {
-  background-color: #ddd;
+  background-color: #FF5A5F;
+  color: white;
+  border-color: #FF33A1; 
+  transform: scale(1.05); 
 }
 
 .tab.active {
-  background-color: #ff5a5f;
-  color: white;
+  background-color: #FF33A1; 
+  color: white; 
+  border-color: #FF33A1; 
 }
 
 /* Contenu dynamique */
 .chart-container {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start; 
   align-items: center;
+  height: 100%; 
+  width: 100%;
 }
 
-.data1-container h3 {
+.data1-container, .data2-container, .data3-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; 
+}
+
+.data1-container h3,
+.data2-container h3,
+.data3-container h3 {
   font-size: 20px;
   margin-bottom: 10px;
+  text-align: center;
 }
-.data1-container ul {
+
+.data1-container ul,
+.data2-container ul {
   list-style-type: none;
   padding-left: 0;
   font-size: 14px;
-}
-
-.graph2-text {
   text-align: center;
 }
 
 .data-text-right {
-  text-align: right;
   font-size: 14px;
   color: #555;
+  text-align: right;
 }
 
 .pie-chart-container {
-  width: 200px;
-  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 
-/* Texte Data 3 */
 .data3-container .small-text-top,
 .data3-container .small-text-bottom {
   font-size: 14px;
@@ -364,7 +393,6 @@ onMounted(() => {
   text-align: center;
 }
 
-/* Media Queries */
 @media (max-width: 1024px) {
   .container {
     flex-direction: column;
@@ -381,12 +409,8 @@ onMounted(() => {
   }
 
   .body-button {
-    font-size: 12px;
-    padding: 8px 16px;
-  }
-
-  .section-title h2 {
-    font-size: 20px;
+    font-size: 14px;
+    padding: 10px 20px;
   }
 
   .tabs .tab {
@@ -412,7 +436,8 @@ onMounted(() => {
   }
 
   .body-button {
-    padding: 6px 12px;
+    padding: 8px 16px;
+    font-size: 12px; 
   }
 
   .body-image {

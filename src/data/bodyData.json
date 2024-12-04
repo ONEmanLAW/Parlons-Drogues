@@ -4,7 +4,8 @@
       "id": 1,
       "name": "Cerveau",
       "color": "#FF5733",
-      "image": "cerveau.gif",
+      "image": "cerveau.gif", 
+      "bodyImage": "cerveauInes.png", 
       "data": {
         "data1": {
           "title": "Il y a des risques d'effets, plus ou moins graves :",
@@ -12,10 +13,29 @@
         },
         "data2": {
           "title": "Le cannabis pourrait être à l’origine d’environ 15 % des nouveaux cas de schizophrénie.",
-          "data": [
-            { "label": "Concentration", "value": 70 },
-            { "label": "Stress", "value": 30 }
-          ]
+          "percentage": 15
+        },
+        "data3": {
+          "smallTextTop": "Chez les utilisateurs réguliers de cannabis, environ ",
+          "largeText": "20 %",
+          "smallTextBottom": "de personnes souffrent de troubles anxieux."
+        }
+      }
+    },
+    {
+      "id": 2,
+      "name": "Poumons",
+      "color": "#33FF57",
+      "image": "poumon.gif",
+      "bodyImage": "poumonInes.png",
+      "data": {
+        "data1": {
+          "title": "Il y a des risques d'effets, plus ou moins graves :",
+          "text": ["Toux 🤧", "Voix enrouée 🗣️", "Irritation de la gorge 😖", "Sifflement 🔊", "Augmentation des infections 📈", "Bronchite chronique 🌬️", "Emphysème 😮‍💨"]
+        },
+        "data2": {
+          "title": "de risque d’avoir une bronchite chronique et d’autres troubles respiratoires. 🤒",
+          "percentage": 50
         },
         "data3": {
           "smallTextTop": "L’impact des produits toxiques est",
@@ -25,34 +45,11 @@
       }
     },
     {
-      "id": 2,
-      "name": "Poumons",
-      "color": "#33FF57",
-      "image": "poumon.gif",
-      "data": {
-        "data1": {
-          "title": "Il y a des risques d'effets, plus ou moins graves :",
-          "text": ["Toux 🤧", "Voix enrouée 🗣️", "Irritation de la gorge 😖", "Sifflement 🔊", "Augmentation des infections 📈", "Bronchite chronique 🌬️", "Emphysème 😮‍💨"]
-        },
-        "data2": {
-          "title": "de risque d’avoir une bronchite chronique et d’autres troubles respiratoires. 🤒",
-          "data": [
-            { "label": "Concentration", "value": 70 },
-            { "label": "Stress", "value": 30 }
-          ]
-        },
-        "data3": {
-          "smallTextTop": "Chez les utilisateurs réguliers de cannabis, environ",
-          "largeText": "20%",
-          "smallTextBottom": "de personnes souffrent de troubles anxieux."
-        }
-      }
-    },
-    {
       "id": 3,
       "name": "Cœur",
       "color": "#FF33A1",
       "image": "coeur.gif",
+      "bodyImage": "coeurInes.png", 
       "data": {
         "data1": {
           "title": "Il y a des risques d'effets, plus ou moins graves :",
@@ -60,23 +57,21 @@
         },
         "data2": {
           "title": "des 35 cas de complications cardio-vasculaires ou neuro-vasculaires ont été mortels en France de 2006 à 2010",
-          "data": [
-            { "label": "Tension artérielle", "value": 75 },
-            { "label": "Stress", "value": 25 }
-          ]
+          "percentage": 25.6
         },
         "data3": {
           "smallTextTop": "Les risques d’accidents vasculaires et d’infarctus sont multipliés par",
-          "largeText": "5",
+          "largeText": "5 X",
           "smallTextBottom": "lors d’une forte consommation."
         }
       }
     },
     {
       "id": 4,
-      "name": "Foie",
+      "name": "Autre Risques",
       "color": "#3357FF",
       "image": "foie.png",
+      "bodyImage": "rienInes.png",
       "data": {
         "text": "Des doses trop élevées peuvent provoquer des nausées et des vomissements répétés. 🤢 Certaines études récentes montrent qu'une consommation excessive pourrait réduire les chances de fécondation et d'implantation d’un embryon. 🔬 Une utilisation prolongée est associée à un risque accru de maladies des gencives. 🦷"
       }
