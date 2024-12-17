@@ -34,13 +34,11 @@
   </div>
 </template>
 
-
 <script setup>
 import { ref, nextTick } from 'vue';
 import { useRouter } from 'vue-router';
 import gsap from 'gsap';
 
-// Vidéo de début
 const videoSource = new URL('../assets/videos/intro.mp4', import.meta.url).href;
 const router = useRouter();
 const videoStarted = ref(false);
@@ -142,8 +140,6 @@ const animateAndRedirect = () => {
   transform: scale(1.05);
 }
 
-
-
 .image-container {
   flex: 0 0 60%;
   height: 100%; 
@@ -161,7 +157,6 @@ const animateAndRedirect = () => {
   position: absolute;
 }
 
-
 .logo-container {
   position: absolute;
   top: 10px; 
@@ -173,7 +168,6 @@ const animateAndRedirect = () => {
   width: 150px;
   height: auto;
 }
-
 
 .video-container {
   position: relative;
@@ -239,8 +233,6 @@ const animateAndRedirect = () => {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-
-
 @media (max-width: 768px) {
   .text-and-image {
     flex-direction: column;
@@ -270,5 +262,16 @@ const animateAndRedirect = () => {
     padding: 12px 24px;
     width: 180px;
   }
-}
+
+  .video-fullscreen {
+    width: 100%;
+    height: auto;
+  }
+
+  .video-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+} 
 </style>
