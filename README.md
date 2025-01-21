@@ -21,4 +21,3 @@ Ce projet est une application web développée avec **Vue.js, GSAP, D3.js**. Il 
 3. Lancez le serveur de développement :
     ```bash
     npm run dev
-Merci a tout le monde
