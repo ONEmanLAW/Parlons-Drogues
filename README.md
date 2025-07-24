@@ -57,6 +57,7 @@ Toutes nos sources comme on la dit sont authentiques, et notre cible principale 
 | ![CSS](https://skillicons.dev/icons?i=css)   | ![Illustrator](https://skillicons.dev/icons?i=ai) |
 | ![Vue.js](https://skillicons.dev/icons?i=vue) | ![Photoshop](https://skillicons.dev/icons?i=ps) |
 | ![D3.js](https://skillicons.dev/icons?i=d3)   |                                               |
+| GSAP                                          |                                               |
 
 ---
 
