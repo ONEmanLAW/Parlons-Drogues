@@ -51,19 +51,19 @@ Toutes nos sources comme on la dit sont authentiques, et notre cible principale 
   <tr>
     <td align="center">
       <strong>Développeur : Hugo</strong><br/>
-      <img src="public/assets/images/elena.gif" alt="elena" width="150" />
+      <img src="public/assets/readMeImages/Hugo.png" alt="Hugo" width="150" />
     </td>
     <td align="center">
       <strong>Designers : Liséa</strong><br/>
-      <img src="public/assets/images/raph.gif" alt="raph" width="150" />
+      <img src="public/assets/readMeImages/Liséa.png" alt="Liséa" width="150" />
     </td>
     <td align="center">
       <strong>Designers : Laurane</strong><br/>
-      <img src="public/assets/images/ines.gif" alt="ines" width="150" />
+      <img src="public/assets/readMeImages/Laurane.png" alt="Laurane" width="150" />
     </td>
     <td align="center">
       <strong>Designers : Alena</strong><br/>
-      <img src="public/assets/images/ines.gif" alt="ines" width="150" />
+      <img src="public/assets/readMeImages/Alena.png" alt="Alena" width="150" />
     </td>
   </tr>
 </table>
@@ -116,13 +116,14 @@ Accédez au projet via ce lien :
 
 ## Photos du Site
 <p align="center">
-  <img src="ReadmeImages/image.png" alt="image1" width="300">
-  <img src="ReadmeImages/image1.png" alt="image2" width="300">
+  <img src="ReadMeImages/image2.png" alt="image1" width="300">
+  <img src="ReadMeImages/image3.png" alt="image2" width="300">
 </p>
 <p align="center">
-  <img src="ReadmeImages/image4.png" alt="image3" width="300">
-  <img src="ReadmeImages/image3.png" alt="image4" width="300">
+  <img src="ReadMeImages/image4.png" alt="image3" width="300">
+  <img src="ReadMeImages/image5.png" alt="image4" width="300">
 </p>
 <p align="center">
-  <img src="ReadmeImages/image2.png" alt="image5" width="600">
+  <img src="ReadMeImages/image6.png" alt="image5" width="300">
+  <img src="ReadMeImages/image1.png" alt="image5" width="300">
 </p>
