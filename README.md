@@ -116,14 +116,14 @@ Accédez au projet via ce lien :
 
 ## Photos du Site
 <p align="center">
-  <img src="ReadMeImages/image2.png" alt="image1" width="300">
-  <img src="ReadMeImages/image3.png" alt="image2" width="300">
+  <img src="public/assets/readMeImages/image2.png" alt="image1" width="300">
+  <img src="public/assets/readMeImages/image3.png" alt="image2" width="300">
 </p>
 <p align="center">
-  <img src="ReadMeImages/image4.png" alt="image3" width="300">
-  <img src="ReadMeImages/image5.png" alt="image4" width="300">
+  <img src="public/assets/readMeImages/image4.png" alt="image3" width="300">
+  <img src="public/assets/readMeImages/image5.png" alt="image4" width="300">
 </p>
 <p align="center">
-  <img src="ReadMeImages/image6.png" alt="image5" width="300">
-  <img src="ReadMeImages/image1.png" alt="image5" width="300">
+  <img src="public/assets/readMeImages/image6.png" alt="image5" width="300">
+  <img src="public/assets/readMeImages/image1.png" alt="image5" width="300">
 </p>
