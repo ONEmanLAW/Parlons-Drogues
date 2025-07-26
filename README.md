@@ -47,6 +47,27 @@ Toutes nos sources comme on la dit sont authentiques, et notre cible principale 
 - **1 Développeur** : Intégration, interactivité, datavisualisation 
 - **3 Designers** : Création des visuels, mise en page, illustrations, prototype UI/UX sur Figma
 
+<table align="center">
+  <tr>
+    <td align="center">
+      <strong>Développeur : Hugo</strong><br/>
+      <img src="public/assets/images/elena.gif" alt="elena" width="150" />
+    </td>
+    <td align="center">
+      <strong>Designers : Liséa</strong><br/>
+      <img src="public/assets/images/raph.gif" alt="raph" width="150" />
+    </td>
+    <td align="center">
+      <strong>Designers : Laurane</strong><br/>
+      <img src="public/assets/images/ines.gif" alt="ines" width="150" />
+    </td>
+    <td align="center">
+      <strong>Designers : Alena</strong><br/>
+      <img src="public/assets/images/ines.gif" alt="ines" width="150" />
+    </td>
+  </tr>
+</table>
+
 ---
 
 ## Technologies Utilisées
